@@ -1,0 +1,11 @@
+desktop.ini
+.vscode
+test.py
+__pycache__/
+controller/__pycache__
+interface/__pycache__
+public/__pycache__
+style/__pycache__
+cache.json
+.VSCodeCounter
+temp/*

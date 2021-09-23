@@ -1,0 +1,162 @@
+# -*- coding:utf-8 -*-
+from public._base import *
+from public._file import *
+
+
+class Common(BasePublic):
+    def __init__(self):
+        super().__init__()
+
+    # 判断操作系统类型
+    def OSType(self):
+        osType = system()
+        if osType == "Windows":
+            return osType
+        elif osType == "Linux":
+            return osType
+        elif osType == "Darwin":
+            return "MacOS"
+        else:
+            return "Other"
+
+    # 字符串过滤 只匹配大小写字母和数字的组合
+    def MatchAll(self, Param=""):
+        if Param == "":
+            return False
+        elif search("^[a-zA-Z0-9_]+$", Param) == None:
+            return False
+        else:
+            return True
+
+    # 字符串过滤 只匹配小写字母
+    def MatchStr(self, Param=""):
+        if Param == "":
+            return False
+        elif search("^[a-z_]+$", Param) == None:
+            return False
+        else:
+            return True
+
+    # 字符串过滤 只匹配数字
+    def MatchNum(self, Param=""):
+        if Param == "":
+            return False
+        elif search("^[0-9]+$", Param) == None:
+            return False
+        else:
+            return True
+
+    # 大小写字母 中文 数字 下划线 点
+    def MatchSafe(self, Param=""):
+        if Param == "":
+            return False
+        elif search("^[\u4E00-\u9FA5A-Za-z0-9_.]+$", Param) == None:
+            return False
+        else:
+            return True
+
+    # 时间戳转换成时间(接收10位str时间戳)
+    def TimeToStr(self, TimeNum):
+        timeData = localtime(int(str(TimeNum)[:10]))
+        return strftime("%Y-%m-%d %H:%M:%S", timeData)
+
+    # 时间转换成时间戳
+    def StrToTime(self, TimeStr):
+        timeFormat = strptime(TimeStr, "%Y-%m-%d %H:%M:%S")
+        return int(mktime(timeFormat))
+
+    # 当前时间戳
+    def Time(self):
+        return int(time())
+
+    # 当前时间戳(毫秒)
+    def TimeMS(self):
+        return int(round(time() * 1000))
+
+    # 获取当天的年月日
+    def TodayStr(self):
+        timeData = localtime(self.Time())
+        return strftime("%Y-%m-%d 00:00:00", timeData)
+
+    # 过去的时间
+    def TimePast(self, Day=0):
+        return self.StrToTime(self.TodayStr()) - (Day*(60*60*24))
+
+    # 未来的时间
+    def TimeFuture(self, Day=0):
+        return self.StrToTime(self.TodayStr()) + (Day*(60*60*24))
+
+    # 指定时间的过去天数
+    def TheTimePast(self, Time, Day=0):
+        return Time - (Day*(60*60*24))
+
+    # 指定时间的未来天数
+    def TheTimeFuture(self, Time, Day=0):
+        return Time + (Day*(60*60*24))
+
+    # 按指定字符切割字符串为数组
+    def Explode(self, Separator, StringParam):
+        return StringParam.split(Separator)
+
+    # 按指定字符组合数组为字符串
+    def Implode(self, Separator, array):
+        return Separator.join(array)
+
+    # 获取本机IP
+    def LocalIP(self):
+        try:
+            s = socket(AF_INET, SOCK_DGRAM)
+            s.connect(('8.8.8.8', 80))
+            ip = s.getsockname()[0]
+        finally:
+            s.close()
+        return ip
+
+    # 图片转Base64
+    def IMGToBase64(self, FilePath):
+        with open(FilePath, 'rb') as f:  # 以二进制读取图片
+            FileEncode = b64encode(f.read())  # 得到 byte 编码的数据
+            FileEncodeStr = str(FileEncode, "utf-8")  # 重新编码数据
+        return FileEncodeStr
+
+    # 发送邮件
+    def SendMail(self, Content=""):
+        if Content == "":
+            return False
+
+        MailHost = "smtp.163.com"  # SMTP服务器
+        MailUser = "17602341616"  # 用户名
+        MailPass = "yaowin1987"  # 密码(这里的密码不是登录邮箱密码，而是授权码)
+        Sender = "17602341616@163.com"  # 发件人邮箱
+        Receivers = ["289959263@qq.com"]  # 接收人邮箱
+
+        Title = 'BitBox Suggestions & Opinion'  # 邮件主题
+        Message = MIMEText(Content, "plain", "utf-8")  # 内容, 格式, 编码
+        Message['From'] = "{}".format(Sender)
+        Message['To'] = ",".join(Receivers)
+        Message['Subject'] = Title
+
+        try:
+            # smtpObj = smtplib.SMTP(MailHost, 465)  # 不启用SSL发信, 端口一般是465
+            smtpObj = smtplib.SMTP_SSL(MailHost, 465)  # 启用SSL发信, 端口一般是465
+            smtpObj.login(MailUser, MailPass)  # 登录验证
+            smtpObj.sendmail(Sender, Receivers, Message.as_string())  # 发送
+            return True
+        except smtplib.SMTPException as e:
+            return False
+
+    # str to bytes
+    def StringToBytes(self, Param):
+        return bytes(Param, encoding="utf8")
+
+    # bytes to str
+    def BytesToString(self, Param):
+        return str(Param, encoding="utf-8")
+
+    # bytes to Base64
+    def BytesToBase64(self, Param):
+        return b64encode(Param)
+
+    # Base64 to bytes
+    def Base64ToBytes(self, Param):
+        return b64decode(Param)
