@@ -83,38 +83,44 @@ class UserFrame(BaseInterface, BaseFrame):
         self.UserListBtnFrame = QFrame()
         self.UserListBtnFrame.setStyleSheet(
             self.Style.Object.MainFrame_Mid_User_List_Btn_Frame())
-        self.UserListBtnFrame.setFixedHeight(100)
+        self.UserListBtnFrame.setFixedHeight(70)
         self.UserListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
         self.UserListBtnLayout = QVBoxLayout()
         self.UserListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         if self.IsMaster == True:
+            self.UserBtn = QHBoxLayout()
+            self.UserBtn.setContentsMargins(0, 0, 0, 0)
+
             self.NewUserBtn = QPushButton(self.Lang.NewUser)
             self.NewUserBtn.setStyleSheet(
                 self.Style.Object.MainFrame_Mid_User_List_Btn())
-            self.NewUserBtn.setContentsMargins(1, 1, 1, 1)
-            self.NewUserBtn.setFixedHeight(30)
+            self.NewUserBtn.setFixedHeight(70)
             self.NewUserBtn.clicked.connect(self.CreateUserWindow)
-            self.UserListBtnLayout.addWidget(self.NewUserBtn)
+            self.NewUserBtn.setContentsMargins(0, 0, 0, 0)
+            self.UserBtn.addWidget(self.NewUserBtn)
+
+            self.UserBtnV = QVBoxLayout()
+            self.UserBtnV.setContentsMargins(0, 0, 0, 0)
 
             self.ImportUsersBtn = QPushButton(self.Lang.ImportUsers)
             self.ImportUsersBtn.setStyleSheet(
                 self.Style.Object.MainFrame_Mid_User_List_Btn())
-            self.ImportUsersBtn.setContentsMargins(1, 1, 1, 1)
-            self.ImportUsersBtn.setFixedHeight(30)
+            self.ImportUsersBtn.setFixedHeight(35)
             # self.ImportUsersBtn.clicked.connect(self.CreateUserWindow)
-            self.UserListBtnLayout.addWidget(self.ImportUsersBtn)
+            self.UserBtnV.addWidget(self.ImportUsersBtn)
 
             self.CheckDemoBtn = QPushButton("Demo")
             self.CheckDemoBtn.setStyleSheet(
                 self.Style.Object.MainFrame_Mid_User_List_Btn())
-            self.CheckDemoBtn.setContentsMargins(1, 1, 1, 1)
-            self.CheckDemoBtn.setFixedHeight(30)
+            self.CheckDemoBtn.setFixedHeight(35)
             self.CheckDemoBtn.clicked.connect(self.CheckDemo)
-            self.UserListBtnLayout.addWidget(self.CheckDemoBtn)
+            self.UserBtnV.addWidget(self.CheckDemoBtn)
 
-        self.UserListBtnFrame.setLayout(self.UserListBtnLayout)
+            self.UserBtn.addLayout(self.UserBtnV)
+
+        self.UserListBtnFrame.setLayout(self.UserBtn)
 
         self.UserVS.addWidget(self.UserHeader)
         self.UserVS.addWidget(self.UserTree)
@@ -274,7 +280,7 @@ class UserFrame(BaseInterface, BaseFrame):
             return
         else:
             FileEntityName = Result["FileEntityName"]
-            Data = Result["Data"]
+            Data = self.Common.Base64ToBytes(Result["Data"])
             if self.File.WFileInByte(self.Cache.Get("UserTempDir") + FileEntityName, Data):
                 self.File.OpenLocalDir(self.Cache.Get("UserTempDir"))
             else:
