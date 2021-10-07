@@ -343,3 +343,14 @@ class LoginFrame(BaseInterface, BaseFrame):
     #     AnimationGroup.addAnimation(Animation4)
     #     AnimationGroup.start()
     #     self.ExecutionStatus = True
+
+    # 重新载入输入框以及提示信息
+    def ReloadInputLang(self):
+        from public.zead import Lang
+        Lang = Lang()
+        self.AccountInput.setPlaceholderText(Lang.Account)  # 设置提示文字
+        self.AccountInput.setToolTip(Lang.Account)  # 设置鼠标提示
+        self.PWDInput.setPlaceholderText(Lang.PWD)  # 设置提示文字
+        self.PWDInput.setToolTip(Lang.PWD)  # 设置鼠标提示
+        self.URLInput.setPlaceholderText("IP")  # 设置提示文字
+        self.URLInput.setToolTip(Lang.IP)  # 设置鼠标提示

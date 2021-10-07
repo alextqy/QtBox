@@ -19,7 +19,7 @@ class Test(BaseInterface, BaseObject):  # 测试worker
 
 
 class MainWindow(BaseInterface, BaseMainWindow):  # 主界面
-    ReloadSignal = Signal()
+    ReloadSignalMain = Signal()
 
     def __init__(self):
         super().__init__()
@@ -44,13 +44,15 @@ class MainWindow(BaseInterface, BaseMainWindow):  # 主界面
         self.CheckLoginStatus()  # 执行登陆监控线程
         self.CenterLayout.addWidget(self.LoginFrame)  # 设置控件
 
+        self.ReloadSignalMain.connect(self.LoginFrame.ReloadInputLang)
+
         self.CenterWidget.setLayout(self.CenterLayout)  # 设置佈局
         self.setCentralWidget(self.CenterWidget)  # 添加中央控件
 
         # self.Test(self.LoginFrame.TopLogo)
 
     def AppReload(self):  # 重载登录界面
-        self.ReloadSignal.emit()
+        self.ReloadSignalMain.emit()
         self.hide()
         sleep(0.3)
         self.show()
