@@ -30,12 +30,13 @@ trusted-host = mirrors.aliyun.com
 2 pip install requests
 3 pip install PySide6
 4 pip install cx_Freeze
-5 更新 pip install --upgrade ***
+5 pip install intensio-obfuscator
+6 更新 pip install --upgrade ***
 
 #### 打包
 
 1调试打包 cxfreeze -c main.py --target-dir dist
-2发布打包 cxfreeze -c ./qtapp2.0/main.py --target-dir ./BitBox --base-name=win32gui --include-files="./qtapp2.0/source"
+2发布打包 cxfreeze -c ./qtbox/main.py --target-dir ./BitBox --base-name=win32gui --include-files="./qtbox/source"
 
 #### 使用说明
 
