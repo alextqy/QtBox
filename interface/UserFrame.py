@@ -274,7 +274,7 @@ class UserFrame(BaseInterface, BaseFrame):
 
     # 查看demo
     def CheckDemo(self):
-        Result = UserAction().CheckImportUsersDemo()
+        Result = UserAction().CheckImportUsersDemo(self.Lang.Type)
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return

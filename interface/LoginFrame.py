@@ -354,3 +354,4 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.PWDInput.setToolTip(Lang.PWD)  # 设置鼠标提示
         self.URLInput.setPlaceholderText("IP")  # 设置提示文字
         self.URLInput.setToolTip(Lang.IP)  # 设置鼠标提示
+        self.LoginButton.setText("  " + Lang.SignIn)

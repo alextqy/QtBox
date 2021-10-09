@@ -291,8 +291,11 @@ class UserAction(BaseController):
         return Result
 
     # 查看用户导入Demo
-    def CheckImportUsersDemo(self):
-        Result = self.Post({}, "/Download/Demo")
+    def CheckImportUsersDemo(self, LangType):
+        Param = {
+            "LangType": LangType,
+        }
+        Result = self.Post(Param, "/Download/Demo")
         if self.Debug == True:
             print(Result)
         return Result
