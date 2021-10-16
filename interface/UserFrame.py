@@ -120,7 +120,7 @@ class UserFrame(BaseInterface, BaseFrame):
 
             self.UserBtn.addLayout(self.UserBtnV)
 
-        self.UserListBtnFrame.setLayout(self.UserBtn)
+            self.UserListBtnFrame.setLayout(self.UserBtn)
 
         self.UserVS.addWidget(self.UserHeader)
         self.UserVS.addWidget(self.UserTree)
