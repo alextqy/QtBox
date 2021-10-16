@@ -59,8 +59,8 @@ class UserFrame(BaseInterface, BaseFrame):
         self.UserTree.setHeaderLabels(["User", "ID"])  # 设置标题栏
         self.UserTree.setHeaderHidden(True)  # 隐藏标题栏
 
-        UserTreeItems = []
         if len(self.UserData) > 0:
+            UserTreeItems = []
             for i in range(len(self.UserData)):
                 item = QTreeWidgetItem()  # 设置item控件
                 # item.setIcon(0, QtGui.QIcon(os.getcwd() + "/avatar.png"))
@@ -108,7 +108,7 @@ class UserFrame(BaseInterface, BaseFrame):
             self.ImportUsersBtn.setStyleSheet(
                 self.Style.Object.MainFrame_Mid_User_List_Btn())
             self.ImportUsersBtn.setFixedHeight(35)
-            # self.ImportUsersBtn.clicked.connect(self.CreateUserWindow)
+            self.ImportUsersBtn.clicked.connect(self.ImportUsers)
             self.UserBtnV.addWidget(self.ImportUsersBtn)
 
             self.CheckDemoBtn = QPushButton("Demo")
@@ -268,10 +268,6 @@ class UserFrame(BaseInterface, BaseFrame):
             1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
         self.UserTree.insertTopLevelItem(0, Item)
 
-    # 导入用户
-    def ImportUsers(self):
-        pass
-
     # 查看demo
     def CheckDemo(self):
         Result = UserAction().CheckImportUsersDemo(self.Lang.Type)
@@ -288,6 +284,36 @@ class UserFrame(BaseInterface, BaseFrame):
                     "UserTempDir") + FileEntityName)
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
                 return
+
+    # 导入用户
+    def ImportUsers(self):
+        Files, _ = QFileDialog.getOpenFileName(self)  # 文件选择框
+        if len(Files) == 0:
+            return
+        Result = UserAction().ImportUser(Files)
+        if Result["State"] == True:
+            self.UserTree.clear()
+            UserData = UserAction().SelectUser(-1)["Data"]
+            if len(UserData) > 0:
+                UserTreeItems = []
+                for i in range(len(UserData)):
+                    if UserData[i]["Account"] != self.Cache.Get("Account"):
+                        item = QTreeWidgetItem()  # 设置item控件
+                        # item.setIcon(0, QtGui.QIcon(os.getcwd() + "/avatar.png"))
+                        item.setText(0, UserData[i]["Name"])  # 设置内容
+                        item.setText(1, str(UserData[i]["ID"]))  # 设置内容
+                        item.setTextAlignment(
+                            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(
+                            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        UserTreeItems.append(item)  # 添加到item list
+                    self.UserTree.insertTopLevelItems(
+                        0, UserTreeItems)  # 添加到用户列表
+
+            MSGBOX().COMPLETE(self.Lang.Complete)
+        else:
+            MSGBOX().ERROR(self.Lang.OperationFailed)
+            return
 
     # 单击用户列表
     def UserItemClicked(self):

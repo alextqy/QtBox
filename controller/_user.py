@@ -299,3 +299,12 @@ class UserAction(BaseController):
         if self.Debug == True:
             print(Result)
         return Result
+
+    # 导入用户
+    def ImportUser(self, FileEntityPath):
+        FileEntityByte = {"FileEntity": open(FileEntityPath, "rb").read()}
+        Result = self.Post({}, "/Import/User",
+                           "", "", "", FileEntityByte)
+        if self.Debug == True:
+            print(Result)
+        return Result
