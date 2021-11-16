@@ -601,7 +601,7 @@ class CheckMyself(BaseInterface, BaseDialog):
 
             IMG = QPObject.scaled(100, 100, Qt.KeepAspectRatio)  # 按比例缩放
             # IMG = AvatarFile.scaled(100, 100, Qt.IgnoreAspectRatio)  # 不按比例缩放
-            self.AvatarLabel.setPixmap(IMG)
+            self.AvatarLabel.setPixmap(self.SetIMG(IMG))
 
         self.setLayout(VLayout)
 
@@ -620,7 +620,7 @@ class CheckMyself(BaseInterface, BaseDialog):
             AvatarFile = QPixmap(TheFile)
             # IMG = AvatarFile.scaled(100, 100, Qt.KeepAspectRatio)  # 按比例缩放
             IMG = AvatarFile.scaled(100, 100, Qt.IgnoreAspectRatio)  # 不按比例缩放
-            self.AvatarLabel.setPixmap(IMG)
+            self.AvatarLabel.setPixmap(self.SetIMG(IMG))
             self.Avatar = self.Common.IMGToBase64(TheFile)
 
     def DoModify(self):

@@ -564,7 +564,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
             QPObject.loadFromData(AvatarByte)  # 加载到类
             # IMG = QPObject.scaled(100, 100, Qt.KeepAspectRatio)  # 按比例缩放
             IMG = QPObject.scaled(100, 100, Qt.IgnoreAspectRatio)  # 不按比例缩放
-            self.AvatarLabel.setPixmap(IMG)
+            self.AvatarLabel.setPixmap(self.SetIMG(IMG))
 
         self.UserAccountInput = QLineEdit()
         self.UserAccountInput.setEnabled(False)

@@ -141,7 +141,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         self.FileHeaderList = FileListLabel("List")
         self.FileHeaderList.setScaledContents(True)  # 图片自适应
-        self.FileHeaderList.setPixmap(FLIST)
+        self.FileHeaderList.setPixmap(self.SetIMG(FLIST))
         self.FileHeaderList.setStyleSheet(
             self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
         self.FileHeaderList.setAlignment(Qt.AlignCenter)  # 字体居中
@@ -151,7 +151,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         self.FileHeaderGrid = FileGridLabel("Grid")
         self.FileHeaderGrid.setScaledContents(True)  # 图片自适应
-        self.FileHeaderGrid.setPixmap(FGRID)
+        self.FileHeaderGrid.setPixmap(self.SetIMG(FGRID))
         self.FileHeaderGrid.setStyleSheet(
             self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
         self.FileHeaderGrid.setAlignment(Qt.AlignCenter)  # 字体居中
@@ -715,7 +715,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 if Result["State"] != True:
                     if Result["Memo"] == "Data is exists":
                         MSGBOX().WARNING(FileName + " " +
-                                       self.Lang.AlreadyInTheList)
+                                         self.Lang.AlreadyInTheList)
                     else:
                         MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                     return
