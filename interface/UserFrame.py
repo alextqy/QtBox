@@ -23,7 +23,7 @@ class UserFrame(BaseInterface, BaseFrame):
         self.CurrentUserID = 0
 
         Result = UserAction().CheckSelf()
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         self.MyInfo = Result["Data"]
@@ -244,7 +244,7 @@ class UserFrame(BaseInterface, BaseFrame):
         if YesOrNo == QtWidgets.QMessageBox.Yes:
             ID = Item.text(1)
             Result = UserAction().RemoveUser(ID)
-            if Result["State"] == True:
+            if Result["ResultStatus"] == True:
                 self.UserTree.RemoveTopItem(Item)
                 MSGBOX().COMPLETE(self.Lang.Complete)
             else:
@@ -271,7 +271,7 @@ class UserFrame(BaseInterface, BaseFrame):
     # 查看demo
     def CheckDemo(self):
         Result = UserAction().CheckImportUsersDemo(self.Lang.Type)
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         else:
@@ -291,7 +291,7 @@ class UserFrame(BaseInterface, BaseFrame):
         if len(Files) == 0:
             return
         Result = UserAction().ImportUser(Files)
-        if Result["State"] == True:
+        if Result["ResultStatus"] == True:
             self.UserTree.clear()
             UserData = UserAction().SelectUser(-1)["Data"]
             if len(UserData) > 0:
@@ -378,14 +378,14 @@ class UserFrame(BaseInterface, BaseFrame):
             return
 
         Result = UserAction().CreateMessage(MSG, self.CurrentUserID)
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         else:
             SName = ""
             STime = self.Common.Time()
             Result = UserAction().CheckSelf()
-            if Result["State"] == True:
+            if Result["ResultStatus"] == True:
                 SName = Result["Data"]["Name"]
 
             self.MessageInput.setText("")
@@ -431,7 +431,7 @@ class UserFrame(BaseInterface, BaseFrame):
     # 账号统计提示
     def AccountNumberStatisticsAction(self):
         Result = ConfigAction().AccountNumberStatistics()
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             return
         else:
             Data = Result["Data"]
@@ -535,7 +535,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         Result = UserAction().UserInfo(self.UserID)
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
 
@@ -672,7 +672,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
             DepartmentID,
             self.UserID
         )
-        if Result["State"] == True:
+        if Result["ResultStatus"] == True:
             self.close()
             MSGBOX().COMPLETE(self.Lang.Complete)
         else:
@@ -749,7 +749,7 @@ class CreateUserWindow(BaseInterface, BaseDialog):  # 新建用户
             return
         else:
             Result = UserAction().CreateUser(Account, Name, PWD)
-            if Result["State"] == True:
+            if Result["ResultStatus"] == True:
                 self.ActionSignal.emit(Name, Result["ID"])
                 self.close()
                 MSGBOX().COMPLETE(self.Lang.Complete)
@@ -767,7 +767,7 @@ class HistoryWindow(BaseInterface, BaseDialog):  # 历史信息
             MSGBOX().WARNING(self.Lang.NoUserSelected)
             return
         Result = UserAction().UserInfo(self.UserID)
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             self.destroy()
             MSGBOX().WARNING(self.Lang.RequestWasAborted)
             return
@@ -826,7 +826,7 @@ class HistoryMessageListWindow(BaseInterface, BaseDialog):  # 历史信息展示
         if UserName == "":
             return
         Result = UserAction().CheckSelf()
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
 

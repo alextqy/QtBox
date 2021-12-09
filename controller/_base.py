@@ -36,7 +36,7 @@ class BaseController():
         TokenType = self.Cache.Get("TokenType")
         BaseData = {
             "Token": Token,
-            "Type": TokenType,
+            "TokenType": TokenType,
         }
         PostData = {**BaseData, **Param}  # 数据合并
         try:

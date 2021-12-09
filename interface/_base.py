@@ -74,8 +74,8 @@ class BaseInterface():  # 基础操作类
         self.File.MkDir(TempDir)
         # 解锁已经锁定的文件数据
         Result = DirFileAction().FileLockList()
-        if Result["State"] == True:
-            Files = Result["Data"]
+        if Result["ResultStatus"] == True:
+            Files = Result["DataList"]
             if len(Files) > 0:
                 for i in range(len(Files)):
                     ID = Files[i]["ID"]

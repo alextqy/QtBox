@@ -11,7 +11,7 @@ class UserAction(BaseController):
         Param = {
             "Account": Account,
             "Password": Password,
-            "Type": Type,
+            "TokenType": Type,
         }
         Result = self.Post(Param, "/Sign/In", URL)
         if self.Debug == True:

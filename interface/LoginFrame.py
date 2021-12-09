@@ -254,10 +254,8 @@ class LoginFrame(BaseInterface, BaseFrame):
 
         # 是否填写IP地址
         if ServerAddr == "":
-            # IPAddr = self.Common.LocalIP()
             UDPPort = self.Cache.Get("UDPPort")
             try:
-                # UDPReceived = self.UDPTool.Receive(IPAddr, UDPPort)  # 获取UDP信息
                 UDPReceived = self.UDPTool.UDPReceive(UDPPort)  # 获取UDP信息
             except Exception as e:
                 MSGBOX().ERROR(self.Lang.RequestTimeout)
@@ -267,17 +265,7 @@ class LoginFrame(BaseInterface, BaseFrame):
                 MSGBOX.ERROR(self.Lang.UnableToGetServerAddress)
                 return
             else:
-                URL = ""
-                UDPReceivedArr = self.Common.Explode("_", UDPReceived)
-                URL_HTTP = UDPReceivedArr[0]
-                URL_HTTPS = UDPReceivedArr[1]
-
-                # 是否开启HTTPS
-                if self.HttpsSelect.currentIndex() == 1:
-                    URL = URL_HTTPS
-                else:
-                    URL = URL_HTTP
-
+                URL = UDPReceived
                 if "http://" not in URL:
                     URL = "http://" + URL
                 ServerAddr = URL
@@ -288,7 +276,7 @@ class LoginFrame(BaseInterface, BaseFrame):
 
         self.Cache.Set("URL", ServerAddr)  # 设置服务器地址缓存
         Result = UserAction().SignIn(Account, Password, Type, ServerAddr)
-        if Result["State"] == True:
+        if Result["ResultStatus"] == True:
             self.Cache.Set("Token", Result["Token"])  # 记录Token
 
             UploadDirPath, DownloadDirPath = self.File.SetUserDir(

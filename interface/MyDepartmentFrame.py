@@ -99,7 +99,7 @@ class MyDepartmentFrame(BaseInterface, BaseFrame):
     def InsertUserListData(self):
         self.UserTree.clear()
         Result = UserAction().SelectUser(self.DepartmentID)
-        if Result["State"] == True:
+        if Result["ResultStatus"] == True:
             self.UserList = Result["Data"]
         UserTreeItems = []
         if len(self.UserList) > 0:
@@ -122,7 +122,7 @@ class MyDepartmentFrame(BaseInterface, BaseFrame):
         self.FileTree.clear()
         self.FileList = []
         Result = UserAction().SelectDepartmentFile(0, 0, UserID)
-        if Result["State"] == True:
+        if Result["ResultStatus"] == True:
             self.FileList = Result["Data"]
         FileTreeItems = []
         if len(self.FileList) > 0:
@@ -223,7 +223,7 @@ class MyDepartmentFrame(BaseInterface, BaseFrame):
                     Name = Files[i].text(0)
                     ID = Files[i].text(3)
                     Result = UserAction().DeleteDepartmentFile(ID)
-                    if Result["State"] != True:
+                    if Result["ResultStatus"] != True:
                         if Result["Memo"] == "Permission denied":
                             MSGBOX().ERROR(self.Lang.PermissionDenied)
                         else:

@@ -49,7 +49,7 @@ class ActivationWindow(BaseInterface, BaseDialog):
     # 生成验签码
     def GenerateSecretKey(self):
         Result = ConfigAction().GetHardwareCode()
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         HardwareCode = Result["Data"]
@@ -59,7 +59,7 @@ class ActivationWindow(BaseInterface, BaseDialog):
     def CheckActivationCode(self):
         ActivationCode = self.Input2.toPlainText()
         Result = ConfigAction().ProductActivation(ActivationCode)
-        if Result["State"] != True:
+        if Result["ResultStatus"] != True:
             MSGBOX().ERROR(self.Lang.ActivationFails)
         else:
             self.ActionSignal.emit()

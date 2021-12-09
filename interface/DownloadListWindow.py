@@ -304,7 +304,7 @@ class DownloadHandler(BaseInterface, BaseObject):
 
             # 读取文件分片
             Result = DirFileAction().DownloadFileEntity(FileID, _POS)
-            if Result["State"] != True:
+            if Result["ResultStatus"] != True:
                 self.ErrorSignal.emit(
                     FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
@@ -409,7 +409,7 @@ class DoDownloadWorker(BaseInterface, BaseObject):
         for i in range(len(self.FilesIDList)):
             Result = DirFileAction().CheckFile(
                 int(self.FilesIDList[i]["ID"]))
-            if Result["State"] != True:
+            if Result["ResultStatus"] != True:
                 self.BreakSignal.emit(
                     self.FilesIDList["FileName"] + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
