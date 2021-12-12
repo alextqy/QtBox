@@ -781,7 +781,7 @@ class AboutUSWindow(BaseInterface, BaseDialog):
         self.AboutUSLabel = QLabel('''
             Contact Us:<br/>
             alextqy@gmail.com<br/>
-            alextqy@qq.com<br/>
+            285150667@qq.com<br/>
             © 2021 Bit factory
         ''')
         self.AboutUSLabel.setAlignment(Qt.AlignCenter)
