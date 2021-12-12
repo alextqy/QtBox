@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from sre_constants import SRE_FLAG_IGNORECASE
 from interface._base import *
 
 
@@ -49,7 +50,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.URLInput.setToolTip(self.Lang.IP)  # 设置鼠标提示
 
         self.HttpsSelect = QComboBox()
-        self.HttpsSelect.setToolTip("HTTPS")
+        self.HttpsSelect.setToolTip("SSL")
         self.HttpsSelect.setView(QListView())
         self.HttpsSelect.setFixedHeight(38)
         self.HttpsSelect.setFixedWidth(50)
@@ -265,16 +266,17 @@ class LoginFrame(BaseInterface, BaseFrame):
                 MSGBOX.ERROR(self.Lang.UnableToGetServerAddress)
                 return
             else:
-                URL = UDPReceived
-                if "http://" not in URL:
-                    URL = "http://" + URL
-                ServerAddr = URL
-                self.URLInput.setText(ServerAddr)
+                ServerAddr = UDPReceived
+
+        ServerAddr = ServerAddr.replace("http://", "")
+        ServerAddr = ServerAddr.replace("https://", "")
+        if self.Cache.Get("SwitchHttps") == True:
+            ServerAddr = "https://" + ServerAddr
         else:
-            if "http://" not in ServerAddr:
-                ServerAddr = "http://" + ServerAddr
+            ServerAddr = "http://" + ServerAddr
 
         self.Cache.Set("URL", ServerAddr)  # 设置服务器地址缓存
+        self.URLInput.setText(ServerAddr)
         Result = UserAction().SignIn(Account, Password, Type, ServerAddr)
         if Result["State"] == True:
             self.Cache.Set("Token", Result["Token"])  # 记录Token
