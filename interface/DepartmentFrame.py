@@ -161,7 +161,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
             UserID = Items[i].text(1)
             Name = Items[i].text(0)
             Result = UserAction().UserInfo(UserID)
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 MSGBOX().ERROR(Name + " " + self.Lang.AbnormalData)
                 return
             else:
@@ -178,7 +178,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                     DepartmentID,
                     UserID
                 )
-                if ModifyResult["ResultStatus"] != True:
+                if ModifyResult["State"] != True:
                     MSGBOX().ERROR(Name + " " + self.Lang.AbnormalData)
                     return
                 else:
@@ -230,7 +230,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
             # 获取子部门
             Result = DepartmentAction().SelectDepartment(ID)
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
                 return
 
@@ -254,7 +254,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
             self.StaffTree.clear()
             Result = UserAction().SelectUser(self.CurrentDepartmentID)
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
                 return
 
@@ -312,7 +312,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         if YesOrNo == QtWidgets.QMessageBox.Yes:
             ID = Item.text(1)
             Result = DepartmentAction().DeleteDepartment(ID)
-            if Result["ResultStatus"] == True:
+            if Result["State"] == True:
                 self.DepartmentTree.RemoveItems(Item)
                 MSGBOX().COMPLETE(self.Lang.Complete)
                 return
@@ -328,7 +328,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         self.StaffTree.clear()
 
         Result = UserAction().SelectUser(0)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
 
@@ -405,7 +405,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         if ID == 0:
             return
         Result = UserAction().UserInfo(ID)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         UserInfo = Result["Data"]
@@ -423,7 +423,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                     ID = StaffList[i].text(1)
                     Name = StaffList[i].text(0)
                     Result = UserAction().UserInfo(ID)
-                    if Result["ResultStatus"] != True:
+                    if Result["State"] != True:
                         MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
                         return
                     UserInfo = Result["Data"]
@@ -439,7 +439,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                         0,
                         ID
                     )
-                    if ModifyResult["ResultStatus"] == True:
+                    if ModifyResult["State"] == True:
                         self.StaffTree.RemoveItems(StaffList[i])
                     else:
                         MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
@@ -500,7 +500,7 @@ class CreateTopDepartmentWindow(BaseInterface, BaseDialog):
             return
 
         Result = DepartmentAction().CreateDepartment(self.DepartmentNameInput.text(), 0)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         elif Result["ID"] == 0:
@@ -558,7 +558,7 @@ class DepartmentRenameWindow(BaseInterface, BaseDialog):
             else:
                 Result = DepartmentAction().ModifyDepartment(
                     self.Item.text(1), self.DepartmentNameInput.text(), DepartmentInfo["Data"]["ParentID"])
-                if Result["ResultStatus"] == True:
+                if Result["State"] == True:
                     self.Item.setText(0, self.DepartmentNameInput.text())
                     self.close()
                     MSGBOX().COMPLETE(self.Lang.Complete)
@@ -604,7 +604,7 @@ class CreateSubDepartmentWindow(BaseInterface, BaseDialog):
 
         Result = DepartmentAction().CreateDepartment(
             self.DepartmentNameInput.text(), self.Item.text(1))
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         elif Result["ID"] == 0:

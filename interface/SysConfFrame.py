@@ -9,7 +9,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
         # =========================================== Ready ===========================================
 
         Result = ConfigAction().CheckConfig(1)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             return
 
         self.FileType = Result["Data"]
@@ -160,7 +160,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
         ConfigValue = ConfigValue.lower()
         Result = ConfigAction().ModifyConfig(
             1, ConfigKey, ConfigDesc, ConfigType, ConfigValue)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         else:
@@ -179,7 +179,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
 
     def GetHardDiskSpaceInfo(self):
         Result = ConfigAction().GetHardDiskSpaceInfo()
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
         else:
             Data = self.Common.Explode("_", Result["Data"])

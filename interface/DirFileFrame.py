@@ -19,7 +19,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             return
 
         self.DirData = SelectDirData["Data"]
-        self.CurrentDirID = SelectDirData["CurrentDirID"]
+        self.CurrentDirID = SelectDirData["ID"]
 
         self.PasteFileThread = QThread()
         self.FileSyncThread = QThread()
@@ -281,7 +281,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         if SelectDirData["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
-        self.CurrentDirID = SelectDirData["CurrentDirID"]
+        self.CurrentDirID = SelectDirData["ID"]
         self.ShowFileList()
         self.ShowFileGrid()
 
@@ -293,7 +293,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
     # 写入文件树列表
     def InsertFileTree(self, DirID, State=2):
         Result = DirFileAction().FileList(DirID, State)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         Files = Result["Data"]
@@ -328,7 +328,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             Name = Items[i].text(0)
             FileID = Items[i].text(1)
             Result = DirFileAction().MoveFile(FileID, DirID)
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
                 return
             self.DeleteFileItem(Items[i])
@@ -341,7 +341,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
     # 写入文件阵列
     def InsertFileGrid(self, DirID, State=2):
         Result = DirFileAction().FileList(DirID, State)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             return
         Files = Result["Data"]
 
@@ -518,7 +518,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         # 获取子文件夹和文件
         Result = DirFileAction().SelectDir(DirID)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
 
@@ -585,7 +585,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         if YesOrNo == QtWidgets.QMessageBox.Yes:
             ID = Item.text(1)
             Result = DirFileAction().DeleteDir(ID)
-            if Result["ResultStatus"] == True:
+            if Result["State"] == True:
                 DirTree.RemoveItems(Item)
                 MSGBOX().COMPLETE(self.Lang.Complete)
             else:
@@ -687,7 +687,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                     Name = Files[i].text(0)
                     ID = Files[i].text(1)
                     Result = DirFileAction().DeleteFile(ID)
-                    if Result["ResultStatus"] != True:
+                    if Result["State"] != True:
                         MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
                         break
 
@@ -712,7 +712,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 ID = Files[i].text(1)
                 FileName = Files[i].text(0)
                 Result = UserAction().ShareFilesToDepartment(ID)
-                if Result["ResultStatus"] != True:
+                if Result["State"] != True:
                     if Result["Memo"] == "Data is exists":
                         MSGBOX().WARNING(FileName + " " +
                                          self.Lang.AlreadyInTheList)
@@ -754,7 +754,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 FileMD5 = FileInfo["MD5"]
                 Result = DirFileAction().ModifyFile(ID, FileName, State, FileSize,
                                                     BlockSize, UploadBlockSize, DirID, FileMD5)
-                if Result["ResultStatus"] != True:
+                if Result["State"] != True:
                     MSGBOX.ERROR(Name + " " + self.Lang.OperationFailed)
                     break
 
@@ -774,7 +774,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                     Name = Files[i].text(0)
                     ID = Files[i].text(1)
                     Result = DirFileAction().DeleteFile(ID)
-                    if Result["ResultStatus"] != True:
+                    if Result["State"] != True:
                         MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
                         break
 
@@ -910,7 +910,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         BlockSize = FileInfo["BlockSize"]
         for i in range(BlockSize):
             Result = DirFileAction().DownloadFileEntity(FileID, i + 1)
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                 return
@@ -1077,7 +1077,7 @@ class CreateTopDirWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.WrongFolderName)
             return
         Result = DirFileAction().CreateDir(self.DirNameInput.text(), 0)
-        if Result["ResultStatus"] == True:
+        if Result["State"] == True:
             self.ActionSignal.emit(self.DirNameInput.text(), Result["ID"])
             self.close()
             MSGBOX().COMPLETE(self.Lang.Complete)
@@ -1124,7 +1124,7 @@ class DirRenameWindow(BaseInterface, BaseDialog):
             return
         else:
             Result = DirFileAction().ModifyDir(ID, DirName, ParentID)
-            if Result["ResultStatus"] == True:
+            if Result["State"] == True:
                 self.Item.setText(0, DirName)
                 self.close()
                 MSGBOX().COMPLETE(self.Lang.Complete)
@@ -1165,7 +1165,7 @@ class CreateSubDirWindow(BaseInterface, BaseDialog):
         if DirName == "":
             MSGBOX().ERROR(self.Lang.WrongFolderName)
             return
-        if Result["ResultStatus"] == True:
+        if Result["State"] == True:
             node = QTreeWidgetItem(self.Item)  # 设置Item控件
             node.setTextAlignment(0, Qt.AlignHCenter |
                                   Qt.AlignVCenter)  # 设置item字体居中
@@ -1189,7 +1189,7 @@ class FileInfoWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         Result = DirFileAction().CheckFile(ID)
-        if Result["ResultStatus"] == False:
+        if Result["State"] == False:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         self.FileInfo = Result["Data"]
@@ -1262,7 +1262,7 @@ class FileInfoWindow(BaseInterface, BaseDialog):
         FileMD5 = self.FileInfo["MD5"]
         Result = DirFileAction().ModifyFile(
             self.FileInfo["ID"], FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
         else:
             self.close()
@@ -1280,7 +1280,7 @@ class FileSharingWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
         Result = UserAction().SelectUser(-1)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         self.UserList = Result["Data"]
@@ -1362,7 +1362,7 @@ class FileSharingWindow(BaseInterface, BaseDialog):
                 FileName = self.FilesItem[i].text(0)
                 FileID = self.FilesItem[i].text(1)
                 Result = DirFileAction().SendFileToUser(FileID, UserID)
-                if Result["ResultStatus"] != True:
+                if Result["State"] != True:
                     MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                     break
             MSGBOX().COMPLETE(self.Lang.Complete)

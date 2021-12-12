@@ -27,16 +27,16 @@ class MainFrame(BaseInterface, BaseFrame):
 
         # 获取个人信息
         Result = UserAction().CheckSelf()
-        if Result["ResultStatus"] == False:
+        if Result["State"] == False:
             MSGBOX().ERROR(self.Lang.UnableToGetPersonalInformation)
             self.Quit()
             return
-        self.SelfData = Result
+        self.SelfData = Result["Data"]
 
         # 是否系统管理员
         self.IsMaster = False
         self.CheckMaster = UserAction().IsMaster()
-        self.IsMaster = self.CheckMaster["ResultStatus"]
+        self.IsMaster = self.CheckMaster["State"]
 
         MidLQtWidgetsWidth = 180  # 左侧控件宽度
         MidLQtWidgetsHeight = 35  # 左侧控件高度
@@ -393,7 +393,7 @@ class MainFrame(BaseInterface, BaseFrame):
     # 是否激活
     def IsItActivated(self):
         Result = ConfigAction().AccountNumberStatistics()
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             return False
         else:
             Data = Result["Data"]
@@ -650,7 +650,7 @@ class CheckMyself(BaseInterface, BaseDialog):
             self.UserData["DepartmentID"],
         )
 
-        if Result["ResultStatus"] == True:
+        if Result["State"] == True:
             self.ActionSignal.emit(self.NameInput.text())
             self.close()
             MSGBOX().COMPLETE(self.Lang.Complete)
@@ -805,6 +805,6 @@ class TokenRunningStateWorker(BaseInterface, BaseObject):
         while True:
             sleep(1)
             Result = UserAction().TokenRunningState()
-            if Result["ResultStatus"] != True:
+            if Result["State"] != True:
                 self.ActionSignal.emit()
                 break

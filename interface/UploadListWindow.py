@@ -59,7 +59,7 @@ class UploadListWindow(BaseInterface, BaseDialog):
     # 未完成的上传
     def ReadyToUpload(self):
         Result = DirFileAction().FileList(0, 1)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             MSGBOX().WARNING(self.Lang.UnableToObtainNotBeenUploaded)
             return
         Files = Result["Data"]
@@ -273,7 +273,7 @@ class UploadHandler(BaseInterface, BaseObject):
         FileName = self.File.CheckFileName(self.Item.text(0))
         ID = self.Item.text(1)
         Result = DirFileAction().CheckFile(ID)
-        if Result["ResultStatus"] != True:
+        if Result["State"] != True:
             self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
             return
         FileInfo = Result["Data"]
@@ -292,7 +292,7 @@ class UploadHandler(BaseInterface, BaseObject):
             FileMD5 = self.File.CheckFileMD5(UploadPath)
             ModifyFileResult = DirFileAction().ModifyFile(
                 ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
-            if ModifyFileResult["ResultStatus"] != True:
+            if ModifyFileResult["State"] != True:
                 self.ErrorSignal.emit(
                     FileName + " " + self.Lang.OperationFailed)
                 return

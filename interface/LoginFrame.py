@@ -276,7 +276,7 @@ class LoginFrame(BaseInterface, BaseFrame):
 
         self.Cache.Set("URL", ServerAddr)  # 设置服务器地址缓存
         Result = UserAction().SignIn(Account, Password, Type, ServerAddr)
-        if Result["ResultStatus"] == True:
+        if Result["State"] == True:
             self.Cache.Set("Token", Result["Token"])  # 记录Token
 
             UploadDirPath, DownloadDirPath = self.File.SetUserDir(
