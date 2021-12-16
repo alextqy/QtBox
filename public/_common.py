@@ -128,7 +128,7 @@ class Common(BasePublic):
         MailUser = "17602341616"  # 用户名
         MailPass = "yaowin1987"  # 密码(这里的密码不是登录邮箱密码，而是授权码)
         Sender = "17602341616@163.com"  # 发件人邮箱
-        Receivers = ["289959263@qq.com"]  # 接收人邮箱
+        Receivers = ["285150667@qq.com"]  # 接收人邮箱
 
         Title = 'BitBox Suggestions & Opinion'  # 邮件主题
         Message = MIMEText(Content, "plain", "utf-8")  # 内容, 格式, 编码
@@ -143,6 +143,7 @@ class Common(BasePublic):
             smtpObj.sendmail(Sender, Receivers, Message.as_string())  # 发送
             return True
         except smtplib.SMTPException as e:
+            print(e.errno)
             return False
 
     # str to bytes
