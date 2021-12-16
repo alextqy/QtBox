@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from public._base import *
 from public._file import *
+from email.mime.multipart import MIMEMultipart
 
 
 class Common(BasePublic):
@@ -124,26 +125,37 @@ class Common(BasePublic):
         if Content == "":
             return False
 
-        MailHost = "smtp.163.com"  # SMTP服务器
-        MailUser = "17602341616"  # 用户名
-        MailPass = "yaowin1987"  # 密码(这里的密码不是登录邮箱密码，而是授权码)
-        Sender = "17602341616@163.com"  # 发件人邮箱
-        Receivers = ["285150667@qq.com"]  # 接收人邮箱
+        # MailHost = ""  # SMTP服务器
+        # MailUser = ""  # 用户名
+        # MailPass = ""  # 密码(这里的密码不是登录邮箱密码，而是授权码)
+        # Sender = ""  # 发件人邮箱
+        # Receivers = [""]  # 接收人邮箱
+        # Title = 'BitBox Suggestions & Opinion'  # 邮件主题
+        # Message = MIMEText(Content, "plain", "utf-8")  # 内容, 格式, 编码
+        # Message['From'] = "{}".format(Sender)
+        # Message['To'] = ",".join(Receivers)
+        # Message['Subject'] = Title
+        # try:
+        #     # smtpObj = smtplib.SMTP(MailHost, 465)  # 不启用SSL发信, 端口一般是465
+        #     smtpObj = smtplib.SMTP_SSL(MailHost, 465)  # 启用SSL发信, 端口一般是465
+        #     smtpObj.login(MailUser, MailPass)  # 登录验证
+        #     smtpObj.sendmail(Sender, Receivers, Message.as_string())  # 发送
+        #     return True
+        # except smtplib.SMTPException as e:
+        #     return False
 
-        Title = 'BitBox Suggestions & Opinion'  # 邮件主题
-        Message = MIMEText(Content, "plain", "utf-8")  # 内容, 格式, 编码
-        Message['From'] = "{}".format(Sender)
-        Message['To'] = ",".join(Receivers)
-        Message['Subject'] = Title
-
+        mailFrom = '289959263@qq.com'  # 发送方邮箱
+        smtpObj = MIMEMultipart()
+        smtpObj.attach(MIMEText(Content, 'plain', 'utf-8'))
+        smtpObj['Subject'] = "BitBox Suggestions & Opinion"
+        smtpObj['From'] = mailFrom
+        email = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 通过SSL方式发送，服务器地址和端口
+        email.login(mailFrom, "rkswvfmitwzlbggd")  # 登录邮箱
         try:
-            # smtpObj = smtplib.SMTP(MailHost, 465)  # 不启用SSL发信, 端口一般是465
-            smtpObj = smtplib.SMTP_SSL(MailHost, 465)  # 启用SSL发信, 端口一般是465
-            smtpObj.login(MailUser, MailPass)  # 登录验证
-            smtpObj.sendmail(Sender, Receivers, Message.as_string())  # 发送
+            email.sendmail(mailFrom, "285150667@qq.com",
+                           smtpObj.as_string())  # 开始发送
             return True
         except smtplib.SMTPException as e:
-            print(e.errno)
             return False
 
     # str to bytes
