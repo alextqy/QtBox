@@ -144,7 +144,7 @@ class Common(BasePublic):
         # except smtplib.SMTPException as e:
         #     return False
 
-        mailFrom = '289959263@qq.com'  # 发送方邮箱
+        mailFrom = 'alextqy@qq.com'  # 发送方邮箱
         smtpObj = MIMEMultipart()
         smtpObj.attach(MIMEText(Content, 'plain', 'utf-8'))
         smtpObj['Subject'] = "BitBox Suggestions & Opinion"
