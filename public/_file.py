@@ -333,3 +333,31 @@ class File(BasePublic):
         else:
             SizeStr = format(Size, ".2f") + "M"
         return SizeStr
+
+    # SourcePath 待压缩文件所在文件目录
+    # TargetPath 目标文件目录
+    def CompressZip(self, SourcePath, TargetPath):
+        if not exists(TargetPath):
+            return False
+        target = str(int(round(time() * 1000))) + ".zip"
+        tarZip = zipfile.ZipFile(target, "w", zipfile.ZIP_STORED)
+        fileList = []
+        for root, dirs, files in os.walk(SourcePath):
+            for file in files:
+                fileList.append(os.path.join(root, file))
+        if len(fileList):
+            return False
+        for filename in fileList:
+            tarZip.write(filename, filename[len(SourcePath):])
+        tarZip.close()
+        return True
+
+    # SourceFile 待解压zip路径
+    # TargetPath 目标文件目录
+    def Unzip(self, SourceFile, TargetPath):
+        try:
+            file = zipfile.ZipFile(SourceFile, "r")
+            file.extractall(TargetPath)
+        except Exception as e:
+            return False
+        return True
