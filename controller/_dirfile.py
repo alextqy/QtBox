@@ -132,8 +132,7 @@ class DirFileAction(BaseController):
                 "FileSectionName": FileSectionName,
             }
             FileEntityByte = {"FileEntity": open(FileEntityPath, "rb").read()}
-            Result = self.Post(Param, "/Upload/File/Entity",
-                               "", "", "", FileEntityByte)
+            Result = self.Post(Param, "/Upload/File/Entity", "", "", "", FileEntityByte)
             if self.Debug == True:
                 print(Result)
             return Result
@@ -162,7 +161,9 @@ class DirFileAction(BaseController):
         return Result
 
     # 重命名文件
-    def ModifyFile(self, ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, MD5):
+    def ModifyFile(
+        self, ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, MD5
+    ):
         Param = {
             "ID": ID,
             "FileName": FileName,
@@ -237,10 +238,7 @@ class DirFileAction(BaseController):
 
     # 复制文件
     def CopyFile(self, DirID, FileID):
-        Param = {
-            "DirID": DirID,
-            "FileID": FileID
-        }
+        Param = {"DirID": DirID, "FileID": FileID}
         Result = self.Post(Param, "/Copy/File")
         if self.Debug == True:
             print(Result)
@@ -248,9 +246,7 @@ class DirFileAction(BaseController):
 
     # 文件锁定开关
     def FileLockSwitch(self, FileID):
-        Param = {
-            "FileID": FileID
-        }
+        Param = {"FileID": FileID}
         Result = self.Post(Param, "/File/Lock/Switch")
         if self.Debug == True:
             print(Result)
@@ -266,9 +262,7 @@ class DirFileAction(BaseController):
 
     # 同步前置操作
     def FileEntitySyncPrefix(self, FileID):
-        Param = {
-            "FileID": FileID
-        }
+        Param = {"FileID": FileID}
         Result = self.Post(Param, "/File/Entity/Sync/Prefix")
         if self.Debug == True:
             print(Result)
@@ -281,8 +275,7 @@ class DirFileAction(BaseController):
             "FileSectionName": FileSectionName,
         }
         FileEntityByte = {"FileEntity": open(FileEntity, "rb").read()}
-        Result = self.Post(Param, "/File/Entity/Sync",
-                           "", "", "", FileEntityByte)
+        Result = self.Post(Param, "/File/Entity/Sync", "", "", "", FileEntityByte)
         if self.Debug == True:
             print(Result)
         return Result
@@ -314,6 +307,117 @@ class DirFileAction(BaseController):
             "UserID": UserID,
         }
         Result = self.Post(Param, "/Send/File/To/User")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 添加标签
+    def CreateTag(self, TagName, TagMemo):
+        Param = {
+            "TagName": TagName,
+            "TagMemo": TagMemo,
+        }
+        Result = self.Post(Param, "/Create/Tag")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 修改标签
+    def ModifyTag(self, ID, TagName, TagMemo):
+        Param = {
+            "ID": ID,
+            "TagName": TagName,
+            "TagMemo": TagMemo,
+        }
+        Result = self.Post(Param, "/Modify/Tag")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 标签信息
+    def TagInfo(self, ID):
+        Param = {
+            "ID": ID,
+        }
+        Result = self.Post(Param, "/Tag/Info")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 标签列表
+    def TagList(self):
+        Param = {}
+        Result = self.Post(Param, "/Tag/List")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 删除标签
+    def DelTag(self, ID):
+        Param = {
+            "ID": ID,
+        }
+        Result = self.Post(Param, "/Del/Tag")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 添加文件标签
+    def CreateFileTag(self, TagID, FileID):
+        Param = {
+            "TagID": TagID,
+            "FileID": FileID,
+        }
+        Result = self.Post(Param, "/Create/File/Tag")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 文件标签列表
+    def FileTagList(self, TagID):
+        Param = {
+            "TagID": TagID,
+        }
+        Result = self.Post(Param, "/File/Tag/List")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 删除文件标签
+    def DelFileTag(self, ID):
+        Param = {
+            "ID": ID,
+        }
+        Result = self.Post(Param, "/Del/File/Tag")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 添加离线任务
+    def CreateOfflineTask(self, URL, TaskMemo):
+        Param = {
+            "URL": URL,
+            "TaskMemo": TaskMemo,
+        }
+        Result = self.Post(Param, "/Create/Offline/Task")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 离线任务列表
+    def OfflineTaskList(self):
+        Param = {}
+        Result = self.Post(Param, "/Offline/Task/List")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 删除离线任务
+    def DelOfflineTask(self, ID):
+        Param = {
+            "ID": ID,
+        }
+        Result = self.Post(Param, "/Del/Offline/Task")
         if self.Debug == True:
             print(Result)
         return Result

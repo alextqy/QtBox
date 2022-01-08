@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from public._base import *
 from public._common import *
+import zipfile
 
 # 文件操作
 
@@ -56,7 +57,7 @@ class File(BasePublic):
     # 获取文件MD5
     def CheckFileMD5(self, FilePath):
         md5_value = md5()
-        with open(FilePath, 'rb') as file_b:
+        with open(FilePath, "rb") as file_b:
             while True:
                 data_flow = file_b.read(4096)  # 一次读取4G到内存
                 if not data_flow:
@@ -138,12 +139,12 @@ class File(BasePublic):
             return False
         return True
 
-    '''
+    """
     文件读取:
         filePath 文件路径
         start 开始位置
         size 单次读取的字节数
-    '''
+    """
 
     def ReadFile(self, filePath, start, size):
         content = ""  # 读取到的内容
@@ -156,12 +157,12 @@ class File(BasePublic):
         f.close()
         return content
 
-    '''
+    """
     文件切割:
         FilePath 文件路径
         StorageDir 存储路径
         ChunkSize 块大小
-    '''
+    """
 
     def CutFile(self, FilePath="", StorageDir="", ChunkSize=0):
         if FilePath == "":
@@ -177,7 +178,7 @@ class File(BasePublic):
 
         Partnum = 0
         try:
-            Inputfile = open(FilePath, 'rb')
+            Inputfile = open(FilePath, "rb")
         except Exception as e:
             return False, 0
         while True:
@@ -193,17 +194,17 @@ class File(BasePublic):
             else:
                 PartStr = "part."
             Filename = join(StorageDir, (PartStr + str(Partnum)))
-            Fileobj = open(Filename, 'wb')
+            Fileobj = open(Filename, "wb")
             Fileobj.write(Chunk)
             Fileobj.close()
         return True, Partnum
 
-    '''
+    """
     文件合并
     FilePartPath 文件分片存放路径
     StorageDir 存储路径
     Filename 合并后的文件名
-    '''
+    """
 
     def MergeFile(self, FilePartPath, StorageDir, Filename):
         if StorageDir == "":
@@ -212,12 +213,12 @@ class File(BasePublic):
             return False
         if not exists(FilePartPath):
             return False
-        Outfile = open(join(StorageDir, Filename), 'wb')
+        Outfile = open(join(StorageDir, Filename), "wb")
         Files = listdir(FilePartPath)
         Files.sort()
         for File in Files:
             Filepath = join(FilePartPath, File)
-            Infile = open(Filepath, 'rb')
+            Infile = open(Filepath, "rb")
             Data = Infile.read()
             Outfile.write(Data)
             Infile.close()
@@ -282,11 +283,13 @@ class File(BasePublic):
         if BasePath != "":
             DefaultPath = BasePath
 
-        UploadDirPath = DefaultPath + \
-            "/" + UploadPath + "/Upload_" + Account + "/"  # 设置上传文件夹
+        UploadDirPath = (
+            DefaultPath + "/" + UploadPath + "/Upload_" + Account + "/"
+        )  # 设置上传文件夹
 
-        DownloadDirPath = DefaultPath + \
-            "/" + DownloadPath + "/Download_" + Account + "/"  # 设置下载文件夹
+        DownloadDirPath = (
+            DefaultPath + "/" + DownloadPath + "/Download_" + Account + "/"
+        )  # 设置下载文件夹
 
         UploadDirPath = UploadDirPath.replace("\\", "/")
         DownloadDirPath = DownloadDirPath.replace("\\", "/")
@@ -304,8 +307,9 @@ class File(BasePublic):
         DefaultPath = os.getcwd()
         if BasePath != "":
             DefaultPath = BasePath
-        DownloadTempDir = DefaultPath + \
-            "/" + DownloadTempPath + "/Download_Temp_" + Account + "/"  # 设置下载文件夹
+        DownloadTempDir = (
+            DefaultPath + "/" + DownloadTempPath + "/Download_Temp_" + Account + "/"
+        )  # 设置下载文件夹
         DownloadTempDir = DownloadTempDir.replace("\\", "/")
         self.MkDir(DownloadTempDir)
         return DownloadTempDir
@@ -319,17 +323,16 @@ class File(BasePublic):
         DefaultPath = os.getcwd()
         if BasePath != "":
             DefaultPath = BasePath
-        TempDir = DefaultPath + \
-            "/" + TempPath + "/Temp_" + Account + "/"  # 设置下载文件夹
+        TempDir = DefaultPath + "/" + TempPath + "/Temp_" + Account + "/"  # 设置下载文件夹
         TempDir = TempDir.replace("\\", "/")
         self.MkDir(TempDir)
         return TempDir
 
     # 格式化文件大小
     def FileSizeFormat(self, Size=0):
-        Size = (int(Size)/1024)/1024
+        Size = (int(Size) / 1024) / 1024
         if Size > 1024:
-            SizeStr = format(Size/1024, ".2f") + "G"
+            SizeStr = format(Size / 1024, ".2f") + "G"
         else:
             SizeStr = format(Size, ".2f") + "M"
         return SizeStr
@@ -348,7 +351,7 @@ class File(BasePublic):
         if len(fileList):
             return False
         for filename in fileList:
-            tarZip.write(filename, filename[len(SourcePath):])
+            tarZip.write(filename, filename[len(SourcePath) :])
         tarZip.close()
         return True
 
