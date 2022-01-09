@@ -117,7 +117,7 @@ class MainFrame(BaseInterface, BaseFrame):
                 self.MidLV.addWidget(self.MyDepartmentLabel)  # 添加到布局
 
         if self.IsMaster == True:
-            self.UserLabel = UserLabel(self.Lang.UserList)  # 用户管理
+            self.UserLabel = MainUserLabel(self.Lang.UserList)  # 用户管理
             self.UserLabel.setFixedSize(
                 MidLQtWidgetsWidth, MidLQtWidgetsHeight
             )  # 设置固定大小
@@ -130,7 +130,7 @@ class MainFrame(BaseInterface, BaseFrame):
             )  # 连接槽函数
             self.MidLV.addWidget(self.UserLabel)  # 添加到布局
 
-            self.DepartmentLabel = DepartmentLabel(
+            self.DepartmentLabel = MainDepartmentLabel(
                 self.Lang.DepartmentManagement
             )  # 部门管理
             self.DepartmentLabel.setFixedSize(
@@ -145,7 +145,7 @@ class MainFrame(BaseInterface, BaseFrame):
             )  # 连接槽函数
             self.MidLV.addWidget(self.DepartmentLabel)  # 添加到布局
 
-            self.DirFileLabel = DirFileLabel(self.Lang.FileManagement)  # 文件 文件夹
+            self.DirFileLabel = MainDirFileLabel(self.Lang.FileManagement)  # 文件 文件夹
             self.DirFileLabel.setFixedSize(
                 MidLQtWidgetsWidth, MidLQtWidgetsHeight
             )  # 设置固定大小
@@ -158,7 +158,20 @@ class MainFrame(BaseInterface, BaseFrame):
             )  # 连接槽函数
             self.MidLV.addWidget(self.DirFileLabel)  # 添加到布局
 
-            self.SysConfLabel = SysConfLabel(self.Lang.SystemSettings)  # 系统设置
+            self.FileTagLabel = MainFileTagLabel(self.Lang.FileTag)  # 文件标签
+            self.FileTagLabel.setFixedSize(
+                MidLQtWidgetsWidth, MidLQtWidgetsHeight
+            )  # 设置固定大小
+            self.FileTagLabel.setAlignment(Qt.AlignCenter)  # 字体居中
+            self.FileTagLabel.setStyleSheet(
+                self.Style.Object.MainFrame_Mid_Banner_Btn()
+            )  # 设置样式
+            self.FileTagLabel.ActionSignal.connect(
+                lambda: self.ShowControl("FileTagFrame")
+            )  # 连接槽函数
+            self.MidLV.addWidget(self.FileTagLabel)  # 添加到布局
+
+            self.SysConfLabel = MainSysConfLabel(self.Lang.SystemSettings)  # 系统设置
             self.SysConfLabel.setFixedSize(
                 MidLQtWidgetsWidth, MidLQtWidgetsHeight
             )  # 设置固定大小
@@ -171,7 +184,7 @@ class MainFrame(BaseInterface, BaseFrame):
             )  # 连接槽函数
             self.MidLV.addWidget(self.SysConfLabel)  # 添加到布局
         else:
-            self.DirFileLabel = DirFileLabel(self.Lang.FileManagement)  # 文件 文件夹
+            self.DirFileLabel = MainDirFileLabel(self.Lang.FileManagement)  # 文件 文件夹
             self.DirFileLabel.setFixedSize(
                 MidLQtWidgetsWidth, MidLQtWidgetsHeight
             )  # 设置固定大小
@@ -183,6 +196,19 @@ class MainFrame(BaseInterface, BaseFrame):
                 lambda: self.ShowControl("DirFileFrame")
             )  # 连接槽函数
             self.MidLV.addWidget(self.DirFileLabel)  # 添加到布局
+
+            self.FileTagLabel = MainFileTagLabel(self.Lang.FileTag)  # 文件标签
+            self.FileTagLabel.setFixedSize(
+                MidLQtWidgetsWidth, MidLQtWidgetsHeight
+            )  # 设置固定大小
+            self.FileTagLabel.setAlignment(Qt.AlignCenter)  # 字体居中
+            self.FileTagLabel.setStyleSheet(
+                self.Style.Object.MainFrame_Mid_Banner_Btn()
+            )  # 设置样式
+            self.FileTagLabel.ActionSignal.connect(
+                lambda: self.ShowControl("FileTagFrame")
+            )  # 连接槽函数
+            self.MidLV.addWidget(self.FileTagLabel)  # 添加到布局
 
             self.UserLabel = UserLabel(self.Lang.UserList)  # 用户管理
             self.UserLabel.setFixedSize(
@@ -382,6 +408,7 @@ class MainFrame(BaseInterface, BaseFrame):
             self.DepartmentFrameObject.hide()
             self.SysConfFrameObject.hide()
             self.MyDepartmentFrameObject.hide()
+            self.FileTagFrameObject.hide()
             self.FrameObject = self.DirFileFrameObject
         elif ModuleKey == "UserFrame":
             self.DirFileFrameObject.hide()
@@ -389,6 +416,7 @@ class MainFrame(BaseInterface, BaseFrame):
             self.DepartmentFrameObject.hide()
             self.SysConfFrameObject.hide()
             self.MyDepartmentFrameObject.hide()
+            self.FileTagFrameObject.hide()
             self.FrameObject = self.UserFrameObject
         elif ModuleKey == "DepartmentFrame":
             self.DirFileFrameObject.hide()
@@ -396,6 +424,7 @@ class MainFrame(BaseInterface, BaseFrame):
             self.DepartmentFrameObject.show()
             self.SysConfFrameObject.hide()
             self.MyDepartmentFrameObject.hide()
+            self.FileTagFrameObject.hide()
             self.FrameObject = self.DepartmentFrameObject
         elif ModuleKey == "SysConfFrame":
             self.DirFileFrameObject.hide()
@@ -403,6 +432,7 @@ class MainFrame(BaseInterface, BaseFrame):
             self.DepartmentFrameObject.hide()
             self.SysConfFrameObject.show()
             self.MyDepartmentFrameObject.hide()
+            self.FileTagFrameObject.hide()
             self.FrameObject = self.SysConfFrameObject
         elif ModuleKey == "MyDepartmentFrame":
             self.DirFileFrameObject.hide()
@@ -410,6 +440,7 @@ class MainFrame(BaseInterface, BaseFrame):
             self.DepartmentFrameObject.hide()
             self.SysConfFrameObject.hide()
             self.MyDepartmentFrameObject.show()
+            self.FileTagFrameObject.hide()
             self.FrameObject = self.MyDepartmentFrameObject
         elif ModuleKey == "FileTagFrame":
             self.DirFileFrameObject.hide()
@@ -474,7 +505,7 @@ class TopLabel(QLabel):
 # 文件管理
 
 
-class DirFileLabel(QLabel):
+class MainDirFileLabel(QLabel):
     ActionSignal = Signal()  # 设置信号
 
     def __init__(self, Text):
@@ -488,7 +519,7 @@ class DirFileLabel(QLabel):
 
 
 # 文件标签
-class FileTagLabel(QLabel):
+class MainFileTagLabel(QLabel):
     ActionSignal = Signal()  # 设置信号
 
     def __init__(self, Text):
@@ -504,7 +535,7 @@ class FileTagLabel(QLabel):
 # 用户列表
 
 
-class UserLabel(QLabel):
+class MainUserLabel(QLabel):
     ActionSignal = Signal()  # 设置信号
 
     def __init__(self, Text):
@@ -520,7 +551,7 @@ class UserLabel(QLabel):
 # 部门管理
 
 
-class DepartmentLabel(QLabel):
+class MainDepartmentLabel(QLabel):
     ActionSignal = Signal()  # 设置信号
 
     def __init__(self, Text):
@@ -536,7 +567,7 @@ class DepartmentLabel(QLabel):
 # 系统设置
 
 
-class SysConfLabel(QLabel):
+class MainSysConfLabel(QLabel):
     ActionSignal = Signal()  # 设置信号
 
     def __init__(self, Text):
