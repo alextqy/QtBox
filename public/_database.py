@@ -18,9 +18,6 @@ class Database():
         self.SqlCon = sqlite3.connect(self.DBFileURL)
         self.Cur = self.SqlCon.cursor()
 
-    def Cmd(self, CommandParam):
-        return self.Cur.execute(CommandParam)
-
     def Tran(self):
         self.Cur.execute("BEGIN TRANSACTION")
 
@@ -29,3 +26,6 @@ class Database():
 
     def Commit(self):
         self.Cur.execute("COMMIT")
+
+    def Cmd(self, CommandParam):
+        return self.Cur.execute(CommandParam)
