@@ -25,6 +25,17 @@ class UDPTool(BasePublic):
         self.UDPClient.close()
         return InformationReceived
 
+    # 发送广播(备选方案)
+    def UDPBroadcast(self):
+        self.UDPClient.setsockopt(SOL_SOCKET, SO_BROADCAST, True)
+        while True:  # 发送广播
+            sleep(1)
+            try:
+                self.UDPClient.sendto(
+                    self.SendInfoStr.encode("utf8"), self.ADDR)
+            except Exception as e:
+                print(e)
+
     # 接收广播
     def Receive(self, HostName, UDPPort):
         ADDR = ("", UDPPort)
