@@ -18,7 +18,7 @@ class Database():
         self.SqlCon = sqlite3.connect(self.DBFileURL)
         self.Cur = self.SqlCon.cursor()
 
-    def Command(self, CommandParam):
+    def Cmd(self, CommandParam):
         return self.Cur.execute(CommandParam)
 
     def Tran(self):
