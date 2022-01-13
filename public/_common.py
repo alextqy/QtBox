@@ -56,6 +56,18 @@ class Common(BasePublic):
         else:
             return True
 
+    # 年
+    def NowYear(self):
+        return datetime.datetime.now().year
+
+    # 月
+    def NowMonth(self):
+        return datetime.datetime.now().month
+
+    # 日
+    def NowDay(self):
+        return datetime.datetime.now().day
+
     # 时间戳转换成时间(接收10位str时间戳)
     def TimeToStr(self, TimeNum):
         timeData = localtime(int(str(TimeNum)[:10]))
