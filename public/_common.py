@@ -20,6 +20,33 @@ class Common(BasePublic):
         else:
             return "Other"
 
+    # 获取CPU序列号
+    def CPUID(self):
+        osType = self.OSType()
+        if osType == "Windows":
+            _wmi = WMI()
+            for _, cpu in enumerate(_wmi.Win32_Processor()):
+                cpuInfo = cpu
+            return cpuInfo.ProcessorId.strip()
+        elif osType == "Linux":
+            cpuInfo = os.system("sudo dmidecode -t 4 | grep ID")
+            return cpuInfo.decode("utf8").strip().replace("ID:", "").replace(" ", "")
+        else:
+            return ""
+
+    # 获取主板序列号
+    def MotherboardID(self):
+        osType = self.OSType()
+        if osType == "Windows":
+            _wmi = wmi.WMI()
+            boardInfo = _wmi.Win32_BaseBoard()[0].SerialNumber
+            return boardInfo.strip().replace(" ", "")
+        elif osType == "Linux":
+            boardInfo = os.popen("sudo dmidecode -t 1 | grep Serial").read()
+            return boardInfo.strip().replace("Serial Number:", "").replace(" ", "")
+        else:
+            return ""
+
     # 字符串过滤 只匹配大小写字母和数字的组合
     def MatchAll(self, Param=""):
         if Param == "":

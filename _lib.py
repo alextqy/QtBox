@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
 
+import imp
 import os
 import smtplib
 
 from socket import *
 from os import *
 from os.path import *
+from wmi import *
 from functools import *
 from collections import *
 from platform import *
