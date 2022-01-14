@@ -212,3 +212,7 @@ class Common(BasePublic):
     # Base64 to bytes
     def Base64ToBytes(self, Param):
         return b64decode(Param)
+
+    # 字符串MD5
+    def StrMD5(self, Param):
+        return md5(Param.encode('utf-8')).hexdigest()
