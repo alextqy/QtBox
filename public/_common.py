@@ -38,7 +38,7 @@ class Common(BasePublic):
     def MotherboardID(self):
         osType = self.OSType()
         if osType == "Windows":
-            _wmi = wmi.WMI()
+            _wmi = WMI()
             boardInfo = _wmi.Win32_BaseBoard()[0].SerialNumber
             return boardInfo.strip().replace(" ", "")
         elif osType == "Linux":
