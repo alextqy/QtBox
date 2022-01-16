@@ -1157,6 +1157,76 @@ class DefaultQSS(BaseStyle):
         }
         """
 
+    def MainFrame_Mid_Tag_Header_Frame(self):
+        return """
+        QFrame {
+            font-family: Microsoft Yahei;
+            border-radius: 0px;
+            border-width: 0px;
+            border-bottom-width: 2px;
+        }
+        """
+
+    def MainFrame_Mid_File_Tag_Top_Label(self):
+        return """
+        QLabel {
+            font-family: Microsoft Yahei;
+            background-color: #e2e4db;
+            color: black;
+            border-radius: 0px;
+            qproperty-alignment: AlignHCenter;
+            border-width: 0px;
+        }
+        QLabel:hover {
+            color: white;
+            background-color: #9AB9F6;
+        }
+        """
+
+    def MainFrame_Mid_File_Tag_Frame(self):
+        return """
+        border-width: 0px;
+        """
+
+    def MainFrame_Mid_File_Tag_Tree_Widget(self):
+        return """
+        QTreeWidget {
+            font-family: Microsoft Yahei;
+            background-color: #e2e4db;
+            color: black;
+            border-radius: 0px;
+            border-width: 0px;
+        }
+
+        QTreeWidget::item {
+            margin-right: 3px;
+            margin-left: 3px;
+            margin-top: 5px;
+            font-family: Microsoft Yahei;
+            color: black;
+            background-color: white;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #b2b5ba;
+        }
+
+        QTreeWidget::item:hover {
+            font-family: Microsoft Yahei;
+            border-radius: 5px;
+            border: 2px solid #b2b5ba;
+            background-color: #e2e4db;
+            color: black;
+        }
+
+        QTreeWidget::item:selected {
+            font-family: Microsoft Yahei;
+            border-radius: 5px;
+            border: 2px solid #e2e4db;
+            background-color: #b2b5ba;
+            color: white;
+        }
+        """
+
     # ======================================================= 用户 =======================================================
 
     def MainFrame_Mid_User_Header(self):

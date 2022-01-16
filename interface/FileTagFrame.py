@@ -59,7 +59,8 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.TagListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         self.NewTagBtn = QPushButton(self.Lang.NewTag)
-        self.NewTagBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_List_Btn())
+        self.NewTagBtn.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Tag_List_Btn())
         self.NewTagBtn.setContentsMargins(1, 1, 1, 1)
         self.NewTagBtn.setFixedHeight(30)
         self.NewTagBtn.clicked.connect(self.CreateTagWindow)
@@ -77,14 +78,45 @@ class FileTagFrame(BaseInterface, BaseFrame):
         # 文件标题栏
         self.FileHeaderFrame = QFrame()
         self.FileHeaderFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Header_Frame()
-        )
+            self.Style.Object.MainFrame_Mid_Tag_Header_Frame())
         self.FileHeaderFrame.setFixedHeight(20)
 
         self.FileHeaderLayout = QHBoxLayout()
         self.FileHeaderLayout.setContentsMargins(0, 0, 0, 0)  # 设置边距
 
-        
+        self.FileHeader = QLabel(self.Lang.FileList)
+        self.FileHeader.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_File_Tag_Top_Label()
+        )  # 设置样式
+        self.FileHeader.setAlignment(Qt.AlignCenter)  # 字体居中
+
+        self.FileHeaderLayout.addWidget(self.FileHeader)
+        self.FileHeaderFrame.setLayout(self.FileHeaderLayout)
+        self.FileVS.addWidget(self.FileHeaderFrame)
+
+        self.FileFrame = QFrame()
+        self.FileFrame.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_File_Tag_Frame())
+        self.FileLayout = QVBoxLayout()
+        self.FileLayout.setContentsMargins(0, 0, 0, 0)
+
+        self.FileTree = BaseTreeWidget()  # 员工列表控件
+        self.FileTree.SetSelectionMode(2)  # 设置多选模式
+        self.FileTree.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_File_Tag_Tree_Widget()
+        )  # 设置样式
+        self.FileTree.HideVScroll()  # 隐藏纵向滚动条
+        self.FileTree.HideHScroll()  # 隐藏横向滚动条
+        self.FileTree.setColumnCount(3)  # 设置列数
+        self.FileTree.hideColumn(1)  # 隐藏列
+        self.FileTree.setHeaderLabels(["File", "ID", "CreateTime"])  # 设置标题栏
+        self.FileTree.setHeaderHidden(True)  # 隐藏标题栏
+        self.FileTree.setColumnWidth(0, 200)  # 设置列宽
+        self.FileTree.setDragEnabled(True)  # 设置item可拖动
+
+        self.FileLayout.addWidget(self.FileTree)
+        self.FileFrame.setLayout(self.FileLayout)
+        self.FileVS.addWidget(self.FileFrame)
 
         # ============================================================================================
         # 分割线
@@ -129,7 +161,8 @@ class CreateTagWindow(BaseInterface, BaseDialog):
             Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         )  # 内容居中
         self.TagNameInput.setFixedHeight(30)
-        self.TagNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Win_Input())
+        self.TagNameInput.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Tag_Win_Input())
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)

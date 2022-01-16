@@ -7,6 +7,7 @@ from interface.SysConfFrame import *
 from interface.MyDepartmentFrame import *
 from interface.UploadListWindow import *
 from interface.DownloadListWindow import *
+from interface.OfflineTaskListWindow import *
 from interface.ActivationWindow import *
 from interface.FileTagFrame import *
 
@@ -80,6 +81,19 @@ class MainFrame(BaseInterface, BaseFrame):
         )  # 连接槽函数
         self.TaskDownLoadBtn.setIcon(QIcon(DOWNLOAD))
         self.TopLayout.addWidget(self.TaskDownLoadBtn)  # 加入到布局
+
+        self.OfflineTaskBtn = QPushButton("  " + self.Lang.OfflineTask)
+        self.OfflineTaskBtn.setAutoFillBackground(True)  # 允许修改背景颜色
+        self.OfflineTaskBtn.adjustSize()  # 按内容自适应宽度
+        self.OfflineTaskBtn.setFixedHeight(30)  # 设置固定大小
+        self.OfflineTaskBtn.setStyleSheet(
+            self.Style.Object.MainFrame_Top_Task_Btn()
+        )  # 设置样式
+        self.OfflineTaskBtn.clicked.connect(
+            lambda: self.OfflineTaskListWindowObject.show()
+        )  # 连接槽函数
+        self.OfflineTaskBtn.setIcon(QIcon(OFFLINETASK))
+        self.TopLayout.addWidget(self.OfflineTaskBtn)  # 加入到布局
 
         # ============================================== MID Left ==============================================
 
@@ -272,6 +286,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.CheckMyself = CheckMyself(self.SelfData)
         self.UploadListWindowObject = UploadListWindow()
         self.DownloadListWindowObject = DownloadListWindow()
+        self.OfflineTaskListWindowObject = OfflineTaskListWindow()
         self.ActivationWindowObject = ActivationWindow()
         self.ActivationWindowObject.ActionSignal.connect(self.SetActivationBtn)
         self.FeedbackWindowObject = FeedbackWindow()
@@ -345,12 +360,16 @@ class MainFrame(BaseInterface, BaseFrame):
         self.CheckMyself.show()
 
     # 上传列表
-    def UploadListWindow(self):
-        self.UploadListWindowObject.show()
+    # def UploadListWindow(self):
+    #     self.UploadListWindowObject.show()
 
     # 下载列表
-    def DownloadListWindow(self):
-        self.DownloadListWindowObject.show()
+    # def DownloadListWindow(self):
+    #     self.DownloadListWindowObject.show()
+
+    # 离线任务列表
+    # def OfflineTaskListWindow(self):
+    #     self.OfflineTaskListWindowObject.show()
 
     # 激活
     def ShowActivation(self):
