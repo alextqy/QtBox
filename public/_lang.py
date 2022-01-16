@@ -168,6 +168,8 @@ class Lang(BasePublic):
 
             self.TagList = "Tag list"
             self.NewTag = "New tag"
+            self.SystemLog = "System log"
+            self.Check = "Check"
 
         # 西班牙语
         elif self.Type == "es":
@@ -336,6 +338,8 @@ class Lang(BasePublic):
 
             self.TagList = "Lista de etiquetas"
             self.NewTag = "Nueva etiqueta"
+            self.SystemLog = "Registro del sistema"
+            self.Check = "Cheque"
 
         # 法语
         elif self.Type == "fr":
@@ -502,6 +506,8 @@ class Lang(BasePublic):
 
             self.TagList = "Liste des balises"
             self.NewTag = "Nouvelle balise"
+            self.SystemLog = "Journal du système"
+            self.Check = "Vérifier"
 
         # 中文简体
         elif self.Type == "zh-cn":
@@ -652,6 +658,8 @@ class Lang(BasePublic):
 
             self.TagList = "标签列表"
             self.NewTag = "新建标签"
+            self.SystemLog = "系统日志"
+            self.Check = "查看"
 
         # 中文繁体
         elif self.Type == "zh-tw":
@@ -802,6 +810,8 @@ class Lang(BasePublic):
 
             self.TagList = "標籤列表"
             self.NewTag = "新建標籤"
+            self.SystemLog = "系統日誌"
+            self.Check = "查看"
 
         # 默认
         else:
@@ -952,3 +962,5 @@ class Lang(BasePublic):
 
             self.TagList = ""
             self.NewTag = ""
+            self.SystemLog = ""
+            self.Check = ""
