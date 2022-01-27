@@ -1227,6 +1227,81 @@ class DefaultQSS(BaseStyle):
         }
         """
 
+    def MainFrame_Mid_Tag_Staff_Tree_Menu(self):
+        return """
+        QMenu {
+            font-family: Microsoft Yahei;
+            background-color: #e2e4db;
+            padding: 0px;
+        }
+
+        QMenu::item {
+            font-family: Microsoft Yahei;
+            color: black;
+            background-color: white;
+            /*设置菜单项文字上下和左右的内边距，效果就是菜单中的条目左右上下有了间隔*/
+            padding: 5px 15px;
+            /*设置菜单项的外边距*/
+            /* margin: 1px 0px; */
+            /* width: 100px; */
+            border-width: 0px;
+        }
+
+        QMenu::item:selected {
+            font-family: Microsoft Yahei;
+            background-color: #9AB9F6;
+            color: white;
+            border-width: 0px;
+        }
+
+        QMenu::item:pressed {
+            font-family: Microsoft Yahei;
+            background-color: #9AB9F6;
+            color: black;
+            border-width: 0px;
+        }
+        """
+
+    def MainFrame_Mid_Tag_Win_Input(self):
+        return """
+        QLineEdit {
+            font-family: Microsoft Yahei;
+            color: black;
+            border-radius: 5px;
+            margin: 0px;
+            border: 1px solid #b2b5ba;
+            padding: 5px;
+            background-color: white;
+        }
+        QLineEdit:hover {
+            background-color: #faffbd;
+            color: black;
+        }
+        """
+
+    def MainFrame_Mid_Tag_Win_Btn(self):
+        return """
+        QPushButton {
+            font-family: Microsoft Yahei;
+            background-color: #9AB9F6;
+            color: black;
+            border-radius: 5px;
+            border-width: 0px;
+        }
+
+        QPushButton:hover {
+            background-color: #9AB9F6;
+            color: white;
+        }
+
+        QPushButton:pressed {
+            color: black;
+            background-color: #faffbd;
+            padding-left: 3px;
+            padding-top: 3px;
+        }
+        """
+
     # ======================================================= 用户 =======================================================
 
     def MainFrame_Mid_User_Header(self):

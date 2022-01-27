@@ -170,6 +170,8 @@ class Lang(BasePublic):
             self.NewTag = "New tag"
             self.SystemLog = "System log"
             self.Check = "Check"
+            self.WrongTagName = "Wrong tag name"
+            self.WrongLengthOfTagName = "Wrong length of tag name"
 
         # 西班牙语
         elif self.Type == "es":
@@ -340,6 +342,8 @@ class Lang(BasePublic):
             self.NewTag = "Nueva etiqueta"
             self.SystemLog = "Registro del sistema"
             self.Check = "Cheque"
+            self.WrongTagName = "nombre de etiqueta incorrecto"
+            self.WrongLengthOfTagName = "Longitud incorrecta del nombre de la etiqueta"
 
         # 法语
         elif self.Type == "fr":
@@ -508,6 +512,8 @@ class Lang(BasePublic):
             self.NewTag = "Nouvelle balise"
             self.SystemLog = "Journal du système"
             self.Check = "Vérifier"
+            self.WrongTagName = "mauvais nom de balise"
+            self.WrongLengthOfTagName = "Mauvaise longueur du nom de la balise"
 
         # 中文简体
         elif self.Type == "zh-cn":
@@ -660,6 +666,8 @@ class Lang(BasePublic):
             self.NewTag = "新建标签"
             self.SystemLog = "系统日志"
             self.Check = "查看"
+            self.WrongTagName = "错误的标签名称"
+            self.WrongLengthOfTagName = "标签名称长度错误"
 
         # 中文繁体
         elif self.Type == "zh-tw":
@@ -812,6 +820,8 @@ class Lang(BasePublic):
             self.NewTag = "新建標籤"
             self.SystemLog = "系統日誌"
             self.Check = "查看"
+            self.WrongTagName = "錯誤的標籤名稱"
+            self.WrongLengthOfTagName = "標籤名稱長度錯誤"
 
         # 默认
         else:
@@ -964,3 +974,5 @@ class Lang(BasePublic):
             self.NewTag = ""
             self.SystemLog = ""
             self.Check = ""
+            self.WrongTagName = ""
+            self.WrongLengthOfTagName = ""

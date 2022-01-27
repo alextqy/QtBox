@@ -132,7 +132,8 @@ class DirFileAction(BaseController):
                 "FileSectionName": FileSectionName,
             }
             FileEntityByte = {"FileEntity": open(FileEntityPath, "rb").read()}
-            Result = self.Post(Param, "/Upload/File/Entity", "", "", "", FileEntityByte)
+            Result = self.Post(Param, "/Upload/File/Entity",
+                               "", "", "", FileEntityByte)
             if self.Debug == True:
                 print(Result)
             return Result
@@ -275,7 +276,8 @@ class DirFileAction(BaseController):
             "FileSectionName": FileSectionName,
         }
         FileEntityByte = {"FileEntity": open(FileEntity, "rb").read()}
-        Result = self.Post(Param, "/File/Entity/Sync", "", "", "", FileEntityByte)
+        Result = self.Post(Param, "/File/Entity/Sync",
+                           "", "", "", FileEntityByte)
         if self.Debug == True:
             print(Result)
         return Result
@@ -348,6 +350,17 @@ class DirFileAction(BaseController):
     def TagList(self):
         Param = {}
         Result = self.Post(Param, "/Tag/List")
+        if self.Debug == True:
+            print(Result)
+        return Result
+
+    # 修改标签名称
+    def TagRename(self, ID, TagName):
+        Param = {
+            "ID": ID,
+            "TagName": TagName,
+        }
+        Result = self.Post(Param, "/Tag/Rename")
         if self.Debug == True:
             print(Result)
         return Result
