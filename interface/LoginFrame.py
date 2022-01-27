@@ -89,7 +89,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.LoginButton.setStyleSheet(
             self.Style.Object.MainWindow_Login_Btn())  # 设置样式
         self.LoginButton.clicked.connect(self.LoginAction)  # 连接槽函数
-        # self.LoginButton.setIcon(QIcon(SIGNIN))
+        # self.LoginButton.setIcon(QIcon(SIGNINW))
 
         self.HBtnLayout.addWidget(self.LangSelect)
         self.HBtnLayout.addWidget(self.LoginButton)

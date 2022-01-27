@@ -16,7 +16,8 @@ PREVIEWSIZELIMIT = 1024 * 1024 * 5
 
 ICON = os.getcwd() + "/source/bitbox.png"
 TOPLOGO = os.getcwd() + "/source/toplogo.png"
-SIGNIN = os.getcwd() + "/source/signin.png"
+SIGNINW = os.getcwd() + "/source/signinw.png"
+SIGNINB = os.getcwd() + "/source/signinb.png"
 FLIST = os.getcwd() + "/source/list.png"
 FGRID = os.getcwd() + "/source/grid.png"
 UPLOAD = os.getcwd() + "/source/upload.png"
