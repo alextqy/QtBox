@@ -60,3 +60,13 @@ class ConfigAction(BaseController):
         if self.Debug == True:
             print(Result)
         return Result
+
+    # 系统日志
+    def CheckSysLog(self, TimeStamp):
+        Param = {
+            "TimeStamp": TimeStamp
+        }
+        Result = self.Post(Param, "/Check/Sys/Log")
+        if self.Debug == True:
+            print(Result)
+        return Result

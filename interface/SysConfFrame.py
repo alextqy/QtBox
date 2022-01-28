@@ -210,4 +210,15 @@ class SysConfFrame(BaseInterface, BaseFrame):
             self.ServerDiskSpaceInformationInput2.setText(Data[1] + " GB")
 
     def SysLogWindow(self):
-        print("check")
+        self.SysLog = SysLogWindow()
+
+
+class SysLogWindow(CalendarWindow):  # 系统日志
+    def __init__(self):
+        super().__init__()
+
+    def CalendarAction(self):
+        DateStr = self.CalendarWidget.selectedDate().toString("yyyy-MM-dd 00:00:00")
+        DateStamp = self.Common.StrToTime(DateStr)
+        Result = ConfigAction().CheckSysLog(DateStamp)
+        print(Result)

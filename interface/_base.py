@@ -3,6 +3,7 @@ from interface._library import *
 from public.zead import *
 from style.zead import *
 from controller.zead import *
+from abc import ABCMeta, abstractmethod
 
 
 class BaseInterface():  # 基础操作类
@@ -427,3 +428,33 @@ class TooltipWindow(BaseInterface, BaseDialog):  # 动态公共提示弹窗
 
         self.Layout.addWidget(self.Label)
         self.setLayout(self.Layout)
+
+
+class CalendarWindow(BaseInterface, BaseDialog):
+    def __init__(self):
+        super().__init__()
+        self.AppMode()
+        self.setFixedSize(450, 300)
+        self.Layout = QVBoxLayout()
+        self.Layout.setContentsMargins(0, 0, 0, 0)
+        self.CalendarLayout = QHBoxLayout()
+        self.CalendarLayout.setContentsMargins(0, 0, 0, 0)
+        self.BtnLayout = QHBoxLayout()
+        self.BtnLayout.setContentsMargins(0, 0, 0, 0)
+        self.CalendarWidget = QCalendarWidget()
+        self.CalendarLayout.addWidget(self.CalendarWidget)
+        self.Btn = QPushButton(self.Lang.Confirm)
+        self.Btn.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.Btn.setFixedHeight(30)
+        self.Btn.clicked.connect(self.CalendarAction)
+        self.BtnLayout.addWidget(self.Btn)
+        self.Layout.addLayout(self.CalendarLayout)
+        self.Layout.addLayout(self.BtnLayout)
+        self.setLayout(self.Layout)
+        self.show()
+
+    @abstractmethod
+    def CalendarAction(self):
+        # DateStr = self.CalendarWidget.selectedDate().toString("yyyy-MM-dd 00:00:00")
+        pass
