@@ -887,7 +887,7 @@ class TooltipWorker(BaseInterface, BaseObject):  # 提示窗
 
     def Run(self):
         self.ActionSignal.emit()
-        sleep(3)
+        sleep(2)
         self.HideSignal.emit()
 
 

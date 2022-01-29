@@ -433,7 +433,7 @@ class TooltipWindow(BaseInterface, BaseDialog):  # 动态公共提示弹窗
 class CalendarWindow(BaseInterface, BaseDialog):
     def __init__(self):
         super().__init__()
-        self.AppMode()
+        # self.AppMode()
         self.setFixedSize(450, 300)
         self.Layout = QVBoxLayout()
         self.Layout.setContentsMargins(0, 0, 0, 0)

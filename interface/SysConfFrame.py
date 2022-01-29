@@ -210,10 +210,10 @@ class SysConfFrame(BaseInterface, BaseFrame):
             self.ServerDiskSpaceInformationInput2.setText(Data[1] + " GB")
 
     def SysLogWindow(self):
-        self.SysLog = SysLogWindow()
+        self.SysLog = SetCalendarWindow()
 
 
-class SysLogWindow(CalendarWindow):  # 系统日志
+class SetCalendarWindow(CalendarWindow):  # 系统日志
     def __init__(self):
         super().__init__()
 
@@ -221,4 +221,32 @@ class SysLogWindow(CalendarWindow):  # 系统日志
         DateStr = self.CalendarWidget.selectedDate().toString("yyyy-MM-dd 00:00:00")
         DateStamp = self.Common.StrToTime(DateStr)
         Result = ConfigAction().CheckSysLog(DateStamp)
-        print(Result)
+
+        if Result["State"] != True:
+            MSGBOX().ERROR(self.Lang.RequestWasAborted)
+            return
+        else:
+            LogData = Result["Data"]
+            if len(LogData) == 0:
+                MSGBOX().ERROR(self.Lang.NoData)
+                return
+            else:
+                self.SysLogWindow = SysLogWindow(LogData)
+                self.SysLogWindow.show()
+
+
+class SysLogWindow(BaseInterface, BaseDialog):
+    def __init__(self, LogData=""):
+        super().__init__()
+        self.setMinimumSize(350, 200)
+        self.SysLogLayout = QVBoxLayout()
+        self.SysLogLayout.setContentsMargins(0, 0, 0, 0)
+
+        self.SysLogInput = QTextEdit()
+        self.SysLogInput.setReadOnly(True)
+        self.SysLogInput.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_SysConf_Log_Input())
+        self.SysLogInput.setText(LogData)
+
+        self.SysLogLayout.addWidget(self.SysLogInput)
+        self.setLayout(self.SysLogLayout)
