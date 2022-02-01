@@ -33,9 +33,10 @@ class FileTagFrame(BaseInterface, BaseFrame):
             self.Style.Object.MainFrame_Mid_Tag_Tree_Widget()
         )  # 设置样式
         self.TagTree.HideVScroll()  # 隐藏纵向滚动条
-        self.TagTree.setColumnCount(2)  # 设置列数
+        self.TagTree.setColumnCount(3)  # 设置列数
         self.TagTree.hideColumn(1)  # 隐藏列
-        self.TagTree.setHeaderLabels(["Tag", "ID"])  # 设置标题栏
+        self.TagTree.hideColumn(2)  # 隐藏列
+        self.TagTree.setHeaderLabels(["Tag", "ID", "TagMemo"])  # 设置标题栏
         self.TagTree.setHeaderHidden(True)  # 隐藏标题栏
         self.TagTree.setAcceptDrops(True)  # 开启接收拖动
         # self.TagTree.MoveSignal.connect(self.CheckMoveTreeItems)
@@ -109,7 +110,7 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.FileTree.HideHScroll()  # 隐藏横向滚动条
         self.FileTree.setColumnCount(3)  # 设置列数
         self.FileTree.hideColumn(1)  # 隐藏列
-        self.FileTree.setHeaderLabels(["TagName", "ID", "CreateTime"])  # 设置标题栏
+        self.FileTree.setHeaderLabels(["TagName", "ID"])  # 设置标题栏
         self.FileTree.setHeaderHidden(True)  # 隐藏标题栏
         self.FileTree.setColumnWidth(0, 200)  # 设置列宽
         self.FileTree.setDragEnabled(True)  # 设置item可拖动
@@ -136,6 +137,8 @@ class FileTagFrame(BaseInterface, BaseFrame):
                 item = QTreeWidgetItem()  # 设置item控件
                 item.setText(0, TagList[i]["TagName"])  # 设置内容
                 item.setText(1, str(TagList[i]["ID"]))  # 设置内容
+                item.setText(2, TagList[i]["TagMemo"])  # 设置内容
+                item.setToolTip(0, TagList[i]["TagMemo"])
                 item.setTextAlignment(
                     0, Qt.AlignHCenter | Qt.AlignVCenter
                 )  # 设置item字体居中
@@ -195,6 +198,7 @@ class FileTagFrame(BaseInterface, BaseFrame):
     # 重命名标签
     def TagRenameWindow(self, Item):
         self.TagRenameWindowObject = TagRenameWindow(Item)
+        self.TagRenameWindowObject.ActionSignal.connect(self.RefurbishTapList)
         self.TagRenameWindowObject.show()
 
     # 删除标签
@@ -231,7 +235,7 @@ class CreateTagWindow(BaseInterface, BaseDialog):
     def __init__(self):
         super().__init__()
         self.AppMode()
-        self.setFixedSize(200, 80)
+        self.setFixedSize(200, 190)
         self.VLayout = QVBoxLayout()
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
@@ -243,6 +247,16 @@ class CreateTagWindow(BaseInterface, BaseDialog):
         self.TagNameInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Win_Input()
         )
+        self.TagNameInput.setPlaceholderText(self.Lang.TagName)
+
+        self.TagMemoInput = QTextEdit()
+        self.TagMemoInput.setAlignment(
+            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
+        self.TagMemoInput.setFixedHeight(100)
+        self.TagMemoInput.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()
+        )
+        self.TagMemoInput.setPlaceholderText(self.Lang.Remark)
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
@@ -250,6 +264,7 @@ class CreateTagWindow(BaseInterface, BaseDialog):
         self.Btn.clicked.connect(self.CreateAction)
 
         self.VLayout.addWidget(self.TagNameInput)
+        self.VLayout.addWidget(self.TagMemoInput)
         self.VLayout.addWidget(self.Btn)
         self.setLayout(self.VLayout)
 
@@ -261,7 +276,8 @@ class CreateTagWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.WrongLengthOfTagName)
             return
 
-        Result = DirFileAction().CreateTag(self.TagNameInput.text(), 0)
+        Result = DirFileAction().CreateTag(
+            self.TagNameInput.text(), self.TagMemoInput.toPlainText())
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
@@ -280,8 +296,8 @@ class TagRenameWindow(BaseInterface, BaseDialog):
     def __init__(self, Item):
         super().__init__()
         self.AppMode()
-        self.setFixedSize(200, 80)
         self.Item = Item
+        self.setFixedSize(200, 190)
         self.VLayout = QVBoxLayout()
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
@@ -293,20 +309,31 @@ class TagRenameWindow(BaseInterface, BaseDialog):
         self.TagNameInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Win_Input()
         )
+        self.TagNameInput.setPlaceholderText(self.Lang.TagName)
         self.TagNameInput.setText(self.Item.text(0))
+
+        self.TagMemoInput = QTextEdit()
+        self.TagMemoInput.setAlignment(
+            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
+        self.TagMemoInput.setFixedHeight(100)
+        self.TagMemoInput.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()
+        )
+        self.TagMemoInput.setPlaceholderText(self.Lang.Remark)
+        self.TagMemoInput.setText(self.Item.text(2))
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Win_Btn())
         self.Btn.clicked.connect(self.RenameAction)
 
         self.VLayout.addWidget(self.TagNameInput)
+        self.VLayout.addWidget(self.TagMemoInput)
         self.VLayout.addWidget(self.Btn)
         self.setLayout(self.VLayout)
 
     def RenameAction(self):
-        if self.TagNameInput.text() == self.Item.text(0):
+        if (self.TagNameInput.text() == self.Item.text(0)) and (self.TagMemoInput.toPlainText() == self.Item.text(2)):
             return
         elif self.TagNameInput.text() == "":
             MSGBOX().ERROR(self.Lang.WrongTagName)
@@ -320,10 +347,10 @@ class TagRenameWindow(BaseInterface, BaseDialog):
                 Result = DirFileAction().ModifyTag(
                     self.Item.text(1),
                     self.TagNameInput.text(),
-                    TagInfo["Data"]["ID"],
+                    self.TagMemoInput.toPlainText()
                 )
                 if Result["State"] == True:
-                    self.Item.setText(0, self.TagNameInput.text())
+                    self.ActionSignal.emit()
                     self.close()
                     MSGBOX().COMPLETE(self.Lang.Complete)
                 else:

@@ -1279,6 +1279,23 @@ class DefaultQSS(BaseStyle):
         }
         """
 
+    def MainFrame_Mid_Tag_Memo_Win_Input(self):
+        return """
+        QTextEdit {
+            font-family: Microsoft Yahei;
+            color: black;
+            border-radius: 5px;
+            margin: 0px;
+            border: 1px solid #b2b5ba;
+            padding: 5px;
+            background-color: white;
+        }
+        QTextEdit:hover {
+            background-color: #faffbd;
+            color: black;
+        }
+        """
+
     def MainFrame_Mid_Tag_Win_Btn(self):
         return """
         QPushButton {
