@@ -1019,7 +1019,7 @@ class DefaultQSS(BaseStyle):
 
         QListWidget::item:hover {
             font-family: Microsoft Yahei;
-            background-color: #e2e4db;
+            background-color: white;
             color: black;
         }
 
@@ -1027,6 +1027,60 @@ class DefaultQSS(BaseStyle):
             font-family: Microsoft Yahei;
             background-color: #b2b5ba;
             color: white;
+        }
+        """
+
+    def MainFrame_Mid_File_Tag_Win_List(self):
+        return """
+        QListWidget {
+            font-family: Microsoft Yahei;
+            color: black;
+            border-radius: 5px;
+            margin: 0px;
+            background-color: #e2e4db;
+        }
+
+        QListWidget::item {
+            font-family: Microsoft Yahei;
+            color: black;
+            background-color: #e2e4db;
+            height: 30px;
+            color: black;
+        }
+
+        QListWidget::item:hover {
+            font-family: Microsoft Yahei;
+            background-color: white;
+            color: black;
+        }
+
+        QListWidget::item:selected {
+            font-family: Microsoft Yahei;
+            background-color: #b2b5ba;
+            color: white;
+        }
+        """
+
+    def MainFrame_Mid_File_Tag_Win_Btn(self):
+        return """
+        QPushButton {
+            font-family: Microsoft Yahei;
+            background-color: #9AB9F6;
+            color: black;
+            border-radius: 5px;
+            border-width: 0px;
+        }
+
+        QPushButton:hover {
+            background-color: #9AB9F6;
+            color: white;
+        }
+
+        QPushButton:pressed {
+            color: black;
+            background-color: #faffbd;
+            padding-left: 3px;
+            padding-top: 3px;
         }
         """
 

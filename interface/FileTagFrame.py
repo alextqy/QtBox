@@ -44,7 +44,7 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.InsertTagListData(self.TagData)
 
         # 鼠标左键点击事件
-        # self.TagTree.clicked.connect(self.TagItemClicked)
+        self.TagTree.clicked.connect(self.TagItemClicked)
 
         # 鼠标右键 链接槽函数
         self.TagTree.Connect(self.TagRightContextMenuExec)
@@ -148,6 +148,20 @@ class FileTagFrame(BaseInterface, BaseFrame):
                 TagTreeItems.append(item)  # 添加到item list
             self.TagTree.insertTopLevelItems(
                 0, TagTreeItems)  # 添加到标签列表
+
+    # 单击标签
+    def TagItemClicked(self):
+        CurrentItem = self.TagTree.currentItem()  # 获取当前item对象
+        self.CurrentTagID = int(CurrentItem.text(1))
+        if self.CurrentTagID > 0:
+            FileData = DirFileAction().FileTagList(self.CurrentTagID)
+            if FileData["State"] != True:
+                MSGBOX().ERROR(self.Lang.RequestWasAborted)
+            else:
+                FileList = FileData["Data"]
+                FileListData = {}
+                for i in range(len(FileList)):
+                    print(FileList[i]["FileData"])
 
     # 标签右键菜单
     def TagRightContextMenuExec(self, pos):

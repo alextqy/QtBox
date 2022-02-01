@@ -637,6 +637,8 @@ class DirFileFrame(BaseInterface, BaseFrame):
                     self.Lang.FileSharing, lambda: self.FileSharing())  # 分享给其他用户
                 self.FileTreeMenu.AddAction(
                     self.Lang.ShareFilesToDepartment, lambda: self.ShareFilesToDepartment())  # 发送到部门
+                self.FileTreeMenu.AddAction(
+                    self.Lang.FavoritesToFilesTag, lambda: self.FavoritesToFilesTag())  # 收藏到文件标签
             else:  # 焦点外
                 self.FileTreeMenu.AddAction(
                     self.Lang.Refresh, lambda: self.Refresh())  # 刷新列表
@@ -720,6 +722,12 @@ class DirFileFrame(BaseInterface, BaseFrame):
                         MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                     return
             MSGBOX().COMPLETE(self.Lang.Complete)
+
+    # 收藏到文件标签
+    def FavoritesToFilesTag(self):
+        Files = self.FileTree.selectedItems()
+        self.TagListWindow = TagListWindow(Files)
+        self.TagListWindow.show()
 
     # 复制文件
     def CopyFiles(self):
@@ -1313,6 +1321,7 @@ class FileSharingWindow(BaseInterface, BaseDialog):
         # self.UserTree.setSelectionMode(QAbstractItemView.ExtendedSelection)  # 设置多选
         self.UserTree.setStyleSheet(
             self.Style.Object.MainFrame_Mid_File_Sharing_Win_List())
+        self.UserTree.setFocusPolicy(Qt.NoFocus)
 
         self.Btn2 = QPushButton(self.Lang.Send)
         self.Btn2.setFixedHeight(30)
@@ -1364,7 +1373,67 @@ class FileSharingWindow(BaseInterface, BaseDialog):
                 Result = DirFileAction().SendFileToUser(FileID, UserID)
                 if Result["State"] != True:
                     MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
-                    break
+                    return
+            MSGBOX().COMPLETE(self.Lang.Complete)
+
+
+class TagListWindow(BaseInterface, BaseDialog):
+    def __init__(self, Items):
+        super().__init__()
+        self.AppMode()
+        self.Items = Items
+        if len(self.Items) <= 0:
+            MSGBOX().ERROR(self.Lang.OperationFailed)
+            return
+        SelectTagData = DirFileAction().TagList()
+        self.TagList = SelectTagData["Data"]
+        if len(self.TagList) <= 0:
+            MSGBOX().ERROR(self.Lang.OperationFailed)
+            return
+
+        self.setFixedSize(300, 260)
+        self.VLayout = QVBoxLayout()
+        self.VLayout.setContentsMargins(5, 5, 5, 5)
+
+        self.TagListTree = QListWidget()
+        # self.UserTree.setSelectionMode(QAbstractItemView.ExtendedSelection)  # 设置多选
+        self.TagListTree.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_File_Tag_Win_List())
+        self.TagListTree.setFocusPolicy(Qt.NoFocus)
+
+        self.Btn = QPushButton(self.Lang.Submit)
+        self.Btn.setFixedHeight(30)
+        self.Btn.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_File_Tag_Win_Btn())
+        self.Btn.clicked.connect(self.Send)
+
+        self.VLayout.addWidget(self.TagListTree)
+        self.VLayout.addWidget(self.Btn)
+        self.setLayout(self.VLayout)
+        self.AddItemAction()
+
+    def AddItemAction(self):
+        for i in range(len(self.TagList)):
+            Item = QListWidgetItem()
+            Item.setSizeHint(QtCore.QSize(200, 30))
+            Item.setText(self.TagList[i]["TagName"])
+            Item.setWhatsThis(str(self.TagList[i]["ID"]))
+            Item.setToolTip(self.TagList[i]["TagMemo"])
+            self.TagListTree.addItem(Item)
+
+    def Send(self):
+        Tag = self.TagListTree.currentItem()
+        if Tag is None:
+            return
+        TagID = Tag.whatsThis()
+        if (len(self.Items) > 0) and (int(TagID) > 0):
+            for i in range(len(self.Items)):
+                FileName = self.Items[i].text(0)
+                FileID = self.Items[i].text(1)
+                Result = DirFileAction().CreateFileTag(TagID, FileID)
+                if Result["State"] != True:
+                    MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
+                    return
             MSGBOX().COMPLETE(self.Lang.Complete)
 
 

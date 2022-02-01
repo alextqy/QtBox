@@ -138,6 +138,7 @@ class UserFrame(BaseInterface, BaseFrame):
             self.Style.Object.MainFrame_Mid_User_Header())  # 设置样式
 
         self.SA = QListWidget()
+        self.SA.setFocusPolicy(Qt.NoFocus)
         self.SA.setContentsMargins(0, 0, 0, 0)
         self.SA.setStyleSheet(
             self.Style.Object.MainFrame_Mid_User_Message_List())
