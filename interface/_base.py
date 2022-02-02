@@ -458,3 +458,16 @@ class CalendarWindow(BaseInterface, BaseDialog):
     def CalendarAction(self):
         # DateStr = self.CalendarWidget.selectedDate().toString("yyyy-MM-dd 00:00:00")
         pass
+
+
+class PromptPopUpsWorker(BaseInterface, BaseObject):
+    ActionSignal = Signal()
+    HideSignal = Signal()
+
+    def __init__(self):
+        super().__init__()
+
+    def Run(self):
+        self.ActionSignal.emit()
+        sleep(3)
+        self.HideSignal.emit()

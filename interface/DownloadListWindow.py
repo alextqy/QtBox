@@ -309,8 +309,8 @@ class DownloadHandler(BaseInterface, BaseObject):
                     FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
-            FileEntityName = Result["FileEntityName"]
-            Data = Result["Data"]
+            FileEntityName = Result["Data"]["FileEntityName"]
+            Data = Result["Data"]["Data"]
             Content = self.Common.Base64ToBytes(
                 self.Common.StringToBytes(Data))
 

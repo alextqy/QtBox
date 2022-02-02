@@ -922,7 +922,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                 return
-            FileEntityName = Result["FileEntityName"]
+            FileEntityName = Result["Data"]["FileEntityName"]
             FilePart = FileTempDirPath + "/" + FileEntityName
             try:
                 self.File.MkFile(FilePart)
@@ -933,7 +933,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
             # 内容转换
             Content = self.Common.Base64ToBytes(
-                self.Common.StringToBytes(Result["Data"]))
+                self.Common.StringToBytes(Result["Data"]["Data"]))
 
             # 写入分片数据
             try:
@@ -1471,16 +1471,3 @@ class FileTimingSyncWorker(BaseInterface, BaseObject):
         while True:
             sleep(self.Cache.Get("SynchronizationCycle"))
             self.ActionSignal.emit()
-
-
-class PromptPopUpsWorker(BaseInterface, BaseObject):
-    ActionSignal = Signal()
-    HideSignal = Signal()
-
-    def __init__(self):
-        super().__init__()
-
-    def Run(self):
-        self.ActionSignal.emit()
-        sleep(3)
-        self.HideSignal.emit()

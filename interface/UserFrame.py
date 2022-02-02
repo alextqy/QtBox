@@ -276,8 +276,8 @@ class UserFrame(BaseInterface, BaseFrame):
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         else:
-            FileEntityName = Result["FileEntityName"]
-            Data = self.Common.Base64ToBytes(Result["Data"])
+            FileEntityName = Result["Data"]["FileEntityName"]
+            Data = self.Common.Base64ToBytes(Result["Data"]["Data"])
             if self.File.WFileInByte(self.Cache.Get("UserTempDir") + FileEntityName, Data):
                 self.File.OpenLocalDir(self.Cache.Get("UserTempDir"))
             else:

@@ -3,8 +3,12 @@ from interface._base import *
 
 
 class FileTagFrame(BaseInterface, BaseFrame):
+    DownloadSignal = Signal(list)
+
     def __init__(self):
         super().__init__()
+        self.PromptPopUpsWindow = PromptPopUpsWindow()
+        self.PromptPopUpsThread = QThread()
 
         # =========================================== Ready ===========================================
 
@@ -108,12 +112,17 @@ class FileTagFrame(BaseInterface, BaseFrame):
         )  # 设置样式
         self.FileTree.HideVScroll()  # 隐藏纵向滚动条
         self.FileTree.HideHScroll()  # 隐藏横向滚动条
-        self.FileTree.setColumnCount(3)  # 设置列数
+        self.FileTree.setColumnCount(4)  # 设置列数
         self.FileTree.hideColumn(1)  # 隐藏列
-        self.FileTree.setHeaderLabels(["TagName", "ID"])  # 设置标题栏
+        self.FileTree.hideColumn(3)  # 隐藏列
+        self.FileTree.setHeaderLabels(
+            ["FILE", "ID", "Createtime", "DataID"])  # 设置标题栏
         self.FileTree.setHeaderHidden(True)  # 隐藏标题栏
         self.FileTree.setColumnWidth(0, 200)  # 设置列宽
-        self.FileTree.setDragEnabled(True)  # 设置item可拖动
+        # self.FileTree.setDragEnabled(True)  # 设置item可拖动
+
+        # 鼠标右键 链接槽函数
+        self.FileTree.Connect(self.FileRightContextMenuExec)
 
         self.FileLayout.addWidget(self.FileTree)
         self.FileFrame.setLayout(self.FileLayout)
@@ -151,17 +160,39 @@ class FileTagFrame(BaseInterface, BaseFrame):
 
     # 单击标签
     def TagItemClicked(self):
+        self.FileTree.clear()
         CurrentItem = self.TagTree.currentItem()  # 获取当前item对象
         self.CurrentTagID = int(CurrentItem.text(1))
-        if self.CurrentTagID > 0:
+        self.InsertFileListData()
+
+    # 写入文件列表
+    def InsertFileListData(self):
+        if self.CurrentTagID > 0:  # 获取当前标签下的文件
             FileData = DirFileAction().FileTagList(self.CurrentTagID)
             if FileData["State"] != True:
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
             else:
                 FileList = FileData["Data"]
-                FileListData = {}
+                FileTreeItems = []
                 for i in range(len(FileList)):
-                    print(FileList[i]["FileData"])
+                    DataID = FileList[i]["ID"]
+                    Files = FileList[i]["FileData"]
+                    item = QTreeWidgetItem()  # 设置item控件
+                    item.setText(0, Files["FileName"])  # 设置内容
+                    item.setText(1, str(Files["ID"]))  # 设置内容
+                    item.setText(2, self.Common.TimeToStr(
+                        Files["Createtime"]))  # 设置内容
+                    item.setText(3, str(DataID))
+                    item.setTextAlignment(
+                        0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                    item.setTextAlignment(
+                        1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                    item.setTextAlignment(
+                        2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                    item.setTextAlignment(
+                        4, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                    FileTreeItems.append(item)  # 添加到item list
+                self.FileTree.insertTopLevelItems(0, FileTreeItems)  # 添加到文件夹列表
 
     # 标签右键菜单
     def TagRightContextMenuExec(self, pos):
@@ -228,6 +259,77 @@ class FileTagFrame(BaseInterface, BaseFrame):
             else:
                 MSGBOX().ERROR(self.Lang.OperationFailed)
                 return
+
+    # 文件右键菜单
+    def FileRightContextMenuExec(self, pos):
+        self.FileTreeMenu = BaseMenu()  # 左侧标签列表鼠标右键菜单
+        self.FileTreeMenu.setStyleSheet(
+            self.Style.Object.MainFrame_Mid_Tag_Staff_Tree_Menu()
+        )  # 设置样式
+        Item = self.TagTree.currentItem()  # 获取被点击行控件
+        ItemAt = self.TagTree.itemAt(pos)  # 获取点击焦点
+
+        # 展示判断
+        if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
+            self.FileTreeMenu.AddAction(
+                self.Lang.Download, lambda: self.DoDownload()
+            )  # 重命名
+            self.FileTreeMenu.AddAction(
+                self.Lang.Delete, lambda: self.DelData()
+            )  # 删除标签
+        else:  # 焦点外
+            return
+
+        self.FileTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
+        self.FileTreeMenu.show()  # 展示
+
+    # 下载文件
+    def DoDownload(self):
+        Files = self.FileTree.selectedItems()
+        if (len(Files) > 0):
+            FileIDList = []
+            for i in range(len(Files)):
+                FileInfo = {}
+                FileInfo["FileName"] = Files[i].text(0)
+                FileInfo["ID"] = Files[i].text(1)
+                FileIDList.append(FileInfo)
+            self.DownloadSignal.emit(FileIDList)
+            self.PromptPopUpsAction(self.Lang.AddedToDownloadTaskList)
+
+    # 删除数据
+    def DelData(self):
+        YesOrNo = MSGBOX().ASK(self.Lang.Confirm)
+        if YesOrNo == QtWidgets.QMessageBox.Yes:
+            Files = self.FileTree.selectedItems()
+            if (len(Files) > 0):
+                for i in range(len(Files)):
+                    ID = Files[i].text(3)
+                    Result = DirFileAction().DelFileTag(ID)
+                    if Result["State"] == True:
+                        self.FileTree.clear()
+                        self.InsertFileListData()
+                        MSGBOX().COMPLETE(self.Lang.Complete)
+                        return
+                    else:
+                        MSGBOX().ERROR(self.Lang.OperationFailed)
+                        return
+
+    # 提示窗
+
+    def PromptPopUpsAction(self, TextParam=""):
+        if TextParam == "":
+            return
+        self.PromptPopUpsWorker = PromptPopUpsWorker()
+        self.PromptPopUpsWindow.Label.setText(TextParam)
+        self.PromptPopUpsWorker.ActionSignal.connect(
+            self.PromptPopUpsWindow.show)
+        self.PromptPopUpsWorker.HideSignal.connect(
+            self.PromptPopUpsWindow.hide)
+        self.PromptPopUpsWorker.FinishSignal.connect(
+            self.KillThread(self.PromptPopUpsThread))
+        self.PromptPopUpsWorker.moveToThread(self.PromptPopUpsThread)
+        self.PromptPopUpsThread.started.connect(self.PromptPopUpsWorker.Run)
+        self.PromptPopUpsThread.start()
 
 
 class TagHeaderLabel(QLabel):  # 标签列表标题栏
