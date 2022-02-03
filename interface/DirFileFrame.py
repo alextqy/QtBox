@@ -5,6 +5,7 @@ from interface._base import *
 class DirFileFrame(BaseInterface, BaseFrame):
     UploadSignal = Signal(list, int)
     DownloadSignal = Signal(list)
+    RefreshFileTagListSignal = Signal()
 
     def __init__(self):
         super().__init__()
@@ -764,7 +765,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
                                                     BlockSize, UploadBlockSize, DirID, FileMD5)
                 if Result["State"] != True:
                     MSGBOX.ERROR(Name + " " + self.Lang.OperationFailed)
-                    break
+                    return
+                else:
+                    self.RefreshFileTagListSignal.emit()
 
     # 文件网格详情
     def FileGridInfo(self, ID):
@@ -784,7 +787,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
                     Result = DirFileAction().DeleteFile(ID)
                     if Result["State"] != True:
                         MSGBOX().ERROR(Name + " " + self.Lang.OperationFailed)
-                        break
+                        return
+                    else:
+                        self.RefreshFileTagListSignal.emit()
 
     # 刷新文件列表
     def Refresh(self):

@@ -310,12 +310,6 @@ class MainFrame(BaseInterface, BaseFrame):
     def InitLeftModule(self):
         self.LeftFrameLayout = QVBoxLayout()
 
-        self.DirFileFrameObject = DirFileFrame()
-        self.DirFileFrameObject.UploadSignal.connect(self.DoUpload)
-        self.DirFileFrameObject.DownloadSignal.connect(self.DoDownload)
-        self.DirFileFrameObject.hide()
-        self.LeftFrameLayout.addWidget(self.DirFileFrameObject)
-
         self.UserFrameObject = UserFrame()
         self.UserFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.UserFrameObject)
@@ -338,6 +332,14 @@ class MainFrame(BaseInterface, BaseFrame):
         self.FileTagFrameObject.DownloadSignal.connect(self.DoDownload)
         self.FileTagFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.FileTagFrameObject)
+
+        self.DirFileFrameObject = DirFileFrame()
+        self.DirFileFrameObject.UploadSignal.connect(self.DoUpload)
+        self.DirFileFrameObject.DownloadSignal.connect(self.DoDownload)
+        self.DirFileFrameObject.RefreshFileTagListSignal.connect(
+            self.FileTagFrameObject.InsertFileListData)
+        self.DirFileFrameObject.hide()
+        self.LeftFrameLayout.addWidget(self.DirFileFrameObject)
 
         self.MidLayoutRLayout.addLayout(self.LeftFrameLayout)
 
