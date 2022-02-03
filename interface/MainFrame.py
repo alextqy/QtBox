@@ -376,7 +376,8 @@ class MainFrame(BaseInterface, BaseFrame):
 
     # 激活
     def ShowActivation(self):
-        self.ActivationWindowObject.show()
+        # self.ActivationWindowObject.show()
+        MSGBOX().WARNING("The current version does not support activation")
 
     # 反馈
     def ShowFeedback(self):
