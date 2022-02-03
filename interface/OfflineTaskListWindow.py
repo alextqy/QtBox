@@ -50,4 +50,47 @@ class AddTaskWindow(BaseInterface, BaseDialog):
     def __init__(self):
         super().__init__()
         self.AppMode()
-        self.setMinimumSize(500, 200)  # 初始化窗口大小
+        self.setMinimumSize(600, 100)  # 初始化窗口大小
+
+        Layout = QVBoxLayout()
+        Layout.setContentsMargins(5, 5, 5, 5)
+
+        self.URLInput = QLineEdit()
+        self.URLInput.setPlaceholderText("URL")
+        self.URLInput.clearFocus()
+        # self.URLInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
+        self.URLInput.setFixedHeight(30)
+        # self.URLInput.setStyleSheet()
+
+        self.MemoInput = QTextEdit()
+        self.MemoInput.setPlaceholderText(self.Lang.Remark)
+        # self.MemoInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
+
+        BtnLayout = QHBoxLayout()
+
+        self.AddBtn = QPushButton(self.Lang.Submit)
+        self.AddBtn.setFixedHeight(30)
+        self.AddBtn.clicked.connect(self.AddTaskAction)
+
+        self.ClearBtn = QPushButton(self.Lang.Clear)
+        self.ClearBtn.setFixedSize(150, 30)
+        self.ClearBtn.clicked.connect(self.CleanInputAction)
+
+        BtnLayout.addWidget(self.AddBtn)
+        BtnLayout.addWidget(self.ClearBtn)
+
+        Layout.addWidget(self.URLInput)
+        Layout.addWidget(self.MemoInput)
+        Layout.addLayout(BtnLayout)
+        self.setLayout(Layout)
+
+    def AddTaskAction(self):
+        print("Add task")
+
+    def CleanInputAction(self):
+        self.URLInput.clear()
+        self.MemoInput.clear()

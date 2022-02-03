@@ -357,9 +357,9 @@ class CreateTagWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.TagNameInput = QLineEdit()
-        self.TagNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.TagNameInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.TagNameInput.setFixedHeight(30)
         self.TagNameInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Win_Input()
@@ -367,8 +367,8 @@ class CreateTagWindow(BaseInterface, BaseDialog):
         self.TagNameInput.setPlaceholderText(self.Lang.TagName)
 
         self.TagMemoInput = QTextEdit()
-        self.TagMemoInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
+        # self.TagMemoInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
         self.TagMemoInput.setFixedHeight(100)
         self.TagMemoInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()
@@ -419,9 +419,9 @@ class TagRenameWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.TagNameInput = QLineEdit()
-        self.TagNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.TagNameInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.TagNameInput.setFixedHeight(30)
         self.TagNameInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Win_Input()
@@ -430,8 +430,8 @@ class TagRenameWindow(BaseInterface, BaseDialog):
         self.TagNameInput.setText(self.Item.text(0))
 
         self.TagMemoInput = QTextEdit()
-        self.TagMemoInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
+        # self.TagMemoInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
         self.TagMemoInput.setFixedHeight(100)
         self.TagMemoInput.setStyleSheet(
             self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()

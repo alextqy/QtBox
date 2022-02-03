@@ -1310,8 +1310,8 @@ class FileSharingWindow(BaseInterface, BaseDialog):
         self.SearchBar = QLineEdit()
         self.SearchBar.setFixedHeight(30)
         self.SearchBar.setPlaceholderText(self.Lang.Name)
-        self.SearchBar.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        # self.SearchBar.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.SearchBar.setStyleSheet(
             self.Style.Object.MainFrame_Mid_File_Sharing_Win_Input())
 

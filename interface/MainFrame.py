@@ -647,9 +647,9 @@ class CheckMyself(BaseInterface, BaseDialog):
         self.AccountInput = QLineEdit()  # 账号输入
         self.AccountInput.setText(self.UserData["Account"])  # 设置内容
         self.AccountInput.setEnabled(False)  # 不允许编辑
-        self.AccountInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.AccountInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.AccountInput.setPlaceholderText(self.Lang.Account)  # 设置空内容提示
         self.AccountInput.setStyleSheet(
             self.Style.Object.MainFrame_CheckMyself_Input()
@@ -658,9 +658,9 @@ class CheckMyself(BaseInterface, BaseDialog):
 
         self.NameInput = QLineEdit()  # 姓名输入
         self.NameInput.setText(self.UserData["Name"])  # 设置内容
-        self.NameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.NameInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.NameInput.setPlaceholderText(self.Lang.Name)  # 设置空内容提示
         self.NameInput.setStyleSheet(
             self.Style.Object.MainFrame_CheckMyself_Input()
@@ -669,9 +669,9 @@ class CheckMyself(BaseInterface, BaseDialog):
 
         self.PasswordInput = QLineEdit()  # 密码输入
         self.PasswordInput.setEchoMode(QLineEdit.Password)  # 输入为密码类型
-        self.PasswordInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.PasswordInput.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.PasswordInput.setPlaceholderText(self.Lang.PWD)
         self.PasswordInput.setStyleSheet(
             self.Style.Object.MainFrame_CheckMyself_Input()
@@ -680,9 +680,9 @@ class CheckMyself(BaseInterface, BaseDialog):
 
         self.PasswordInput_ = QLineEdit()
         self.PasswordInput_.setEchoMode(QLineEdit.Password)  # 输入为密码类型
-        self.PasswordInput_.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        # self.PasswordInput_.setAlignment(
+        #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
+        # )  # 内容居中
         self.PasswordInput_.setPlaceholderText(self.Lang.Repeat)
         self.PasswordInput_.setStyleSheet(
             self.Style.Object.MainFrame_CheckMyself_Input()
