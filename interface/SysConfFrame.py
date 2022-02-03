@@ -238,7 +238,8 @@ class SetCalendarWindow(CalendarWindow):  # 系统日志
 class SysLogWindow(BaseInterface, BaseDialog):
     def __init__(self, LogData=""):
         super().__init__()
-        self.setMinimumSize(350, 200)
+        self.AppMode()
+        self.setMinimumSize(650, 400)
         self.SysLogLayout = QVBoxLayout()
         self.SysLogLayout.setContentsMargins(0, 0, 0, 0)
 
