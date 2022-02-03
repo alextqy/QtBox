@@ -692,7 +692,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         self.Btn = QPushButton(self.Lang.Submit)
         self.Btn.setFixedHeight(30)
         self.Btn.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Btn())
-        self.Btn.clicked.connect(lambda: self.DoModify())
+        self.Btn.clicked.connect(self.DoModify)
 
         VLayout.addLayout(self.AvatarLayout)
         VLayout.addWidget(self.TextLabel)

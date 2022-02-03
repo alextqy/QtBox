@@ -176,6 +176,8 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = "Wrong length of tag name"
             self.Remark = "Remark"
             self.CheckForUpdates = "Check for updates"
+            self.TaskStatus = "Task status"
+            self.AddTask = "Add task"
 
         # 西班牙语
         elif self.Type == "es":
@@ -352,6 +354,8 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = "Longitud incorrecta del nombre de la etiqueta"
             self.Remark = "Observación"
             self.CheckForUpdates = "Buscar actualizaciones"
+            self.TaskStatus = "estado de la tarea"
+            self.AddTask = "agregar tarea"
 
         # 法语
         elif self.Type == "fr":
@@ -526,6 +530,8 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = "Mauvaise longueur du nom de la balise"
             self.Remark = "Remarque"
             self.CheckForUpdates = "Vérifier les mises à jour"
+            self.TaskStatus = "état de la tâche"
+            self.AddTask = "Ajouter une tâche"
 
         # 中文简体
         elif self.Type == "zh-cn":
@@ -684,6 +690,8 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = "标签名称长度错误"
             self.Remark = "备注"
             self.CheckForUpdates = "检查更新"
+            self.TaskStatus = "任务状态"
+            self.AddTask = "添加任务"
 
         # 中文繁体
         elif self.Type == "zh-tw":
@@ -842,6 +850,8 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = "標籤名稱長度錯誤"
             self.Remark = "備註"
             self.CheckForUpdates = "檢查更新"
+            self.TaskStatus = "任務狀態"
+            self.AddTask = "添加任務"
 
         # 默认
         else:
@@ -1000,3 +1010,5 @@ class Lang(BasePublic):
             self.WrongLengthOfTagName = ""
             self.Remark = ""
             self.CheckForUpdates = ""
+            self.TaskStatus = ""
+            self.AddTask = ""

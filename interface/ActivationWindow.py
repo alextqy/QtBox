@@ -26,7 +26,7 @@ class ActivationWindow(BaseInterface, BaseDialog):
         self.Btn1.setFixedHeight(30)  # 设置固定高度
         self.Btn1.setStyleSheet(
             self.Style.Object.MainFrame_Activation_Window_Btn())
-        self.Btn1.clicked.connect(lambda: self.GenerateSecretKey())  # 连接槽函数
+        self.Btn1.clicked.connect(self.GenerateSecretKey)  # 连接槽函数
         self.Btn1.setIcon(QIcon(GCODE))
         Layout.addWidget(self.Btn1)
 
@@ -40,7 +40,7 @@ class ActivationWindow(BaseInterface, BaseDialog):
         self.Btn2.setFixedHeight(30)  # 设置固定高度
         self.Btn2.setStyleSheet(
             self.Style.Object.MainFrame_Activation_Window_Btn())
-        self.Btn2.clicked.connect(lambda: self.CheckActivationCode())  # 连接槽函数
+        self.Btn2.clicked.connect(self.CheckActivationCode)  # 连接槽函数
         self.Btn2.setIcon(QIcon(ACODE))
         Layout.addWidget(self.Btn2)
 
