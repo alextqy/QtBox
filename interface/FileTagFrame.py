@@ -160,45 +160,47 @@ class FileTagFrame(BaseInterface, BaseFrame):
 
     # 单击标签
     def TagItemClicked(self):
-        self.FileTree.clear()
         CurrentItem = self.TagTree.currentItem()  # 获取当前item对象
         self.CurrentTagID = int(CurrentItem.text(1))
         self.InsertFileListData()
 
     # 写入文件列表
     def InsertFileListData(self):
+        self.FileTree.clear()
         if self.CurrentTagID > 0:  # 获取当前标签下的文件
             FileData = DirFileAction().FileTagList(self.CurrentTagID)
             if FileData["State"] != True:
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
             else:
                 FileList = FileData["Data"]
-                FileTreeItems = []
-                for i in range(len(FileList)):
-                    DataID = FileList[i]["ID"]
-                    Files = FileList[i]["FileData"]
-                    item = QTreeWidgetItem()  # 设置item控件
-                    item.setText(0, Files["FileName"])  # 设置内容
-                    item.setText(1, str(Files["ID"]))  # 设置内容
-                    item.setText(2, self.Common.TimeToStr(
-                        Files["Createtime"]))  # 设置内容
-                    item.setText(3, str(DataID))
-                    item.setTextAlignment(
-                        0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                    item.setTextAlignment(
-                        1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                    item.setTextAlignment(
-                        2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                    item.setTextAlignment(
-                        4, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                    FileTreeItems.append(item)  # 添加到item list
-                self.FileTree.insertTopLevelItems(0, FileTreeItems)  # 添加到文件夹列表
+                if len(FileList) > 0:
+                    FileTreeItems = []
+                    for i in range(len(FileList)):
+                        DataID = FileList[i]["ID"]
+                        Files = FileList[i]["FileData"]
+                        item = QTreeWidgetItem()  # 设置item控件
+                        item.setText(0, Files["FileName"])  # 设置内容
+                        item.setText(1, str(Files["ID"]))  # 设置内容
+                        item.setText(2, self.Common.TimeToStr(
+                            Files["Createtime"]))  # 设置内容
+                        item.setText(3, str(DataID))
+                        item.setTextAlignment(
+                            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(
+                            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(
+                            2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(
+                            4, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        FileTreeItems.append(item)  # 添加到item list
+                    self.FileTree.insertTopLevelItems(
+                        0, FileTreeItems)  # 添加到文件夹列表
 
     # 标签右键菜单
     def TagRightContextMenuExec(self, pos):
         self.TagTreeMenu = BaseMenu()  # 左侧标签列表鼠标右键菜单
         self.TagTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Staff_Tree_Menu()
+            self.Style.Object.MainFrame_Mid_Tag_Tree_Menu()
         )  # 设置样式
         Item = self.TagTree.currentItem()  # 获取被点击行控件
         ItemAt = self.TagTree.itemAt(pos)  # 获取点击焦点
@@ -264,13 +266,13 @@ class FileTagFrame(BaseInterface, BaseFrame):
     def FileRightContextMenuExec(self, pos):
         self.FileTreeMenu = BaseMenu()  # 左侧标签列表鼠标右键菜单
         self.FileTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Staff_Tree_Menu()
+            self.Style.Object.MainFrame_Mid_Tag_Tree_Menu()
         )  # 设置样式
-        Item = self.TagTree.currentItem()  # 获取被点击行控件
-        ItemAt = self.TagTree.itemAt(pos)  # 获取点击焦点
+        Item = self.FileTree.currentItem()  # 获取被点击行控件
+        ItemAt = self.FileTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
-        if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
+        if type(Item) == QTreeWidgetItem and type(ItemAt) == type(Item):  # 焦点内
             self.FileTreeMenu.AddAction(
                 self.Lang.Download, lambda: self.DoDownload()
             )  # 重命名
@@ -278,7 +280,8 @@ class FileTagFrame(BaseInterface, BaseFrame):
                 self.Lang.Delete, lambda: self.DelData()
             )  # 删除标签
         else:  # 焦点外
-            return
+            self.FileTreeMenu.AddAction(
+                self.Lang.Refresh, lambda: self.InsertFileListData())  # 刷新列表
 
         self.FileTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.FileTreeMenu.show()  # 展示
@@ -306,7 +309,6 @@ class FileTagFrame(BaseInterface, BaseFrame):
                     ID = Files[i].text(3)
                     Result = DirFileAction().DelFileTag(ID)
                     if Result["State"] == True:
-                        self.FileTree.clear()
                         self.InsertFileListData()
                         MSGBOX().COMPLETE(self.Lang.Complete)
                         return

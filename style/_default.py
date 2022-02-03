@@ -1281,7 +1281,7 @@ class DefaultQSS(BaseStyle):
         }
         """
 
-    def MainFrame_Mid_Tag_Staff_Tree_Menu(self):
+    def MainFrame_Mid_Tag_Tree_Menu(self):
         return """
         QMenu {
             font-family: Microsoft Yahei;
