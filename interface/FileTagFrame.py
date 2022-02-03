@@ -315,7 +315,6 @@ class FileTagFrame(BaseInterface, BaseFrame):
                         return
 
     # 提示窗
-
     def PromptPopUpsAction(self, TextParam=""):
         if TextParam == "":
             return

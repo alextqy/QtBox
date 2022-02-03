@@ -335,6 +335,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.LeftFrameLayout.addWidget(self.MyDepartmentFrameObject)
 
         self.FileTagFrameObject = FileTagFrame()
+        self.FileTagFrameObject.DownloadSignal.connect(self.DoDownload)
         self.FileTagFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.FileTagFrameObject)
 
