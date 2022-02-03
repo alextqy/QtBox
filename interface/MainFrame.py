@@ -878,26 +878,35 @@ class AboutUSWindow(BaseInterface, BaseDialog):
     def __init__(self):
         super().__init__()
         self.AppMode()
-        self.setFixedSize(220, 120)
+        self.setFixedSize(220, 170)
+        TheURL = "www.bitfty.cc"
 
         VLayout = QVBoxLayout()
         VLayout.setContentsMargins(5, 5, 5, 5)
-
         self.AboutUSLabel = QLabel(
             """
+            Ver 0.0.1 alpha<br/><br/>
             Contact Us:<br/>
             alextqy@gmail.com<br/>
             285150667@qq.com<br/>
-            © 2021 Bit factory
-        """
+            """
+            + TheURL
         )
         self.AboutUSLabel.setAlignment(Qt.AlignCenter)
         self.AboutUSLabel.setStyleSheet(
             self.Style.Object.MainFrame_AboutUS_Window_Label()
         )
 
+        self.Btn = QPushButton(self.Lang.CheckForUpdates)
+        self.Btn.setFixedHeight(30)
+        self.Btn.clicked.connect(lambda: self.OpenURL(TheURL))
+
         VLayout.addWidget(self.AboutUSLabel)
+        VLayout.addWidget(self.Btn)
         self.setLayout(VLayout)
+
+    def OpenURL(self, TheUrl):
+        QDesktopServices.openUrl(QUrl(TheUrl))
 
 
 # 登录状态监控

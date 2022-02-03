@@ -38,4 +38,6 @@ from PySide6.QtGui import QPalette, QBrush, QPixmap, QPainter
 from PySide6.QtCore import QThread, QRunnable, QThreadPool, QTimer
 from PySide6.QtCore import QByteArray
 from PySide6.QtCore import Slot
+from PySide6.QtCore import QUrl
 from PySide6.QtGui import *
+from PySide6.QtGui import QDesktopServices

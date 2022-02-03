@@ -175,6 +175,7 @@ class Lang(BasePublic):
             self.WrongTagName = "Wrong tag name"
             self.WrongLengthOfTagName = "Wrong length of tag name"
             self.Remark = "Remark"
+            self.CheckForUpdates = "Check for updates"
 
         # 西班牙语
         elif self.Type == "es":
@@ -350,6 +351,7 @@ class Lang(BasePublic):
             self.WrongTagName = "nombre de etiqueta incorrecto"
             self.WrongLengthOfTagName = "Longitud incorrecta del nombre de la etiqueta"
             self.Remark = "Observación"
+            self.CheckForUpdates = "Buscar actualizaciones"
 
         # 法语
         elif self.Type == "fr":
@@ -523,6 +525,7 @@ class Lang(BasePublic):
             self.WrongTagName = "mauvais nom de balise"
             self.WrongLengthOfTagName = "Mauvaise longueur du nom de la balise"
             self.Remark = "Remarque"
+            self.CheckForUpdates = "Vérifier les mises à jour"
 
         # 中文简体
         elif self.Type == "zh-cn":
@@ -680,6 +683,7 @@ class Lang(BasePublic):
             self.WrongTagName = "错误的标签名称"
             self.WrongLengthOfTagName = "标签名称长度错误"
             self.Remark = "备注"
+            self.CheckForUpdates = "检查更新"
 
         # 中文繁体
         elif self.Type == "zh-tw":
@@ -837,6 +841,7 @@ class Lang(BasePublic):
             self.WrongTagName = "錯誤的標籤名稱"
             self.WrongLengthOfTagName = "標籤名稱長度錯誤"
             self.Remark = "備註"
+            self.CheckForUpdates = "檢查更新"
 
         # 默认
         else:
@@ -994,3 +999,4 @@ class Lang(BasePublic):
             self.WrongTagName = ""
             self.WrongLengthOfTagName = ""
             self.Remark = ""
+            self.CheckForUpdates = ""
