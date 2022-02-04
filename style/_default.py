@@ -341,6 +341,63 @@ class DefaultQSS(BaseStyle):
         }
         """
 
+    def Offline_Task_Text_Input(self):
+        return """
+        QTextEdit {
+            font-family: Microsoft Yahei;
+            color: black;
+            border-radius: 5px;
+            margin: 0px;
+            border: 1px solid #b2b5ba;
+            padding: 5px;
+            background-color: white;
+        }
+        QTextEdit:hover {
+            background-color: #faffbd;
+            color: black;
+        }
+        """
+
+    def Offline_Task_Line_Input(self):
+        return """
+        QLineEdit {
+            font-family: Microsoft Yahei;
+            color: black;
+            border-radius: 5px;
+            margin: 0px;
+            border: 1px solid #b2b5ba;
+            padding: 5px;
+            background-color: white;
+        }
+        QLineEdit:hover {
+            background-color: #faffbd;
+            color: black;
+        }
+        """
+
+    def Offline_Task_Btn(self):
+        return """
+        QPushButton {
+            font-family: Microsoft Yahei;
+            background-color: #e2e4db;
+            color: black;
+            border-radius: 0px;
+            border-width: 0px;
+        }
+
+        QPushButton:hover {
+            background-color: #9AB9F6;
+            color: white;
+        }
+
+        QPushButton:pressed {
+            color: black;
+            background-color: #faffbd;
+            padding-left: 3px;
+            padding-top: 3px;
+        }
+        """
+
     def Bar(self):
         return """
         QProgressBar {

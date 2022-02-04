@@ -13,13 +13,13 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         # 设置文件最终存储目录
         self.UserTempDir = self.Cache.Get("UserTempDir")
 
-        self.DCache = Cache(self.DownloadDirPath)  # 实例化上传缓存
+        self.DCache = Cache(self.DownloadDirPath)  # 实例化下载缓存
         self.setMinimumSize(700, 400)  # 初始化窗口大小
         self.ThreadPool = QThreadPool()  # 创建线程池
         self.ThreadPool.setMaxThreadCount(10000)  # 最大线程数
         self.ThreadPool.globalInstance()  # 全局设定
         self.NoneMode()  # 更改Dialog交互状态
-        self.DownloadThread = QThread()  # 上传操作线程
+        self.DownloadThread = QThread()  # 下载操作线程
         self.DeleteDownloadThread = QThread()  # 删除操作线程
 
         Layout = QVBoxLayout()  # 设置布局
@@ -150,7 +150,7 @@ class DownloadListWindow(BaseInterface, BaseDialog):
                 self.Lang.Delete, lambda: self.Delete())  # 批量删除
         else:
             self.DownloadTreeMenu.AddAction(
-                self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理上传完成的数据
+                self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理下载完成的数据
 
         self.DownloadTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.DownloadTreeMenu.show()  # 展示
@@ -203,13 +203,13 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         if len(Items) > 0:
             for i in range(len(Items)):
                 Bar = self.DownloadTree.itemWidget(Items[i], 2)  # 获取进度条控件
-                if Bar != None and Bar.value() == 100 or Bar == None:  # 上传完毕只移除任务
+                if Bar != None and Bar.value() == 100 or Bar == None:  # 下载完毕只移除任务
                     self.DownloadTree.RemoveItems(Items[i])
 
     # 移动到线程池
     def MoveToThreadPool(self, Item):
         GoUpload = DownloadHandler(
-            Item, self.DownloadDirPath, self.UserTempDir, self.DCache)  # 实例化上传操作类
+            Item, self.DownloadDirPath, self.UserTempDir, self.DCache)  # 实例化下载操作类
         GoUpload.ErrorSignal.connect(self.ShowError)
         GoUpload.SetBarBusySwitchSignal.connect(self.SetBarBusySwitch)
         GoUpload.SetBarValueSignal.connect(self.SetBarValue)
@@ -494,7 +494,7 @@ class DoDeleteWorker(BaseInterface, BaseObject):
             FileName = self.Items[i].text(0)
 
             Bar = self.DownloadTree.itemWidget(self.Items[i], 2)  # 获取进度条控件
-            if Bar != None and Bar.value() != 100 or Bar == None:  # 未上传完毕则移除临时文件夹
+            if Bar != None and Bar.value() != 100 or Bar == None:  # 未下载完毕则移除临时文件夹
                 self.File.DirRemoveAll(self.DownloadDirPath + FileName)
 
             self.RemoveItemsSignal.emit(self.Items[i])

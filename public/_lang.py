@@ -178,6 +178,8 @@ class Lang(BasePublic):
             self.CheckForUpdates = "Check for updates"
             self.TaskStatus = "Task status"
             self.AddTask = "Add task"
+            self.InTheLine = "In the line"
+            self.Processing = "Processing"
 
         # 西班牙语
         elif self.Type == "es":
@@ -356,6 +358,8 @@ class Lang(BasePublic):
             self.CheckForUpdates = "Buscar actualizaciones"
             self.TaskStatus = "estado de la tarea"
             self.AddTask = "agregar tarea"
+            self.InTheLine = "En la linea"
+            self.Processing = "Procesando"
 
         # 法语
         elif self.Type == "fr":
@@ -532,6 +536,8 @@ class Lang(BasePublic):
             self.CheckForUpdates = "Vérifier les mises à jour"
             self.TaskStatus = "état de la tâche"
             self.AddTask = "Ajouter une tâche"
+            self.InTheLine = "dans la ligne"
+            self.Processing = "Traitement"
 
         # 中文简体
         elif self.Type == "zh-cn":
@@ -692,6 +698,8 @@ class Lang(BasePublic):
             self.CheckForUpdates = "检查更新"
             self.TaskStatus = "任务状态"
             self.AddTask = "添加任务"
+            self.InTheLine = "排队中"
+            self.Processing = "处理中"
 
         # 中文繁体
         elif self.Type == "zh-tw":
@@ -852,6 +860,8 @@ class Lang(BasePublic):
             self.CheckForUpdates = "檢查更新"
             self.TaskStatus = "任務狀態"
             self.AddTask = "添加任務"
+            self.InTheLine = "排隊中"
+            self.Processing = "處理中"
 
         # 默认
         else:
@@ -1012,3 +1022,5 @@ class Lang(BasePublic):
             self.CheckForUpdates = ""
             self.TaskStatus = ""
             self.AddTask = ""
+            self.InTheLine = ""
+            self.Processing = ""
