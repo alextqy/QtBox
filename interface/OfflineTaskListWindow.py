@@ -131,6 +131,8 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
             Result = DirFileAction().DelOfflineTask(Item.text(3))
             if Result["State"] != True:
                 MSGBOX().ERROR(self.Lang.OperationFailed)
+            else:
+                self.InsertTreeData()
 
 
 class AddTaskWindow(BaseInterface, BaseDialog):
