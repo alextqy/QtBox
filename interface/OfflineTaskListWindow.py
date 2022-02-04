@@ -15,7 +15,7 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
         Layout.setContentsMargins(5, 5, 5, 5)  # 设置布局内边距
 
         self.TaskTree = BaseTreeWidget()  # 设置tree控件
-        self.TaskTree.SetSelectionMode(2)  # 设置为多选模式
+        # self.TaskTree.SetSelectionMode(2)  # 设置为多选模式
         self.TaskTree.setStyleSheet(
             self.Style.Object.Download_Tree())  # 设置tree控件样式
         self.TaskTree.setColumnCount(5)  # 设置tree控件列数
