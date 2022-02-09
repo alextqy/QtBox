@@ -434,3 +434,14 @@ class DirFileAction(BaseController):
         if self.Debug == True:
             print(Result)
         return Result
+
+    # 设置离线任务状态
+    def SetOfflineTaskState(self, ID, State):
+        Param = {
+            "ID": ID,
+            "State": State
+        }
+        Result = self.Post(Param, "/Set/Offline/Task/State")
+        if self.Debug == True:
+            print(Result)
+        return Result

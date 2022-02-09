@@ -118,11 +118,23 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
         # 焦点判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:
             self.TaskTreeMenu.AddAction(
+                self.Lang.Retry, lambda: self.Retry())  # 批量删除
+            self.TaskTreeMenu.AddAction(
                 self.Lang.Delete, lambda: self.Delete())  # 批量删除
         else:
             return
         self.TaskTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.TaskTreeMenu.show()  # 展示
+
+    def Retry(self):
+        Item = self.TaskTree.currentItem()
+        if int(Item.text(4)) != 4:
+            return
+        Result = DirFileAction().SetOfflineTaskState(Item.text(3), 1)
+        if Result["State"] != True:
+            MSGBOX().ERROR(self.Lang.OperationFailed)
+        else:
+            self.InsertTreeData()
 
     def Delete(self):
         YesOrNo = MSGBOX().ASK(self.Lang.Confirm)
@@ -185,6 +197,7 @@ class AddTaskWindow(BaseInterface, BaseDialog):
         if Result["State"] == True:
             self.ActionSignal.emit()
             MSGBOX().COMPLETE(self.Lang.Complete)
+            self.close()
         else:
             MSGBOX().ERROR(self.Lang.OperationFailed)
 
