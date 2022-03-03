@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 class Common(BasePublic):
+
     def __init__(self):
         super().__init__()
 
@@ -120,19 +121,19 @@ class Common(BasePublic):
 
     # 过去的时间
     def TimePast(self, Day=0):
-        return self.StrToTime(self.TodayStr()) - (Day*(60*60*24))
+        return self.StrToTime(self.TodayStr()) - (Day * (60 * 60 * 24))
 
     # 未来的时间
     def TimeFuture(self, Day=0):
-        return self.StrToTime(self.TodayStr()) + (Day*(60*60*24))
+        return self.StrToTime(self.TodayStr()) + (Day * (60 * 60 * 24))
 
     # 指定时间的过去天数
     def TheTimePast(self, Time, Day=0):
-        return Time - (Day*(60*60*24))
+        return Time - (Day * (60 * 60 * 24))
 
     # 指定时间的未来天数
     def TheTimeFuture(self, Time, Day=0):
-        return Time + (Day*(60*60*24))
+        return Time + (Day * (60 * 60 * 24))
 
     # 按指定字符切割字符串为数组
     def Explode(self, Separator, StringParam):
@@ -191,8 +192,7 @@ class Common(BasePublic):
         email = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 通过SSL方式发送，服务器地址和端口
         email.login(mailFrom, "rkswvfmitwzlbggd")  # 登录邮箱
         try:
-            email.sendmail(mailFrom, "285150667@qq.com",
-                           smtpObj.as_string())  # 开始发送
+            email.sendmail(mailFrom, "285150667@qq.com", smtpObj.as_string())  # 开始发送
             return True
         except smtplib.SMTPException as e:
             return False

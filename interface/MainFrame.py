@@ -49,8 +49,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.TopLabel.setMinimumHeight(30)  # 设置固定高度
         self.TopLabel.setMinimumWidth(MidLQtWidgetsWidth + 14)  # 设置固定宽度
         self.TopLabel.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.TopLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Top_Label())  # 设置样式
+        self.TopLabel.setStyleSheet(self.Style.Object.MainFrame_Top_Label())  # 设置样式
         self.TopLabel.ActionSignal.connect(self.UserInfo)  # 连接槽函数
         self.TopLayout.addWidget(self.TopLabel)  # 加入到布局
 
@@ -60,12 +59,8 @@ class MainFrame(BaseInterface, BaseFrame):
         self.TaskUploadBtn.setAutoFillBackground(True)  # 允许修改背景颜色
         self.TaskUploadBtn.adjustSize()  # 按内容自适应宽度
         self.TaskUploadBtn.setFixedHeight(30)  # 设置固定大小
-        self.TaskUploadBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Top_Task_Btn()
-        )  # 设置样式
-        self.TaskUploadBtn.clicked.connect(
-            lambda: self.UploadListWindowObject.show()
-        )  # 连接槽函数
+        self.TaskUploadBtn.setStyleSheet(self.Style.Object.MainFrame_Top_Task_Btn())  # 设置样式
+        self.TaskUploadBtn.clicked.connect(lambda: self.UploadListWindowObject.show())  # 连接槽函数
         self.TaskUploadBtn.setIcon(QIcon(UPLOAD))
         self.TopLayout.addWidget(self.TaskUploadBtn)  # 加入到布局
 
@@ -73,12 +68,8 @@ class MainFrame(BaseInterface, BaseFrame):
         self.TaskDownLoadBtn.setAutoFillBackground(True)  # 允许修改背景颜色
         self.TaskDownLoadBtn.adjustSize()  # 按内容自适应宽度
         self.TaskDownLoadBtn.setFixedHeight(30)  # 设置固定大小
-        self.TaskDownLoadBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Top_Task_Btn()
-        )  # 设置样式
-        self.TaskDownLoadBtn.clicked.connect(
-            lambda: self.DownloadListWindowObject.show()
-        )  # 连接槽函数
+        self.TaskDownLoadBtn.setStyleSheet(self.Style.Object.MainFrame_Top_Task_Btn())  # 设置样式
+        self.TaskDownLoadBtn.clicked.connect(lambda: self.DownloadListWindowObject.show())  # 连接槽函数
         self.TaskDownLoadBtn.setIcon(QIcon(DOWNLOAD))
         self.TopLayout.addWidget(self.TaskDownLoadBtn)  # 加入到布局
 
@@ -86,12 +77,8 @@ class MainFrame(BaseInterface, BaseFrame):
         self.OfflineTaskBtn.setAutoFillBackground(True)  # 允许修改背景颜色
         self.OfflineTaskBtn.adjustSize()  # 按内容自适应宽度
         self.OfflineTaskBtn.setFixedHeight(30)  # 设置固定大小
-        self.OfflineTaskBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Top_Task_Btn()
-        )  # 设置样式
-        self.OfflineTaskBtn.clicked.connect(
-            lambda: self.OfflineTaskListWindowObject.show()
-        )  # 连接槽函数
+        self.OfflineTaskBtn.setStyleSheet(self.Style.Object.MainFrame_Top_Task_Btn())  # 设置样式
+        self.OfflineTaskBtn.clicked.connect(lambda: self.OfflineTaskListWindowObject.show())  # 连接槽函数
         self.OfflineTaskBtn.setIcon(QIcon(OFFLINETASK))
         self.TopLayout.addWidget(self.OfflineTaskBtn)  # 加入到布局
 
@@ -99,9 +86,7 @@ class MainFrame(BaseInterface, BaseFrame):
 
         self.MidLayoutL = QVBoxLayout()  # 中间左侧布局
         self.MidLayoutLFrame = QFrame()  # 中间左侧控件
-        self.MidLayoutLFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Frame_L()
-        )  # 设置样式
+        self.MidLayoutLFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Frame_L())  # 设置样式
         self.MidLayoutLFrame.setFixedWidth(MidLQtWidgetsWidth + 14)  # 设置固定宽度
         self.MidLV = QVBoxLayout()  # 左侧按钮布局
         self.MidLV.setContentsMargins(6, 5, 0, 5)  # 设置边距
@@ -111,135 +96,66 @@ class MainFrame(BaseInterface, BaseFrame):
 
         if self.SelfData["Account"] != "root":
             if self.SelfData["DepartmentID"] > 0:
-                self.MyDepartmentLabel = MyDepartmentLabel(
-                    self.Lang.MyDepartment,
-                    MidLQtWidgetsWidth,
-                    MidLQtWidgetsHeight,
-                    self.Style.Object.MainFrame_Mid_Banner_Btn()
-                )  # 我的部门
+                self.MyDepartmentLabel = MyDepartmentLabel(self.Lang.MyDepartment, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 我的部门
                 if self.SelfData["DepartmentID"] > 0:
-                    self.MyDepartmentLabel.ActionSignal.connect(
-                        lambda: self.ShowControl("MyDepartmentFrame"))  # 连接槽函数
+                    self.MyDepartmentLabel.ActionSignal.connect(lambda: self.ShowControl("MyDepartmentFrame"))  # 连接槽函数
                 else:
-                    self.MyDepartmentLabel.ActionSignal.connect(
-                        lambda: self.ShowError(self.Lang.TheAccountHasNoDepartment))  # 连接槽函数
+                    self.MyDepartmentLabel.ActionSignal.connect(lambda: self.ShowError(self.Lang.TheAccountHasNoDepartment))  # 连接槽函数
                 self.MidLV.addWidget(self.MyDepartmentLabel)  # 添加到布局
 
         if self.IsMaster == True:
-            self.UserLabel = MainUserLabel(
-                self.Lang.UserList,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 用户管理
-            self.UserLabel.ActionSignal.connect(
-                lambda: self.ShowControl("UserFrame")
-            )  # 连接槽函数
+            self.UserLabel = MainUserLabel(self.Lang.UserList, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 用户管理
+            self.UserLabel.ActionSignal.connect(lambda: self.ShowControl("UserFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.UserLabel)  # 添加到布局
 
-            self.DepartmentLabel = MainDepartmentLabel(
-                self.Lang.DepartmentManagement,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 部门管理
-            self.DepartmentLabel.ActionSignal.connect(
-                lambda: self.ShowControl("DepartmentFrame")
-            )  # 连接槽函数
+            self.DepartmentLabel = MainDepartmentLabel(self.Lang.DepartmentManagement, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 部门管理
+            self.DepartmentLabel.ActionSignal.connect(lambda: self.ShowControl("DepartmentFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.DepartmentLabel)  # 添加到布局
 
-            self.DirFileLabel = MainDirFileLabel(
-                self.Lang.FileManagement,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 文件 文件夹
-            self.DirFileLabel.ActionSignal.connect(
-                lambda: self.ShowControl("DirFileFrame")
-            )  # 连接槽函数
+            self.DirFileLabel = MainDirFileLabel(self.Lang.FileManagement, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 文件 文件夹
+            self.DirFileLabel.ActionSignal.connect(lambda: self.ShowControl("DirFileFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.DirFileLabel)  # 添加到布局
 
-            self.FileTagLabel = MainFileTagLabel(
-                self.Lang.FileTag,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 文件标签
-            self.FileTagLabel.ActionSignal.connect(
-                lambda: self.ShowControl("FileTagFrame")
-            )  # 连接槽函数
+            self.FileTagLabel = MainFileTagLabel(self.Lang.FileTag, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 文件标签
+            self.FileTagLabel.ActionSignal.connect(lambda: self.ShowControl("FileTagFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.FileTagLabel)  # 添加到布局
 
-            self.SysConfLabel = MainSysConfLabel(
-                self.Lang.SystemSettings,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 系统设置
-            self.SysConfLabel.ActionSignal.connect(
-                lambda: self.ShowControl("SysConfFrame")
-            )  # 连接槽函数
+            self.SysConfLabel = MainSysConfLabel(self.Lang.SystemSettings, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 系统设置
+            self.SysConfLabel.ActionSignal.connect(lambda: self.ShowControl("SysConfFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.SysConfLabel)  # 添加到布局
         else:
-            self.DirFileLabel = MainDirFileLabel(
-                self.Lang.FileManagement,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 文件 文件夹
-            self.DirFileLabel.ActionSignal.connect(
-                lambda: self.ShowControl("DirFileFrame")
-            )  # 连接槽函数
+            self.DirFileLabel = MainDirFileLabel(self.Lang.FileManagement, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 文件 文件夹
+            self.DirFileLabel.ActionSignal.connect(lambda: self.ShowControl("DirFileFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.DirFileLabel)  # 添加到布局
 
-            self.FileTagLabel = MainFileTagLabel(
-                self.Lang.FileTag,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 文件标签
-            self.FileTagLabel.ActionSignal.connect(
-                lambda: self.ShowControl("FileTagFrame")
-            )  # 连接槽函数
+            self.FileTagLabel = MainFileTagLabel(self.Lang.FileTag, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 文件标签
+            self.FileTagLabel.ActionSignal.connect(lambda: self.ShowControl("FileTagFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.FileTagLabel)  # 添加到布局
 
-            self.UserLabel = UserLabel(
-                self.Lang.UserList,
-                MidLQtWidgetsWidth,
-                MidLQtWidgetsHeight,
-                self.Style.Object.MainFrame_Mid_Banner_Btn()
-            )  # 用户管理
-            self.UserLabel.ActionSignal.connect(
-                lambda: self.ShowControl("UserFrame")
-            )  # 连接槽函数
+            self.UserLabel = MainUserLabel(self.Lang.UserList, MidLQtWidgetsWidth, MidLQtWidgetsHeight, self.Style.Object.MainFrame_Mid_Banner_Btn())  # 用户管理
+            self.UserLabel.ActionSignal.connect(lambda: self.ShowControl("UserFrame"))  # 连接槽函数
             self.MidLV.addWidget(self.UserLabel)  # 添加到布局
         # =====================================================================================================
 
         self.MidLV.addStretch()  # 底部占位
 
         self.ActivationBtn = QPushButton("")  # 系统设置
-        self.ActivationBtn.setFixedSize(
-            MidLQtWidgetsWidth, MidLQtWidgetsHeight
-        )  # 设置固定大小
+        self.ActivationBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
         self.ActivationBtn.clicked.connect(self.ShowActivation)  # 连接槽函数
         self.ActivationBtn.setIcon(QIcon(UNLOCK))
         self.MidLV.addWidget(self.ActivationBtn)  # 添加到布局
         self.SetActivationBtn()
 
         self.FeedbackBtn = QPushButton("  " + self.Lang.Feedback)  # 系统设置
-        self.FeedbackBtn.setFixedSize(
-            MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
-        self.FeedbackBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Exit_Btn())  # 设置样式
+        self.FeedbackBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
+        self.FeedbackBtn.setStyleSheet(self.Style.Object.MainFrame_Exit_Btn())  # 设置样式
         self.FeedbackBtn.clicked.connect(self.ShowFeedback)  # 连接槽函数
         self.FeedbackBtn.setIcon(QIcon(FEEDBACK))
         self.MidLV.addWidget(self.FeedbackBtn)  # 添加到布局
 
         self.ExitBtn = QPushButton("  " + self.Lang.SignOut)  # 退出按钮
-        self.ExitBtn.setFixedSize(
-            MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
-        self.ExitBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Exit_Btn())  # 设置样式
+        self.ExitBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
+        self.ExitBtn.setStyleSheet(self.Style.Object.MainFrame_Exit_Btn())  # 设置样式
         self.ExitBtn.clicked.connect(self.DoQuit)  # 连接槽函数
         self.ExitBtn.setIcon(QIcon(SIGNOUT))
         self.MidLV.addWidget(self.ExitBtn)  # 添加到布局
@@ -252,9 +168,7 @@ class MainFrame(BaseInterface, BaseFrame):
         # ============================================== MID Right ==============================================
         self.MidLayoutR = QVBoxLayout()  # 中间右侧布局
         self.MidLayoutRFrame = QFrame()  # 中间右侧控件
-        self.MidLayoutRFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Frame_R()
-        )  # 设置样式
+        self.MidLayoutRFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Frame_R())  # 设置样式
         self.MidLayoutRLayout = QHBoxLayout()  # 设置右侧基础布局
         self.MidLayoutRLayout.setContentsMargins(0, 0, 0, 0)  # 设置外边距
 
@@ -266,8 +180,7 @@ class MainFrame(BaseInterface, BaseFrame):
         # ============================================== BTM ==============================================
         self.BtmLayout = QHBoxLayout()  # 底部布局
         self.BtmLabel = BtmLabel("About Us")
-        self.BtmLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Btm_Label())  # 设置样式
+        self.BtmLabel.setStyleSheet(self.Style.Object.MainFrame_Btm_Label())  # 设置样式
         self.BtmLabel.ActionSignal.connect(self.AboutUS)  # 连接槽函数
         self.BtmLabel.setFixedHeight(25)  # 设置固定高度
         self.BtmLabel.setAlignment(Qt.AlignCenter)  # 字体居中
@@ -297,8 +210,7 @@ class MainFrame(BaseInterface, BaseFrame):
 
     # 顶部动效
     def InitAnimation(self):
-        Animation1 = QtCore.QPropertyAnimation(
-            self.TopLabel, b"pos", self)  # 实例化动效对象
+        Animation1 = QtCore.QPropertyAnimation(self.TopLabel, b"pos", self)  # 实例化动效对象
         Animation1.setKeyValueAt(0, QtCore.QPoint(5, -20))  # 起始位置
         Animation1.setKeyValueAt(1, QtCore.QPoint(5, 5))  # 最后位置
         Animation1.setDuration(800)  # 执行时长
@@ -322,8 +234,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.SysConfFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.SysConfFrameObject)
 
-        self.MyDepartmentFrameObject = MyDepartmentFrame(
-            self.SelfData["DepartmentID"])
+        self.MyDepartmentFrameObject = MyDepartmentFrame(self.SelfData["DepartmentID"])
         self.MyDepartmentFrameObject.DownloadSignal.connect(self.DoDownload)
         self.MyDepartmentFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.MyDepartmentFrameObject)
@@ -336,8 +247,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.DirFileFrameObject = DirFileFrame()
         self.DirFileFrameObject.UploadSignal.connect(self.DoUpload)
         self.DirFileFrameObject.DownloadSignal.connect(self.DoDownload)
-        self.DirFileFrameObject.RefreshFileTagListSignal.connect(
-            self.FileTagFrameObject.InsertFileListData)
+        self.DirFileFrameObject.RefreshFileTagListSignal.connect(self.FileTagFrameObject.InsertFileListData)
         self.DirFileFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.DirFileFrameObject)
 
@@ -347,12 +257,9 @@ class MainFrame(BaseInterface, BaseFrame):
     def TokenRunningStateAction(self):
         self.TokenRunningStateWorker = TokenRunningStateWorker()
         self.TokenRunningStateWorker.ActionSignal.connect(self.DoQuit)
-        self.TokenRunningStateWorker.FinishSignal.connect(
-            self.KillThread(self.TokenRunningStateThread)
-        )
+        self.TokenRunningStateWorker.FinishSignal.connect(self.KillThread(self.TokenRunningStateThread))
         self.TokenRunningStateWorker.moveToThread(self.TokenRunningStateThread)
-        self.TokenRunningStateThread.started.connect(
-            self.TokenRunningStateWorker.Run)
+        self.TokenRunningStateThread.started.connect(self.TokenRunningStateWorker.Run)
         self.TokenRunningStateThread.start()
 
     # ============================================== 模块链接 ==============================================
@@ -395,15 +302,11 @@ class MainFrame(BaseInterface, BaseFrame):
 
     # 上传
     def DoUpload(self, FilesPath=[], DirID=0):
-        self.UploadListWindowObject.ActionSignal.connect(
-            self.UploadListWindowObject.DOUploadInThread(FilesPath, DirID)
-        )
+        self.UploadListWindowObject.ActionSignal.connect(self.UploadListWindowObject.DOUploadInThread(FilesPath, DirID))
 
     # 下载
     def DoDownload(self, FileIDList):
-        self.DownloadListWindowObject.ActionSignal.connect(
-            self.DownloadListWindowObject.DODownloadInThread(FileIDList)
-        )
+        self.DownloadListWindowObject.ActionSignal.connect(self.DownloadListWindowObject.DODownloadInThread(FileIDList))
 
     # 左侧展示控制
     def ShowControl(self, ModuleKey=""):
@@ -629,9 +532,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         self.AvatarLabel = AvatarLabel("")  # 默认展示内容
         self.AvatarLabel.setAlignment(Qt.AlignCenter)  # 字体居中
         self.AvatarLabel.setFixedSize(125, 120)  # 固定大小
-        self.AvatarLabel.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Label()
-        )  # 设置样式
+        self.AvatarLabel.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Label())  # 设置样式
         self.AvatarLabel.setScaledContents(True)  # 图片自适应
         self.AvatarLabel.ActionSignal.connect(self.DoAvatarUpload)  # 链接槽函数
         self.AvatarLabel.setToolTip(self.Lang.Avatar)  # 设置鼠标提示
@@ -640,9 +541,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         self.TextLabel = QLabel("100 X 100 ico")
         self.TextLabel.setFixedHeight(20)
         self.TextLabel.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.TextLabel.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Avatar_Label()
-        )  # 设置样式
+        self.TextLabel.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Avatar_Label())  # 设置样式
 
         self.AccountInput = QLineEdit()  # 账号输入
         self.AccountInput.setText(self.UserData["Account"])  # 设置内容
@@ -651,9 +550,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.AccountInput.setPlaceholderText(self.Lang.Account)  # 设置空内容提示
-        self.AccountInput.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Input()
-        )  # 设置样式
+        self.AccountInput.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Input())  # 设置样式
         self.AccountInput.setToolTip(self.Lang.Account)  # 设置鼠标提示
 
         self.NameInput = QLineEdit()  # 姓名输入
@@ -662,9 +559,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.NameInput.setPlaceholderText(self.Lang.Name)  # 设置空内容提示
-        self.NameInput.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Input()
-        )  # 设置样式
+        self.NameInput.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Input())  # 设置样式
         self.NameInput.setToolTip(self.Lang.Name)  # 设置鼠标提示
 
         self.PasswordInput = QLineEdit()  # 密码输入
@@ -673,9 +568,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.PasswordInput.setPlaceholderText(self.Lang.PWD)
-        self.PasswordInput.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Input()
-        )
+        self.PasswordInput.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Input())
         self.PasswordInput.setToolTip(self.Lang.PWD)  # 设置鼠标提示
 
         self.PasswordInput_ = QLineEdit()
@@ -684,9 +577,7 @@ class CheckMyself(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.PasswordInput_.setPlaceholderText(self.Lang.Repeat)
-        self.PasswordInput_.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Input()
-        )
+        self.PasswordInput_.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Input())
         self.PasswordInput_.setToolTip(self.Lang.Repeat)  # 设置鼠标提示
 
         self.Btn = QPushButton(self.Lang.Submit)
@@ -704,9 +595,7 @@ class CheckMyself(BaseInterface, BaseDialog):
 
         # 加载图像到Label
         if self.UserData["Avatar"] != "":
-            AvatarByte = QByteArray.fromBase64(
-                self.UserData["Avatar"].encode("utf8")
-            )  # 读取二进制信息
+            AvatarByte = QByteArray.fromBase64(self.UserData["Avatar"].encode("utf8"))  # 读取二进制信息
             QPObject = QPixmap()  # 实例化图像处理类
             QPObject.loadFromData(AvatarByte)  # 加载到类
 
@@ -799,15 +688,13 @@ class FeedbackWindow(BaseInterface, BaseDialog):
 
         self.Input = QTextEdit()
         self.Input.setPlaceholderText(self.Lang.OpinionsOrSuggestions)
-        self.Input.setStyleSheet(
-            self.Style.Object.MainFrame_Feedback_Window_Input())
+        self.Input.setStyleSheet(self.Style.Object.MainFrame_Feedback_Window_Input())
 
         HLayout = QHBoxLayout()
 
         self.Btn1 = QPushButton("  " + self.Lang.Submit)
         self.Btn1.setFixedHeight(30)
-        self.Btn1.setStyleSheet(
-            self.Style.Object.MainFrame_Feedback_Window_Btn())
+        self.Btn1.setStyleSheet(self.Style.Object.MainFrame_Feedback_Window_Btn())
         self.Btn1.clicked.connect(self.SendMail)
         self.Btn1.setIcon(QIcon(SUBMIT))
         HLayout.addWidget(self.Btn1)
@@ -815,8 +702,7 @@ class FeedbackWindow(BaseInterface, BaseDialog):
         self.Btn2 = QPushButton("  " + self.Lang.Clear)
         self.Btn2.setFixedHeight(30)
         self.Btn2.setFixedWidth(100)
-        self.Btn2.setStyleSheet(
-            self.Style.Object.MainFrame_Feedback_Window_Btn())
+        self.Btn2.setStyleSheet(self.Style.Object.MainFrame_Feedback_Window_Btn())
         self.Btn2.clicked.connect(self.Input.clear)
         self.Btn2.setIcon(QIcon(CLEAR))
         HLayout.addWidget(self.Btn2)
@@ -832,8 +718,7 @@ class FeedbackWindow(BaseInterface, BaseDialog):
             return
         self.SendMailWorker = SendMailWorker(Content)
         self.SendMailWorker.ResultSignal.connect(self.ReferAction)
-        self.SendMailWorker.FinishSignal.connect(
-            self.KillThread(self.SendMailThread))
+        self.SendMailWorker.FinishSignal.connect(self.KillThread(self.SendMailThread))
         self.SendMailWorker.moveToThread(self.SendMailThread)
         self.SendMailThread.started.connect(self.SendMailWorker.Run)  # 设置执行方法
         self.SendMailThread.start()  # 线程启动
@@ -876,6 +761,7 @@ class BtmLabel(QLabel):
 
 # 关于我们
 class AboutUSWindow(BaseInterface, BaseDialog):
+
     def __init__(self):
         super().__init__()
         self.AppMode()
@@ -884,19 +770,14 @@ class AboutUSWindow(BaseInterface, BaseDialog):
 
         VLayout = QVBoxLayout()
         VLayout.setContentsMargins(5, 5, 5, 5)
-        self.AboutUSLabel = QLabel(
-            """
+        self.AboutUSLabel = QLabel("""
             Ver 0.0.1 alpha<br/><br/>
             Contact Us:<br/>
             alextqy@gmail.com<br/>
             285150667@qq.com<br/>
-            """
-            + TheURL
-        )
+            """ + TheURL)
         self.AboutUSLabel.setAlignment(Qt.AlignCenter)
-        self.AboutUSLabel.setStyleSheet(
-            self.Style.Object.MainFrame_AboutUS_Window_Label()
-        )
+        self.AboutUSLabel.setStyleSheet(self.Style.Object.MainFrame_AboutUS_Window_Label())
 
         self.Btn = QPushButton(self.Lang.CheckForUpdates)
         self.Btn.setFixedHeight(30)

@@ -3,6 +3,7 @@ from interface._base import *
 
 
 class UserFrame(BaseInterface, BaseFrame):
+
     def __init__(self):
         super().__init__()
 
@@ -43,16 +44,13 @@ class UserFrame(BaseInterface, BaseFrame):
         self.UserHeader = UserLabel(self.Lang.UserList)
         self.UserHeader.setFixedHeight(20)
         self.UserHeader.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.UserHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Header())  # 设置样式
-        self.UserHeader.ActionSignal.connect(
-            self.AccountNumberStatisticsAction)
+        self.UserHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Header())  # 设置样式
+        self.UserHeader.ActionSignal.connect(self.AccountNumberStatisticsAction)
 
         # 用户列表
         self.UserTree = BaseTreeWidget()
         self.UserTree.setMaximumWidth(300)
-        self.UserTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Tree_Widget())  # 设置样式
+        self.UserTree.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Tree_Widget())  # 设置样式
         self.UserTree.HideVScroll()  # 隐藏纵向滚动条
         self.UserTree.setColumnCount(2)  # 设置列数
         self.UserTree.hideColumn(1)  # 隐藏列
@@ -66,10 +64,8 @@ class UserFrame(BaseInterface, BaseFrame):
                 # item.setIcon(0, QtGui.QIcon(os.getcwd() + "/avatar.png"))
                 item.setText(0, self.UserData[i]["Name"])  # 设置内容
                 item.setText(1, str(self.UserData[i]["ID"]))  # 设置内容
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 UserTreeItems.append(item)  # 添加到item list
             self.UserTree.insertTopLevelItems(0, UserTreeItems)  # 添加到用户列表
 
@@ -81,8 +77,7 @@ class UserFrame(BaseInterface, BaseFrame):
 
         # 用户列表下方按钮
         self.UserListBtnFrame = QFrame()
-        self.UserListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_List_Btn_Frame())
+        self.UserListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_User_List_Btn_Frame())
         self.UserListBtnFrame.setFixedHeight(70)
         self.UserListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -94,8 +89,7 @@ class UserFrame(BaseInterface, BaseFrame):
             self.UserBtn.setContentsMargins(0, 0, 0, 0)
 
             self.NewUserBtn = QPushButton(self.Lang.NewUser)
-            self.NewUserBtn.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_List_Btn())
+            self.NewUserBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_User_List_Btn())
             self.NewUserBtn.setFixedHeight(70)
             self.NewUserBtn.clicked.connect(self.CreateUserWindow)
             self.NewUserBtn.setContentsMargins(0, 0, 0, 0)
@@ -105,15 +99,13 @@ class UserFrame(BaseInterface, BaseFrame):
             self.UserBtnV.setContentsMargins(0, 0, 0, 0)
 
             self.ImportUsersBtn = QPushButton(self.Lang.ImportUsers)
-            self.ImportUsersBtn.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_List_Btn())
+            self.ImportUsersBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_User_List_Btn())
             self.ImportUsersBtn.setFixedHeight(35)
             self.ImportUsersBtn.clicked.connect(self.ImportUsers)
             self.UserBtnV.addWidget(self.ImportUsersBtn)
 
             self.CheckDemoBtn = QPushButton("Demo")
-            self.CheckDemoBtn.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_List_Btn())
+            self.CheckDemoBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_User_List_Btn())
             self.CheckDemoBtn.setFixedHeight(35)
             self.CheckDemoBtn.clicked.connect(self.CheckDemo)
             self.UserBtnV.addWidget(self.CheckDemoBtn)
@@ -130,24 +122,20 @@ class UserFrame(BaseInterface, BaseFrame):
         self.MessageVS = self.VS()
 
         # 信息标题栏
-        self.MessageHeader = QLabel(
-            self.Lang.MessageList + " < " + self.Common.TodayStr()[:10] + " >")
+        self.MessageHeader = QLabel(self.Lang.MessageList + " < " + self.Common.TodayStr()[:10] + " >")
         self.MessageHeader.setFixedHeight(20)
         self.MessageHeader.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.MessageHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Header())  # 设置样式
+        self.MessageHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Header())  # 设置样式
 
         self.SA = QListWidget()
         self.SA.setFocusPolicy(Qt.NoFocus)
         self.SA.setContentsMargins(0, 0, 0, 0)
-        self.SA.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Message_List())
+        self.SA.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Message_List())
         self.SA.setSpacing(10)  # 行间距
 
         # # 信息发送编辑布局
         self.MessageInputFrame = QFrame()
-        self.MessageInputFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_Frame())
+        self.MessageInputFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_Frame())
         self.MessageInputFrame.setFixedHeight(70)
         self.MessageInputFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -156,30 +144,26 @@ class UserFrame(BaseInterface, BaseFrame):
 
         self.MessageInput = QLineEdit()
         self.MessageInput.returnPressed.connect(self.NewMessage)  # 绑定Enter键
-        self.MessageInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_Input())
+        self.MessageInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_Input())
         self.MessageInput.setPlaceholderText(self.Lang.NewMessage)
         self.MessageInput.setFixedHeight(30)
         self.MessageInput.setContentsMargins(0, 0, 0, 0)
 
         self.SubmitBtn = QPushButton(self.Lang.Submit)
         self.SubmitBtn.setShortcut("Enter")  # 绑定Enter按钮
-        self.SubmitBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.SubmitBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_List_Btn())
         self.SubmitBtn.setContentsMargins(0, 0, 0, 0)
         self.SubmitBtn.setFixedHeight(30)
         self.SubmitBtn.clicked.connect(self.NewMessage)
 
         self.ClearBtn = QPushButton(self.Lang.Clear)
-        self.ClearBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.ClearBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_List_Btn())
         self.ClearBtn.setContentsMargins(0, 0, 0, 0)
         self.ClearBtn.setFixedHeight(30)
         self.ClearBtn.clicked.connect(lambda: self.MessageInput.setText(""))
 
         self.HistoryBtn = QPushButton(self.Lang.History)
-        self.HistoryBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.HistoryBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_List_Btn())
         self.HistoryBtn.setContentsMargins(0, 0, 0, 0)
         self.HistoryBtn.setFixedHeight(30)
         self.HistoryBtn.clicked.connect(self.HistoryWindow)
@@ -216,18 +200,15 @@ class UserFrame(BaseInterface, BaseFrame):
     # 用户列表右键
     def UserRightContextMenuExec(self, pos):
         self.UserTreeMenu = BaseMenu()  # 左侧用户列表鼠标右键菜单
-        self.UserTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Tree_Menu())  # 设置样式
+        self.UserTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Tree_Menu())  # 设置样式
         Item = self.UserTree.currentItem()  # 获取被点击行控件
         ItemAt = self.UserTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-            self.UserTreeMenu.AddAction(
-                self.Lang.UserDetails, lambda: self.UserInfoWindow(Item))
+            self.UserTreeMenu.AddAction(self.Lang.UserDetails, lambda: self.UserInfoWindow(Item))
             if self.IsMaster == True:
-                self.UserTreeMenu.AddAction(
-                    self.Lang.Delete, lambda: self.RemoveAction(Item))  # 移除用户
+                self.UserTreeMenu.AddAction(self.Lang.Delete, lambda: self.RemoveAction(Item))  # 移除用户
         else:  # 焦点外
             return
 
@@ -263,10 +244,8 @@ class UserFrame(BaseInterface, BaseFrame):
         Item = QTreeWidgetItem()  # 设置item控件
         Item.setText(0, Name)  # 设置内容
         Item.setText(1, str(ID))
-        Item.setTextAlignment(
-            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-        Item.setTextAlignment(
-            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
         self.UserTree.insertTopLevelItem(0, Item)
 
     # 查看demo
@@ -281,8 +260,7 @@ class UserFrame(BaseInterface, BaseFrame):
             if self.File.WFileInByte(self.Cache.Get("UserTempDir") + FileEntityName, Data):
                 self.File.OpenLocalDir(self.Cache.Get("UserTempDir"))
             else:
-                self.File.DeleteFile(self.Cache.Get(
-                    "UserTempDir") + FileEntityName)
+                self.File.DeleteFile(self.Cache.Get("UserTempDir") + FileEntityName)
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
                 return
 
@@ -303,13 +281,10 @@ class UserFrame(BaseInterface, BaseFrame):
                         # item.setIcon(0, QtGui.QIcon(os.getcwd() + "/avatar.png"))
                         item.setText(0, UserData[i]["Name"])  # 设置内容
                         item.setText(1, str(UserData[i]["ID"]))  # 设置内容
-                        item.setTextAlignment(
-                            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                        item.setTextAlignment(
-                            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                         UserTreeItems.append(item)  # 添加到item list
-                    self.UserTree.insertTopLevelItems(
-                        0, UserTreeItems)  # 添加到用户列表
+                    self.UserTree.insertTopLevelItems(0, UserTreeItems)  # 添加到用户列表
 
             MSGBOX().COMPLETE(self.Lang.Complete)
         else:
@@ -326,10 +301,8 @@ class UserFrame(BaseInterface, BaseFrame):
         StartPoint = self.Common.StrToTime(self.Common.TodayStr())
         EndPoint = self.Common.TimeFuture(1)
 
-        Result1 = UserAction().MessageList(
-            1, self.CurrentUserID, 0, StartPoint, EndPoint)  # 收到的信息
-        Result2 = UserAction().MessageList(
-            2, self.CurrentUserID, 0, StartPoint, EndPoint)  # 发送的信息
+        Result1 = UserAction().MessageList(1, self.CurrentUserID, 0, StartPoint, EndPoint)  # 收到的信息
+        Result2 = UserAction().MessageList(2, self.CurrentUserID, 0, StartPoint, EndPoint)  # 发送的信息
 
         if Result1["State"] != True or Result2["State"] != True:
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
@@ -357,8 +330,7 @@ class UserFrame(BaseInterface, BaseFrame):
                     FrameH = ContentWidget.height()
                     self.SA.setItemWidget(Item, ContentWidget)
                 if self.MyID == ReceiverID:
-                    ContentWidget = ReceivedFrame(
-                        self.MyName, Content, Createtime)
+                    ContentWidget = ReceivedFrame(self.MyName, Content, Createtime)
                     FrameH = ContentWidget.height()
                     self.SA.setItemWidget(Item, ContentWidget)
                 Item.setSizeHint(QtCore.QSize(200, FrameH))
@@ -407,14 +379,10 @@ class UserFrame(BaseInterface, BaseFrame):
         if TextParam == "":
             return
         self.TooltipWorker = TooltipWorker()
-        self.TooltipWindow.Label.setText(
-            self.Lang.ReceivedNewMessageFrom + " " + TextParam)
-        self.TooltipWorker.ActionSignal.connect(
-            self.TooltipWindow.show)
-        self.TooltipWorker.HideSignal.connect(
-            self.TooltipWindow.hide)
-        self.TooltipWorker.FinishSignal.connect(
-            self.KillThread(self.TooltipThread))
+        self.TooltipWindow.Label.setText(self.Lang.ReceivedNewMessageFrom + " " + TextParam)
+        self.TooltipWorker.ActionSignal.connect(self.TooltipWindow.show)
+        self.TooltipWorker.HideSignal.connect(self.TooltipWindow.hide)
+        self.TooltipWorker.FinishSignal.connect(self.KillThread(self.TooltipThread))
         self.TooltipWorker.moveToThread(self.TooltipThread)
         self.TooltipThread.started.connect(self.TooltipWorker.Run)
         self.TooltipThread.start()
@@ -423,8 +391,7 @@ class UserFrame(BaseInterface, BaseFrame):
     def InfoTipAction(self):
         self.InfoTipWorker = InfoTipWorker()
         self.InfoTipWorker.ActionSignal.connect(self.InfoTipWindow)
-        self.InfoTipWorker.FinishSignal.connect(
-            self.KillThread(self.InfoTipThread))
+        self.InfoTipWorker.FinishSignal.connect(self.KillThread(self.InfoTipThread))
         self.InfoTipWorker.moveToThread(self.InfoTipThread)
         self.InfoTipThread.started.connect(self.InfoTipWorker.Run)
         self.InfoTipThread.start()
@@ -437,8 +404,7 @@ class UserFrame(BaseInterface, BaseFrame):
         else:
             Data = Result["Data"]
             DataArr = Common().Explode("_", Data)
-            MSGBOX().CUE(self.Lang.AccountsUsed + " " +
-                         DataArr[0] + ". " + self.Lang.TotalAccounts + " " + DataArr[1] + ".")
+            MSGBOX().CUE(self.Lang.AccountsUsed + " " + DataArr[0] + ". " + self.Lang.TotalAccounts + " " + DataArr[1] + ".")
 
 
 class UserLabel(QLabel):  # 用户列表标题栏
@@ -455,25 +421,22 @@ class UserLabel(QLabel):  # 用户列表标题栏
 
 
 class ReceivedFrame(BaseInterface, BaseFrame):  # 接收框
+
     def __init__(self, UserName="", Context="", Date=0):
         super().__init__()
-        self.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Conversation_Frame())
+        self.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Conversation_Frame())
         self.ConversationHLayout = QHBoxLayout()
         self.ConversationHLayout.setContentsMargins(0, 0, 0, 0)
 
         self.ConversationVLayout = QVBoxLayout()
         self.ConversationVLayout.setContentsMargins(0, 0, 0, 0)
 
-        self.IconLabel = QLabel(
-            UserName + "  " + self.Common.TimeToStr(Date))
-        self.IconLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Conversation_Label())
+        self.IconLabel = QLabel(UserName + "  " + self.Common.TimeToStr(Date))
+        self.IconLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Conversation_Label())
         self.ConversationVLayout.addWidget(self.IconLabel)
 
         self.ConversationLabel = QTextEdit(Context)
-        self.ConversationLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Message_Conversation_Received())
+        self.ConversationLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Message_Conversation_Received())
         self.ConversationLabel.setReadOnly(True)
         self.ConversationLabel.verticalScrollBar().hide()
         self.ConversationLabel.document().adjustSize()
@@ -491,25 +454,22 @@ class ReceivedFrame(BaseInterface, BaseFrame):  # 接收框
 
 
 class SentFrame(BaseInterface, BaseFrame):  # 发出框
+
     def __init__(self, UserName="", Context="", Date=0):
         super().__init__()
-        self.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Conversation_Frame())
+        self.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Conversation_Frame())
         self.ConversationHLayout = QHBoxLayout()
         self.ConversationHLayout.setContentsMargins(0, 0, 0, 0)
 
         self.ConversationVLayout = QVBoxLayout()
         self.ConversationVLayout.setContentsMargins(0, 0, 0, 0)
 
-        self.IconLabel = QLabel(
-            UserName + "  " + self.Common.TimeToStr(Date))
-        self.IconLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Conversation_Label())
+        self.IconLabel = QLabel(UserName + "  " + self.Common.TimeToStr(Date))
+        self.IconLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Conversation_Label())
         self.ConversationVLayout.addWidget(self.IconLabel)
 
         self.ConversationLabel = QTextEdit(Context)
-        self.ConversationLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Message_Conversation_Sent())
+        self.ConversationLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Message_Conversation_Sent())
         self.ConversationLabel.setReadOnly(True)
         self.ConversationLabel.verticalScrollBar().hide()
         self.ConversationLabel.document().adjustSize()
@@ -528,6 +488,7 @@ class SentFrame(BaseInterface, BaseFrame):  # 发出框
 
 
 class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
+
     def __init__(self, ID):
         super().__init__()
         self.AppMode()
@@ -550,8 +511,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
         self.AvatarLabel = QLabel("")  # 默认展示内容
         self.AvatarLabel.setAlignment(Qt.AlignCenter)  # 字体居中
         self.AvatarLabel.setFixedSize(125, 120)  # 固定大小
-        self.AvatarLabel.setStyleSheet(
-            self.Style.Object.MainFrame_CheckMyself_Label())  # 设置样式
+        self.AvatarLabel.setStyleSheet(self.Style.Object.MainFrame_CheckMyself_Label())  # 设置样式
         self.AvatarLabel.setScaledContents(True)  # 图片自适应
         self.AvatarLabel.setToolTip(self.Lang.Avatar)  # 设置鼠标提示
         AvatarLayout.addWidget(self.AvatarLabel)
@@ -559,8 +519,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
 
         # 加载图像到Label
         if self.UserInfo["Avatar"] != "":
-            AvatarByte = QByteArray.fromBase64(
-                self.UserInfo["Avatar"].encode("utf8"))  # 读取二进制信息
+            AvatarByte = QByteArray.fromBase64(self.UserInfo["Avatar"].encode("utf8"))  # 读取二进制信息
             QPObject = QPixmap()  # 实例化图像处理类
             QPObject.loadFromData(AvatarByte)  # 加载到类
             # IMG = QPObject.scaled(100, 100, Qt.KeepAspectRatio)  # 按比例缩放
@@ -569,22 +528,18 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
 
         self.UserAccountInput = QLineEdit()
         self.UserAccountInput.setEnabled(False)
-        self.UserAccountInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.UserAccountInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.UserAccountInput.setFixedHeight(30)
-        self.UserAccountInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+        self.UserAccountInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
         self.UserAccountInput.setToolTip(self.Lang.Account)
         self.UserAccountInput.setText(self.UserInfo["Account"])
         self.VLayout.addRow(self.Lang.Account + " :", self.UserAccountInput)
 
         self.UserNameInput = QLineEdit()
         self.UserNameInput.setEnabled(False)
-        self.UserNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.UserNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.UserNameInput.setFixedHeight(30)
-        self.UserNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+        self.UserNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
         self.UserNameInput.setToolTip(self.Lang.Name)
         self.UserNameInput.setText(self.UserInfo["Name"])
         self.VLayout.addRow(self.Lang.Name + " :", self.UserNameInput)
@@ -592,11 +547,9 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
         if MasterCheck == True:
             self.UserPWDInput = QLineEdit()
             self.UserPWDInput.setEnabled(True)
-            self.UserPWDInput.setAlignment(
-                Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+            self.UserPWDInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
             self.UserPWDInput.setFixedHeight(30)
-            self.UserPWDInput.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+            self.UserPWDInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
             self.UserPWDInput.setToolTip(self.Lang.PWD)
             self.UserPWDInput.setEchoMode(QLineEdit.Password)  # 输入为密码类型
             self.VLayout.addRow(self.Lang.PWD + " :", self.UserPWDInput)
@@ -605,38 +558,25 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
             self.AdminSelect.setView(QListView())
             self.AdminSelect.setFixedHeight(30)
             self.AdminSelect.setFixedWidth(60)
-            self.AdminSelect.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_Info_Win_Box())
-            Options = [
-                " " + self.Lang.Select,
-                " " + self.Lang.No,
-                " " + self.Lang.Yes
-            ]
+            self.AdminSelect.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Box())
+            Options = [" " + self.Lang.Select, " " + self.Lang.No, " " + self.Lang.Yes]
             self.AdminSelect.addItems(Options)
             self.AdminSelect.setCurrentIndex(self.UserInfo["Admin"])
-            self.VLayout.addRow(self.Lang.DepartmentManager +
-                                " :", self.AdminSelect)
+            self.VLayout.addRow(self.Lang.DepartmentManager + " :", self.AdminSelect)
 
             self.MasterSelect = QComboBox()
             self.MasterSelect.setView(QListView())
             self.MasterSelect.setFixedHeight(30)
             self.MasterSelect.setFixedWidth(60)
-            self.MasterSelect.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_Info_Win_Box())
-            Options = [
-                " " + self.Lang.Select,
-                " " + self.Lang.No,
-                " " + self.Lang.Yes
-            ]
+            self.MasterSelect.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Box())
+            Options = [" " + self.Lang.Select, " " + self.Lang.No, " " + self.Lang.Yes]
             self.MasterSelect.addItems(Options)
             self.MasterSelect.setCurrentIndex(self.UserInfo["Master"])
-            self.VLayout.addRow(self.Lang.SuperAdmin +
-                                " :", self.MasterSelect)
+            self.VLayout.addRow(self.Lang.SuperAdmin + " :", self.MasterSelect)
 
             self.Btn = QPushButton("OK")
             self.Btn.setFixedHeight(30)
-            self.Btn.setStyleSheet(
-                self.Style.Object.MainFrame_Mid_User_Info_Win_Btn())
+            self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Btn())
             self.Btn.clicked.connect(self.ModifyAction)
             self.VLayout.addRow(self.Btn)
 
@@ -661,18 +601,7 @@ class UserInfoWindow(BaseInterface, BaseDialog):  # 用户详情
         Status = self.UserInfo["Status"]
         Permission = self.UserInfo["Permission"]
         DepartmentID = self.UserInfo["DepartmentID"]
-        Result = UserAction().UserModify(
-            Name,
-            Password,
-            Avatar,
-            Wallpaper,
-            Admin,
-            Status,
-            Permission,
-            Master,
-            DepartmentID,
-            self.UserID
-        )
+        Result = UserAction().UserModify(Name, Password, Avatar, Wallpaper, Admin, Status, Permission, Master, DepartmentID, self.UserID)
         if Result["State"] == True:
             self.close()
             MSGBOX().COMPLETE(self.Lang.Complete)
@@ -692,31 +621,24 @@ class CreateUserWindow(BaseInterface, BaseDialog):  # 新建用户
         self.FLayout.setContentsMargins(5, 5, 5, 5)
 
         self.UserAccountInput = QLineEdit()
-        self.UserAccountInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.UserAccountInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.UserAccountInput.setFixedHeight(30)
-        self.UserAccountInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+        self.UserAccountInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
 
         self.UserNameInput = QLineEdit()
-        self.UserNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.UserNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.UserNameInput.setFixedHeight(30)
-        self.UserNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+        self.UserNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
 
         self.UserPWDInput = QLineEdit()
-        self.UserPWDInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.UserPWDInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.UserPWDInput.setFixedHeight(30)
-        self.UserPWDInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
+        self.UserPWDInput.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Input())
         self.UserPWDInput.setEchoMode(QLineEdit.Password)  # 输入为密码类型
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Info_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Info_Win_Btn())
         self.Btn.clicked.connect(self.CreateAction)
 
         self.FLayout.addRow(self.Lang.Account + " :", self.UserAccountInput)
@@ -760,6 +682,7 @@ class CreateUserWindow(BaseInterface, BaseDialog):  # 新建用户
 
 
 class HistoryWindow(BaseInterface, BaseDialog):  # 历史信息
+
     def __init__(self, UserID):
         super().__init__()
         self.UserID = UserID
@@ -787,8 +710,7 @@ class HistoryWindow(BaseInterface, BaseDialog):  # 历史信息
         self.CalendarLayout.addWidget(self.CalendarWidget)
 
         self.Btn = QPushButton(self.Lang.Confirm)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_List_Btn())
         self.Btn.setFixedHeight(30)
         self.Btn.clicked.connect(self.ShowMessageList)
         self.BtnLayout.addWidget(self.Btn)
@@ -812,14 +734,14 @@ class HistoryWindow(BaseInterface, BaseDialog):  # 历史信息
         Data2 = Result2["Data"]
         Data = Data1 + Data2
         if len(Data) > 0:
-            self.MessageWindow = HistoryMessageListWindow(
-                Data, self.UserInfo["Name"])
+            self.MessageWindow = HistoryMessageListWindow(Data, self.UserInfo["Name"])
         else:
             MSGBOX().WARNING(self.Lang.NoData)
             return
 
 
 class HistoryMessageListWindow(BaseInterface, BaseDialog):  # 历史信息展示
+
     def __init__(self, List=[], UserName=""):
         super().__init__()
         if len(List) == 0:
@@ -845,29 +767,24 @@ class HistoryMessageListWindow(BaseInterface, BaseDialog):  # 历史信息展示
         self.SA = QScrollArea()
         self.SA.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # 隐藏横向滚动条
         self.SA.setWidgetResizable(True)  # 自适应宽度
-        self.SA.setStyleSheet(
-            self.Style.Object.BaseScrollArea())
+        self.SA.setStyleSheet(self.Style.Object.BaseScrollArea())
 
         self.MessageFrame = QFrame()
-        self.MessageFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_User_Message_Frame())
+        self.MessageFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_User_Message_Frame())
 
         self.MessageLayout = QVBoxLayout()
         self.MessageLayout.setContentsMargins(10, 10, 10, 10)
 
-        SortData = sorted(
-            List, key=lambda e: e.__getitem__('Createtime'))  # 按时间戳排序
+        SortData = sorted(List, key=lambda e: e.__getitem__('Createtime'))  # 按时间戳排序
         for i in range(len(SortData)):
             ReceiverID = SortData[i]["ReceiverID"]
             SenderID = SortData[i]["SenderID"]
             Content = SortData[i]["Content"]
             Createtime = SortData[i]["Createtime"]
             if MyID == SenderID:
-                self.MessageLayout.addWidget(
-                    SentFrame(MyName, Content, Createtime))
+                self.MessageLayout.addWidget(SentFrame(MyName, Content, Createtime))
             if MyID == ReceiverID:
-                self.MessageLayout.addWidget(
-                    ReceivedFrame(UserName, Content, Createtime))
+                self.MessageLayout.addWidget(ReceivedFrame(UserName, Content, Createtime))
         self.MessageLayout.addStretch()
 
         self.MessageFrame.setLayout(self.MessageLayout)
@@ -903,8 +820,7 @@ class InfoTipWorker(BaseInterface, BaseObject):  # 当天的新信息提示
         EndPoint = self.Common.TimeFuture(1)
         while True:
             sleep(1)
-            Result = UserAction().MessageList(
-                1, 0, 1, StartPoint, EndPoint)["Data"]  # 收到的信息
+            Result = UserAction().MessageList(1, 0, 1, StartPoint, EndPoint)["Data"]  # 收到的信息
 
             if len(Result) > self.Cache.Get("MessageCount"):
                 SenderID = Result[-1]["SenderID"]

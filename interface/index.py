@@ -14,8 +14,7 @@ class Test(BaseInterface, BaseObject):  # 测试worker
     def Run(self):
         while True:
             sleep(1)
-            print(self.Check.geometry().x(),
-                  self.Check.geometry().y())
+            print(self.Check.geometry().x(), self.Check.geometry().y())
 
 
 class MainWindow(BaseInterface, BaseMainWindow):  # 主界面
@@ -60,12 +59,9 @@ class MainWindow(BaseInterface, BaseMainWindow):  # 主界面
     def CheckLoginStatus(self):  # 登陆状态监控
         self.LoginThread = QThread()  # 实例化线程
         self.MainWindowWorker = MainWindowWorker(self.LoginFrame)  # 实例化worker
-        self.MainWindowWorker.LoginOverSignal.connect(
-            self.LoginFrame.hide)  # 链接槽函数 隐藏登录框体
-        self.MainWindowWorker.LoadMainFrameSignal.connect(
-            self.LoadMainFrame)  # 链接槽函数 展示主框体
-        self.MainWindowWorker.FinishSignal.connect(
-            self.KillThread(self.LoginThread))  # 链接槽函数 结束线程
+        self.MainWindowWorker.LoginOverSignal.connect(self.LoginFrame.hide)  # 链接槽函数 隐藏登录框体
+        self.MainWindowWorker.LoadMainFrameSignal.connect(self.LoadMainFrame)  # 链接槽函数 展示主框体
+        self.MainWindowWorker.FinishSignal.connect(self.KillThread(self.LoginThread))  # 链接槽函数 结束线程
         self.MainWindowWorker.moveToThread(self.LoginThread)  # 异步执行
         self.LoginThread.started.connect(self.MainWindowWorker.Run)  # 设置执行方法
         self.LoginThread.start()  # 线程启动

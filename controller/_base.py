@@ -8,6 +8,7 @@ import urllib3
 
 
 class BaseController():
+
     def __init__(self):
         super().__init__()
         self.Cache = Cache()
@@ -40,8 +41,7 @@ class BaseController():
         }
         PostData = {**BaseData, **Param}  # 数据合并
         try:
-            JsonResult = post(URL + Func, PostData, files=Files,
-                              headers=Headers, verify=self.SwitchHttps)  # 返回json数据
+            JsonResult = post(URL + Func, PostData, files=Files, headers=Headers, verify=self.SwitchHttps)  # 返回json数据
             return loads(JsonResult.text)
         except Exception as e:
             return {"State": False, "Memo": "error"}

@@ -3,6 +3,7 @@ from controller._base import *
 
 
 class DirFileAction(BaseController):
+
     def __init__(self):
         super().__init__()
 
@@ -132,8 +133,7 @@ class DirFileAction(BaseController):
                 "FileSectionName": FileSectionName,
             }
             FileEntityByte = {"FileEntity": open(FileEntityPath, "rb").read()}
-            Result = self.Post(Param, "/Upload/File/Entity",
-                               "", "", "", FileEntityByte)
+            Result = self.Post(Param, "/Upload/File/Entity", "", "", "", FileEntityByte)
             if self.Debug == True:
                 print(Result)
             return Result
@@ -162,9 +162,7 @@ class DirFileAction(BaseController):
         return Result
 
     # 重命名文件
-    def ModifyFile(
-        self, ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, MD5
-    ):
+    def ModifyFile(self, ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, MD5):
         Param = {
             "ID": ID,
             "FileName": FileName,
@@ -276,8 +274,7 @@ class DirFileAction(BaseController):
             "FileSectionName": FileSectionName,
         }
         FileEntityByte = {"FileEntity": open(FileEntity, "rb").read()}
-        Result = self.Post(Param, "/File/Entity/Sync",
-                           "", "", "", FileEntityByte)
+        Result = self.Post(Param, "/File/Entity/Sync", "", "", "", FileEntityByte)
         if self.Debug == True:
             print(Result)
         return Result
@@ -437,10 +434,7 @@ class DirFileAction(BaseController):
 
     # 设置离线任务状态
     def SetOfflineTaskState(self, ID, State):
-        Param = {
-            "ID": ID,
-            "State": State
-        }
+        Param = {"ID": ID, "State": State}
         Result = self.Post(Param, "/Set/Offline/Task/State")
         if self.Debug == True:
             print(Result)
