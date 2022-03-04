@@ -18,16 +18,14 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.TopLogo.setPixmap(self.SetIMG(TOPLOGO))
         self.TopLogo.setScaledContents(True)
         self.TopLogo.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.TopLogo.setStyleSheet(
-            self.Style.Object.MainWindow_Login_Top_Logo())  # 设置样式
+        self.TopLogo.setStyleSheet(self.Style.Object.MainWindow_Login_Top_Logo())  # 设置样式
 
         self.TopLogoLayout = QHBoxLayout()
         self.TopLogoLayout.addWidget(self.TopLogo)
 
         self.AccountInput = QLineEdit()  # 账号输入
         self.AccountInput.setFixedWidth(300)  # 设置固定宽度
-        self.AccountInput.setStyleSheet(
-            self.Style.Object.MainWindow_Login_Input())  # 设置样式
+        self.AccountInput.setStyleSheet(self.Style.Object.MainWindow_Login_Input())  # 设置样式
         self.AccountInput.setPlaceholderText(self.Lang.Account)  # 设置提示文字
         self.AccountInput.setToolTip(self.Lang.Account)  # 设置鼠标提示
 
@@ -35,8 +33,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.PWDInput.returnPressed.connect(self.LoginAction)  # 绑定Enter键
         self.PWDInput.setFixedWidth(300)  # 设置固定宽度
         self.PWDInput.setEchoMode(QLineEdit.Password)  # 输入为密码类型
-        self.PWDInput.setStyleSheet(
-            self.Style.Object.MainWindow_Login_Input())  # 设置样式
+        self.PWDInput.setStyleSheet(self.Style.Object.MainWindow_Login_Input())  # 设置样式
         self.PWDInput.setPlaceholderText(self.Lang.PWD)  # 设置提示文字
         self.PWDInput.setToolTip(self.Lang.PWD)  # 设置鼠标提示
 
@@ -44,8 +41,7 @@ class LoginFrame(BaseInterface, BaseFrame):
 
         self.URLInput = QLineEdit()  # 设置输入控件
         self.URLInput.setFixedWidth(245)  # 设置固定宽度
-        self.URLInput.setStyleSheet(
-            self.Style.Object.MainWindow_Login_Input())  # 设置样式
+        self.URLInput.setStyleSheet(self.Style.Object.MainWindow_Login_Input())  # 设置样式
         self.URLInput.setPlaceholderText("IP")  # 设置提示文字
         self.URLInput.setToolTip(self.Lang.IP)  # 设置鼠标提示
 
@@ -54,8 +50,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.HttpsSelect.setView(QListView())
         self.HttpsSelect.setFixedHeight(38)
         self.HttpsSelect.setFixedWidth(50)
-        self.HttpsSelect.setStyleSheet(
-            self.Style.Object.MainFrame_Lang_Box())
+        self.HttpsSelect.setStyleSheet(self.Style.Object.MainFrame_Lang_Box())
         HttpsOptions = [
             " OFF",
             " ON ",
@@ -70,15 +65,8 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.LangSelect.setView(QListView())
         self.LangSelect.setFixedHeight(35)
         self.LangSelect.setFixedWidth(85)
-        self.LangSelect.setStyleSheet(
-            self.Style.Object.MainFrame_Lang_Box())
-        LangOptions = [
-            " English",
-            " Español",
-            " Français",
-            " 中文(简体)",
-            " 中文(繁体)"
-        ]
+        self.LangSelect.setStyleSheet(self.Style.Object.MainFrame_Lang_Box())
+        LangOptions = [" English", " Español", " Français", " 中文(简体)", " 中文(繁体)"]
         self.LangSelect.addItems(LangOptions)
         self.LangSelect.currentIndexChanged.connect(self.ChangeLang)
 
@@ -86,8 +74,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         self.LoginButton.setShortcut("Enter")  # 绑定Enter按钮
         self.LoginButton.setFixedWidth(210)
         self.LoginButton.setFixedHeight(35)
-        self.LoginButton.setStyleSheet(
-            self.Style.Object.MainWindow_Login_Btn())  # 设置样式
+        self.LoginButton.setStyleSheet(self.Style.Object.MainWindow_Login_Btn())  # 设置样式
         self.LoginButton.clicked.connect(self.LoginAction)  # 连接槽函数
         # self.LoginButton.setIcon(QIcon(SIGNINW))
 
@@ -130,7 +117,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         else:
             self.LangSelect.setCurrentIndex(0)
 
-        self.LoginAnimation()  # 运行动画
+        # self.LoginAnimation()  # 运行动画
 
     # 选择事件
     def ChangeLang(self):
@@ -150,43 +137,37 @@ class LoginFrame(BaseInterface, BaseFrame):
 
     # 登录页动效
     def LoginAnimation(self):
-        Animation0 = QtCore.QPropertyAnimation(
-            self.TopLogo, b'pos', self)
+        Animation0 = QtCore.QPropertyAnimation(self.TopLogo, b'pos', self)
         Animation0.setKeyValueAt(0, QtCore.QPoint(520, 287))  # 起始位置
         Animation0.setKeyValueAt(1, QtCore.QPoint(520, 125))  # 最后位置
         Animation0.setDuration(500)
         # Animation1.start()
 
-        Animation1 = QtCore.QPropertyAnimation(
-            self.AccountInput, b'pos', self)
+        Animation1 = QtCore.QPropertyAnimation(self.AccountInput, b'pos', self)
         Animation1.setKeyValueAt(0, QtCore.QPoint(426, 331))  # 起始位置
         Animation1.setKeyValueAt(1, QtCore.QPoint(426, 241))  # 最后位置
         Animation1.setDuration(600)
         # Animation1.start()
 
-        Animation2 = QtCore.QPropertyAnimation(
-            self.PWDInput, b'pos', self)
+        Animation2 = QtCore.QPropertyAnimation(self.PWDInput, b'pos', self)
         Animation2.setKeyValueAt(0, QtCore.QPoint(426, 375))  # 起始位置
         Animation2.setKeyValueAt(1, QtCore.QPoint(426, 285))  # 最后位置
         Animation2.setDuration(800)
         # Animation2.start()
 
-        Animation3_1 = QtCore.QPropertyAnimation(
-            self.URLInput, b'pos', self)
+        Animation3_1 = QtCore.QPropertyAnimation(self.URLInput, b'pos', self)
         Animation3_1.setKeyValueAt(0, QtCore.QPoint(426, 419))  # 起始位置
         Animation3_1.setKeyValueAt(1, QtCore.QPoint(426, 329))  # 最后位置
         Animation3_1.setDuration(1100)
         # Animation3.start()
 
-        Animation3_2 = QtCore.QPropertyAnimation(
-            self.HttpsSelect, b'pos', self)
+        Animation3_2 = QtCore.QPropertyAnimation(self.HttpsSelect, b'pos', self)
         Animation3_2.setKeyValueAt(0, QtCore.QPoint(676, 419))  # 起始位置
         Animation3_2.setKeyValueAt(1, QtCore.QPoint(676, 329))  # 最后位置
         Animation3_2.setDuration(1100)
         # Animation3.start()
 
-        Animation4_1 = QtCore.QPropertyAnimation(
-            self.LangSelect, b'pos', self)
+        Animation4_1 = QtCore.QPropertyAnimation(self.LangSelect, b'pos', self)
         # Animation4.setStartValue(QtCore.QPoint(516, 463))  # 起始位置
         # Animation4.setEndValue(QtCore.QPoint(426, 373))  # 最后位置
         Animation4_1.setKeyValueAt(0, QtCore.QPoint(516, 470))
@@ -195,8 +176,7 @@ class LoginFrame(BaseInterface, BaseFrame):
         Animation4_1.setDuration(2000)
         Animation4_1.start()
 
-        Animation4_2 = QtCore.QPropertyAnimation(
-            self.LoginButton, b'pos', self)
+        Animation4_2 = QtCore.QPropertyAnimation(self.LoginButton, b'pos', self)
         Animation4_2.setKeyValueAt(0, QtCore.QPoint(516, 470))  # 起始位置
         Animation4_2.setKeyValueAt(0.8, QtCore.QPoint(516, 373))  # 中间位置
         Animation4_2.setKeyValueAt(1, QtCore.QPoint(516, 373))  # 最后位置
@@ -281,10 +261,8 @@ class LoginFrame(BaseInterface, BaseFrame):
         if Result["State"] == True:
             self.Cache.Set("Token", Result["Token"])  # 记录Token
 
-            UploadDirPath, DownloadDirPath = self.File.SetUserDir(
-                Account, UPLOADDIR, DOWNLOADDIR)  # 设置用户目录
-            UserTempDir = self.File.SetDownloadTempDir(
-                Account, DOWNLOADTEMP)  # 设置文件存放路径
+            UploadDirPath, DownloadDirPath = self.File.SetUserDir(Account, UPLOADDIR, DOWNLOADDIR)  # 设置用户目录
+            UserTempDir = self.File.SetDownloadTempDir(Account, DOWNLOADTEMP)  # 设置文件存放路径
             TempDir = self.File.SetTempDir(Account, TEMPDIR)  # 设置临时预览文件夹
 
             self.Cache.Set("UserUploadPath", UploadDirPath)
