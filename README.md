@@ -30,6 +30,7 @@ trusted-host = mirrors.aliyun.com
 2 pip install requests
 3 pip install PySide6
 4 pip install cx_Freeze
+4 pip install nuitka
 5 pip install wmi
 6 更新 pip install --upgrade ***
 
