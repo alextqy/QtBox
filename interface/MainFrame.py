@@ -138,13 +138,15 @@ class MainFrame(BaseInterface, BaseFrame):
         # =====================================================================================================
 
         self.MidLV.addStretch()  # 底部占位
-
-        self.ActivationBtn = QPushButton("")  # 系统设置
-        self.ActivationBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
-        self.ActivationBtn.clicked.connect(self.ShowActivation)  # 连接槽函数
-        self.ActivationBtn.setIcon(QIcon(UNLOCK))
-        self.MidLV.addWidget(self.ActivationBtn)  # 添加到布局
-        self.SetActivationBtn()
+        '''
+        正式版后再设置激活功能
+        '''
+        # self.ActivationBtn = QPushButton("")  # 激活按钮
+        # self.ActivationBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
+        # self.ActivationBtn.clicked.connect(self.ShowActivation)  # 连接槽函数
+        # self.ActivationBtn.setIcon(QIcon(UNLOCK))
+        # self.MidLV.addWidget(self.ActivationBtn)  # 添加到布局
+        # self.SetActivationBtn()
 
         self.FeedbackBtn = QPushButton("  " + self.Lang.Feedback)  # 系统设置
         self.FeedbackBtn.setFixedSize(MidLQtWidgetsWidth, MidLQtWidgetsHeight)  # 设置固定大小
