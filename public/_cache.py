@@ -6,29 +6,17 @@ from public._file import *
 
 
 class Cache(BasePublic):
+
     def __init__(self, Path="", jsonFile="cache.json"):
         self.jsonFile = Path + jsonFile
         self.configData = OrderedDict()
         if Path == "":
-            self.configData = {
-                "Debug": False,
-                "URL": "",
-                "SwitchHttps": False,
-                "Account": "",
-                "Title": "bitbox",
-                "Lang": "",
-                "Token": "",
-                "TokenType": "",
-                "Sync": False,
-                "UDPPort": 6002,
-                "SynchronizationCycle": 3
-            }
+            self.configData = {"Debug": False, "URL": "", "SwitchHttps": False, "Account": "", "Title": "bitbox", "Lang": "", "Token": "", "TokenType": "", "Sync": False, "UDPPort": 6002, "SynchronizationCycle": 3}
 
         selectFile = isfile(self.jsonFile)
         if selectFile == False:
             with open(self.jsonFile, "w", encoding="utf-8") as f:
-                dump(self.configData, f, indent=2,
-                     sort_keys=True, ensure_ascii=False)  # 写为多行
+                dump(self.configData, f, indent=2, sort_keys=True, ensure_ascii=False)  # 写为多行
 
     def Select(self):
         try:
@@ -55,8 +43,7 @@ class Cache(BasePublic):
             self.configData = {**self.configData, **{k: v}}  # 数据合并
         try:
             with open(self.jsonFile, "w", encoding="utf-8") as f:
-                dump(self.configData, f, indent=2,
-                     sort_keys=True, ensure_ascii=False)  # 写入多行
+                dump(self.configData, f, indent=2, sort_keys=True, ensure_ascii=False)  # 写入多行
         except Exception as e:
             return
 
@@ -68,8 +55,7 @@ class Cache(BasePublic):
             return
         try:
             with open(self.jsonFile, "w", encoding="utf-8") as f:
-                dump(self.configData, f, indent=2,
-                     sort_keys=True, ensure_ascii=False)  # 写入多行
+                dump(self.configData, f, indent=2, sort_keys=True, ensure_ascii=False)  # 写入多行
         except Exception as e:
             return
 

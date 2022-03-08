@@ -3,6 +3,7 @@ from controller._base import *
 
 
 class DepartmentAction(BaseController):
+
     def __init__(self):
         super().__init__()
 

@@ -7,6 +7,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class BaseInterface():  # 基础操作类
+
     def __init__(self, StyleType="default"):
         super().__init__()
         self.SW, self.SH = Tk().maxsize()  # 获取显示器的宽高
@@ -102,6 +103,7 @@ class BaseObject(QObject):  # 多线程基础对象
 
 
 class BaseMainWindow(QMainWindow):  # 基础主窗口
+
     def __init__(self, Title=TITLE):
         super().__init__()
         self.setWindowTitle(Title)  # 窗口标题
@@ -123,11 +125,13 @@ class BaseMainWindow(QMainWindow):  # 基础主窗口
 
 
 class BaseFrame(QFrame):  # 基础结构窗
+
     def __init__(self):
         super().__init__()
 
 
 class BaseDialog(QDialog):  # 交互窗口
+
     def __init__(self, Title=TITLE):
         super().__init__()
         self.setWindowTitle(Title)  # 窗口标题
@@ -167,11 +171,9 @@ class BaseTreeWidget(QTreeWidget):  # 基础树形控件
         if No == 1:  # 多选(不需按ctrl)
             self.setSelectionMode(QAbstractItemView.MultiSelection)
         elif No == 2:  # 按住ctrl一次选一项或者按住shift可多选
-            self.setSelectionMode(
-                QAbstractItemView.ExtendedSelection)
+            self.setSelectionMode(QAbstractItemView.ExtendedSelection)
         elif No == 3:  # 一次选择多项
-            self.setSelectionMode(
-                QAbstractItemView.ContiguousSelection)
+            self.setSelectionMode(QAbstractItemView.ContiguousSelection)
         elif No == 4:  # 无法选择
             self.setSelectionMode(QAbstractItemView.NoSelection)
         else:  # 单选
@@ -238,6 +240,7 @@ class BaseTreeWidget(QTreeWidget):  # 基础树形控件
 
 
 class BaseMenu(QMenu):  # 基础菜单控件
+
     def __init__(self):
         super().__init__()
 
@@ -246,6 +249,7 @@ class BaseMenu(QMenu):  # 基础菜单控件
 
 
 class MSGBOX(BaseInterface, QMessageBox):  # 自定义问询窗口
+
     def __init__(self):
         super().__init__()
         self.Cache = Cache()  # 设置缓存
@@ -391,6 +395,7 @@ class MSGBOX(BaseInterface, QMessageBox):  # 自定义问询窗口
 
 
 class PromptPopUpsWindow(BaseInterface, BaseDialog):  # 静态公共提示弹窗
+
     def __init__(self):
         super().__init__()
         self.AppMode()
@@ -403,14 +408,14 @@ class PromptPopUpsWindow(BaseInterface, BaseDialog):  # 静态公共提示弹窗
 
         self.Label = QLabel()
         self.Label.setAlignment(Qt.AlignCenter)
-        self.Label.setStyleSheet(
-            self.Style.Object.MainFrame_PromptPopUps_Label())
+        self.Label.setStyleSheet(self.Style.Object.MainFrame_PromptPopUps_Label())
 
         self.Layout.addWidget(self.Label)
         self.setLayout(self.Layout)
 
 
 class TooltipWindow(BaseInterface, BaseDialog):  # 动态公共提示弹窗
+
     def __init__(self):
         super().__init__()
         self.NoneMode()
@@ -423,14 +428,14 @@ class TooltipWindow(BaseInterface, BaseDialog):  # 动态公共提示弹窗
 
         self.Label = QLabel()
         self.Label.setAlignment(Qt.AlignCenter)
-        self.Label.setStyleSheet(
-            self.Style.Object.MainFrame_PromptPopUps_Label())
+        self.Label.setStyleSheet(self.Style.Object.MainFrame_PromptPopUps_Label())
 
         self.Layout.addWidget(self.Label)
         self.setLayout(self.Layout)
 
 
 class CalendarWindow(BaseInterface, BaseDialog):
+
     def __init__(self):
         super().__init__()
         # self.AppMode()
@@ -444,8 +449,7 @@ class CalendarWindow(BaseInterface, BaseDialog):
         self.CalendarWidget = QCalendarWidget()
         self.CalendarLayout.addWidget(self.CalendarWidget)
         self.Btn = QPushButton(self.Lang.Confirm)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Message_List_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Message_List_Btn())
         self.Btn.setFixedHeight(30)
         self.Btn.clicked.connect(self.CalendarAction)
         self.BtnLayout.addWidget(self.Btn)

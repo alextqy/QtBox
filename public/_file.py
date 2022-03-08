@@ -7,6 +7,7 @@ import zipfile
 
 
 class File(BasePublic):
+
     def __init__(self):
         super().__init__()
 
@@ -283,13 +284,9 @@ class File(BasePublic):
         if BasePath != "":
             DefaultPath = BasePath
 
-        UploadDirPath = (
-            DefaultPath + "/" + UploadPath + "/Upload_" + Account + "/"
-        )  # 设置上传文件夹
+        UploadDirPath = (DefaultPath + "/" + UploadPath + "/Upload_" + Account + "/")  # 设置上传文件夹
 
-        DownloadDirPath = (
-            DefaultPath + "/" + DownloadPath + "/Download_" + Account + "/"
-        )  # 设置下载文件夹
+        DownloadDirPath = (DefaultPath + "/" + DownloadPath + "/Download_" + Account + "/")  # 设置下载文件夹
 
         UploadDirPath = UploadDirPath.replace("\\", "/")
         DownloadDirPath = DownloadDirPath.replace("\\", "/")
@@ -307,9 +304,7 @@ class File(BasePublic):
         DefaultPath = os.getcwd()
         if BasePath != "":
             DefaultPath = BasePath
-        DownloadTempDir = (
-            DefaultPath + "/" + DownloadTempPath + "/Download_Temp_" + Account + "/"
-        )  # 设置下载文件夹
+        DownloadTempDir = (DefaultPath + "/" + DownloadTempPath + "/Download_Temp_" + Account + "/")  # 设置下载文件夹
         DownloadTempDir = DownloadTempDir.replace("\\", "/")
         self.MkDir(DownloadTempDir)
         return DownloadTempDir
@@ -351,7 +346,7 @@ class File(BasePublic):
         if len(fileList):
             return False
         for filename in fileList:
-            tarZip.write(filename, filename[len(SourcePath) :])
+            tarZip.write(filename, filename[len(SourcePath):])
         tarZip.close()
         return True
 

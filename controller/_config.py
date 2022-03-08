@@ -3,6 +3,7 @@ from controller._base import *
 
 
 class ConfigAction(BaseController):
+
     def __init__(self):
         super().__init__()
 
@@ -46,9 +47,7 @@ class ConfigAction(BaseController):
 
     # 产品激活
     def ProductActivation(self, EncryptedCode):
-        Param = {
-            "EncryptedCode": EncryptedCode
-        }
+        Param = {"EncryptedCode": EncryptedCode}
         Result = self.Post(Param, "/Product/Activation")
         if self.Debug == True:
             print(Result)
@@ -63,9 +62,7 @@ class ConfigAction(BaseController):
 
     # 系统日志
     def CheckSysLog(self, TimeStamp):
-        Param = {
-            "TimeStamp": TimeStamp
-        }
+        Param = {"TimeStamp": TimeStamp}
         Result = self.Post(Param, "/Check/Sys/Log")
         if self.Debug == True:
             print(Result)

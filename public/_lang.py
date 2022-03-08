@@ -6,6 +6,7 @@ from public._cache import *
 
 
 class Lang(BasePublic):
+
     def __init__(self):
         super().__init__()
         self.Cache = Cache()  # 设置缓存
@@ -39,9 +40,7 @@ class Lang(BasePublic):
             self.SystemSettings = "Settings"
             self.Activation = "Activation"
             self.InputActivationCode = "Input activation code"
-            self.GenerateSignatureVerificationCode = (
-                "Generate signature verification code"
-            )
+            self.GenerateSignatureVerificationCode = ("Generate signature verification code")
             self.ActivatedSuccessfully = "Activated successfully"
             self.ActivationFails = "Activation fails"
             self.ActivateMoreAccounts = "Activate more accounts"
@@ -126,9 +125,7 @@ class Lang(BasePublic):
             self.FileSize = "File size"
             self.WrongFileType = "Wrong file type"
             self.UploadTypesSupported = "Upload types supported by the system"
-            self.DifferentFileTypesSeparatedByCommas = (
-                "Different file types separated by commas"
-            )
+            self.DifferentFileTypesSeparatedByCommas = ("Different file types separated by commas")
             self.UploadSourcePath = "Upload source path"
             self.UploadDestinationFolder = "Upload destination folder"
             self.UploadProgress = "Upload progress"
@@ -137,9 +134,7 @@ class Lang(BasePublic):
             self.Start = "Start"
             self.Stop = "Stop"
             self.RemoveAllCompletedTasks = "Remove all completed tasks"
-            self.UnableToObtainNotBeenUploaded = (
-                "Unable to obtain file data that has not been uploaded"
-            )
+            self.UnableToObtainNotBeenUploaded = ("Unable to obtain file data that has not been uploaded")
             self.FileDoesNotExist = "File does not exist"
             self.FailedToDeleteTempDir = "Failed to delete the temporary upload folder"
             self.MoveToTheRootFolder = "Move to the root folder"
@@ -188,21 +183,15 @@ class Lang(BasePublic):
             self.Account = "número de cuenta"
             self.Name = "Nombre"
             self.PWD = "contraseña"
-            self.IP = (
-                "Direccionamiento automático en el mismo segmento de red de intranet"
-            )
+            self.IP = ("Direccionamiento automático en el mismo segmento de red de intranet")
             self.IncorrectAccount = "Cuenta incorrecta"
             self.WrongAccountLength = "La longitud de la cuenta es incorrecta"
             self.IncorrectPassword = "Contraseña incorrecta"
             self.RequestTimeout = "Tiempo de espera agotado"
-            self.UnableToGetServerAddress = (
-                "No se puede obtener la dirección del servidor"
-            )
+            self.UnableToGetServerAddress = ("No se puede obtener la dirección del servidor")
             self.LoginFailed = "error de inicio de sesion"
             self.LoginStatusIsAbnormal = "El estado de inicio de sesión es anormal"
-            self.UnableToGetPersonalInformation = (
-                "Incapaz de obtener información personal."
-            )
+            self.UnableToGetPersonalInformation = ("Incapaz de obtener información personal.")
             self.UploadTask = "Subir tarea"
             self.DownloadTask = "Descargar tarea"
             self.OfflineTask = "Tareas fuera de línea"
@@ -287,9 +276,7 @@ class Lang(BasePublic):
             self.NewDepartment = "Crear departamento"
             self.AddSubDepartment = "Agregar subdepartamento"
             self.WrongDepartmentName = "El nombre del departamento es incorrecto"
-            self.WrongLengthOfDepartmentName = (
-                "Longitud incorrecta del nombre del departamento"
-            )
+            self.WrongLengthOfDepartmentName = ("Longitud incorrecta del nombre del departamento")
             self.StaffList = "Lista de empleados"
             self.AddEmployeesToTheDepartment = "Agregar empleados al departamento"
             self.StaffWithoutOwnership = "Lista de empleados no atribuidos"
@@ -301,9 +288,7 @@ class Lang(BasePublic):
             self.FileSize = "Tamaño del archivo"
             self.WrongFileType = "Tipo de archivo incorrecto"
             self.UploadTypesSupported = "Tipos de carga admitidos por el sistema"
-            self.DifferentFileTypesSeparatedByCommas = (
-                "Separe los diferentes tipos de archivos con comas."
-            )
+            self.DifferentFileTypesSeparatedByCommas = ("Separe los diferentes tipos de archivos con comas.")
             self.UploadSourcePath = "Subir ruta de origen"
             self.UploadDestinationFolder = "Subir carpeta de destino"
             self.UploadProgress = "Subir progreso"
@@ -312,13 +297,9 @@ class Lang(BasePublic):
             self.Start = "empezar"
             self.Stop = "Detener"
             self.RemoveAllCompletedTasks = "Eliminar todas las tareas completadas"
-            self.UnableToObtainNotBeenUploaded = (
-                "No se pueden obtener datos de archivo que no se han cargado"
-            )
+            self.UnableToObtainNotBeenUploaded = ("No se pueden obtener datos de archivo que no se han cargado")
             self.FileDoesNotExist = "el archivo no existe"
-            self.FailedToDeleteTempDir = (
-                "No se pudo eliminar la carpeta de carga temporal"
-            )
+            self.FailedToDeleteTempDir = ("No se pudo eliminar la carpeta de carga temporal")
             self.MoveToTheRootFolder = "Mover a la carpeta raíz"
             self.EmptyTheRecycleBin = "Vacía la papelera de reciclaje"
             self.FileDetails = "Detalles del archivo"
@@ -330,16 +311,12 @@ class Lang(BasePublic):
             self.AlreadyInTheList = "Ya en la lista"
             self.FileMergeFailed = "Error en la combinación de archivos"
             self.TemporaryFileCleanupFailed = "No se pudo limpiar el archivo temporal"
-            self.PreviewSizeLimitExceeded = (
-                "Se superó el límite de tamaño de la vista previa"
-            )
+            self.PreviewSizeLimitExceeded = ("Se superó el límite de tamaño de la vista previa")
             self.FileSync = "Ya sea para recuperar el estado de modificación del archivo y sincronizarlo"
             self.FileSyncing = "Sincronización de archivos, espere!"
             self.FileSyncFrequency = "Frecuencia de sincronización de archivos"
             self.FileSyncCycleCue = "Con qué frecuencia la caché se sincroniza automáticamente con el archivo en línea después de la edición en línea"
-            self.ServerDiskSpaceInformation = (
-                "Información de espacio en disco del servidor"
-            )
+            self.ServerDiskSpaceInformation = ("Información de espacio en disco del servidor")
             self.AddedToUploadTaskList = "Agregado para cargar la lista de tareas"
             self.AddedToDownloadTaskList = "Agregado a la lista de tareas de descarga"
 
@@ -377,9 +354,7 @@ class Lang(BasePublic):
             self.UnableToGetServerAddress = "Impossible d'obtenir l'adresse du serveur"
             self.LoginFailed = "Échec de la connexion"
             self.LoginStatusIsAbnormal = "L'état de connexion est anormal"
-            self.UnableToGetPersonalInformation = (
-                "Impossible d'obtenir des informations personnelles"
-            )
+            self.UnableToGetPersonalInformation = ("Impossible d'obtenir des informations personnelles")
             self.UploadTask = "Tâche de téléchargement"
             self.DownloadTask = "Tâche de téléchargement"
             self.OfflineTask = "Tâches hors ligne"
@@ -464,9 +439,7 @@ class Lang(BasePublic):
             self.NewDepartment = "Créer un département"
             self.AddSubDepartment = "Ajouter un sous-département"
             self.WrongDepartmentName = "Le nom du département est incorrect"
-            self.WrongLengthOfDepartmentName = (
-                "Longueur incorrecte du nom du département"
-            )
+            self.WrongLengthOfDepartmentName = ("Longueur incorrecte du nom du département")
             self.StaffList = "Liste des employés"
             self.AddEmployeesToTheDepartment = "Ajouter des employés au département"
             self.StaffWithoutOwnership = "Liste des employés non attribués"
@@ -477,12 +450,8 @@ class Lang(BasePublic):
             self.FileType = "Type de fichier"
             self.FileSize = "Taille du fichier"
             self.WrongFileType = "Type de fichier incorrect"
-            self.UploadTypesSupported = (
-                "Types de téléchargement pris en charge par le système"
-            )
-            self.DifferentFileTypesSeparatedByCommas = (
-                "Séparez les différents types de fichiers par des virgules"
-            )
+            self.UploadTypesSupported = ("Types de téléchargement pris en charge par le système")
+            self.DifferentFileTypesSeparatedByCommas = ("Séparez les différents types de fichiers par des virgules")
             self.UploadSourcePath = "Télécharger le chemin source"
             self.UploadDestinationFolder = "Télécharger le dossier de destination"
             self.UploadProgress = "Progression du téléchargement"
@@ -493,9 +462,7 @@ class Lang(BasePublic):
             self.RemoveAllCompletedTasks = "Supprimer toutes les tâches terminées"
             self.UnableToObtainNotBeenUploaded = "Impossible d'obtenir les données du fichier qui n'ont pas été téléchargées"
             self.FileDoesNotExist = "fichier ne existe pas"
-            self.FailedToDeleteTempDir = (
-                "Échec de la suppression du dossier de téléchargement temporaire"
-            )
+            self.FailedToDeleteTempDir = ("Échec de la suppression du dossier de téléchargement temporaire")
             self.MoveToTheRootFolder = "Déplacer vers le dossier racine"
             self.EmptyTheRecycleBin = "Vide la poubelle de recyclage"
             self.FileDetails = "Détails du fichier"
@@ -512,15 +479,9 @@ class Lang(BasePublic):
             self.FileSyncing = "Synchronisation de fichiers, veuillez patienter!"
             self.FileSyncFrequency = "Fréquence de synchronisation des fichiers"
             self.FileSyncCycleCue = "La fréquence à laquelle le cache est automatiquement synchronisé sur la ligne après l'édition du fichier en ligne"
-            self.ServerDiskSpaceInformation = (
-                "Informations sur l'espace disque du serveur"
-            )
-            self.AddedToUploadTaskList = (
-                "Ajouté à la liste des tâches de téléchargement"
-            )
-            self.AddedToDownloadTaskList = (
-                "Ajouté à la liste des tâches de téléchargement"
-            )
+            self.ServerDiskSpaceInformation = ("Informations sur l'espace disque du serveur")
+            self.AddedToUploadTaskList = ("Ajouté à la liste des tâches de téléchargement")
+            self.AddedToDownloadTaskList = ("Ajouté à la liste des tâches de téléchargement")
 
             self.OpinionsOrSuggestions = "Commentaires ou suggestions"
             self.ExceedTheWordLimit = "Dépasser la limite de mots"

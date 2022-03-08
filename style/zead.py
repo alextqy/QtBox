@@ -6,6 +6,7 @@ from style._light import *
 
 
 class MainQSS():
+
     def __init__(self, StyleType=""):
         super().__init__()
         if StyleType == "default":

@@ -28,17 +28,9 @@ class UploadListWindow(BaseInterface, BaseDialog):
 
         self.UploadTree = BaseTreeWidget()  # 设置tree控件
         self.UploadTree.SetSelectionMode(2)  # 设置为多选模式
-        self.UploadTree.setStyleSheet(
-            self.Style.Object.Upload_Tree())  # 设置tree控件样式
+        self.UploadTree.setStyleSheet(self.Style.Object.Upload_Tree())  # 设置tree控件样式
         self.UploadTree.setColumnCount(6)  # 设置tree控件列数
-        self.UploadTree.setHeaderLabels([
-            self.Lang.UploadSourcePath,
-            "FileID",
-            self.Lang.UploadDestinationFolder,
-            "DirID",
-            self.Lang.UploadProgress,
-            "State"
-        ])  # 设置标题栏
+        self.UploadTree.setHeaderLabels([self.Lang.UploadSourcePath, "FileID", self.Lang.UploadDestinationFolder, "DirID", self.Lang.UploadProgress, "State"])  # 设置标题栏
 
         # 设置列宽度
         self.UploadTree.setColumnWidth(0, 150)
@@ -76,21 +68,17 @@ class UploadListWindow(BaseInterface, BaseDialog):
                     DestDirName = ""
                 else:
                     DestDirName = DirInfo["Data"]["DirName"]
-                self.InsertUploadItem(
-                    FilePath, FileID, DestDirName, DirID, UploadSize, TotalSize, 0)
+                self.InsertUploadItem(FilePath, FileID, DestDirName, DirID, UploadSize, TotalSize, 0)
 
     # 新增上传线程方法
     def DOUploadInThread(self, FilesPath, DirID):
-        self.DoUploadWorker = DoUploadWorker(
-            FilesPath, DirID, self.UploadDirPath)
+        self.DoUploadWorker = DoUploadWorker(FilesPath, DirID, self.UploadDirPath)
 
         self.DoUploadWorker.ActionSignal.connect(self.InsertUploadItem)
         self.DoUploadWorker.BreakSignal.connect(self.ShowError)
-        self.DoUploadWorker.FinishSignal.connect(
-            self.KillThread(self.UploadThread))
+        self.DoUploadWorker.FinishSignal.connect(self.KillThread(self.UploadThread))
         self.DoUploadWorker.moveToThread(self.UploadThread)
-        self.UploadThread.started.connect(
-            self.DoUploadWorker.Run)  # 设置执行方法
+        self.UploadThread.started.connect(self.DoUploadWorker.Run)  # 设置执行方法
         self.UploadThread.start()  # 线程启动
 
     # 添加上传数据
@@ -103,7 +91,7 @@ class UploadListWindow(BaseInterface, BaseDialog):
         UploadBar.setStyleSheet(self.Style.Object.Bar())  # 设置样式
         UploadBar.setMinimum(0)  # 设置最小值
         UploadBar.setMaximum(100)  # 设置最大值
-        UploadBar.setValue((int(UploadedSize)/int(TotalSize))*100)  # 初始化进度条百分比
+        UploadBar.setValue((int(UploadedSize) / int(TotalSize)) * 100)  # 初始化进度条百分比
 
         Item = QTreeWidgetItem()  # 实例化item控件
 
@@ -123,8 +111,7 @@ class UploadListWindow(BaseInterface, BaseDialog):
         Item.setTextAlignment(4, Qt.AlignHCenter | Qt.AlignVCenter)
         Item.setTextAlignment(5, Qt.AlignHCenter | Qt.AlignVCenter)
 
-        FileName = self.File.CheckFileName(
-            FilePath) + self.File.CheckFileType(FilePath)
+        FileName = self.File.CheckFileName(FilePath) + self.File.CheckFileType(FilePath)
 
         # 设置鼠标提示
         Item.setToolTip(0, FileName)
@@ -146,8 +133,7 @@ class UploadListWindow(BaseInterface, BaseDialog):
     # 右键功能
     def UploadTreeRightContextMenuExec(self, pos):
         self.UploadTreeMenu = BaseMenu()  # 实例化基础Menu
-        self.UploadTreeMenu.setStyleSheet(
-            self.Style.Object.Upload_Tree_Menu())  # 设置样式
+        self.UploadTreeMenu.setStyleSheet(self.Style.Object.Upload_Tree_Menu())  # 设置样式
 
         # 获取当前点击的item和坐标
         Item = self.UploadTree.currentItem()
@@ -155,14 +141,11 @@ class UploadListWindow(BaseInterface, BaseDialog):
 
         # 焦点判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:
-            self.UploadTreeMenu.AddAction(
-                self.Lang.Start, lambda: self.Start())
+            self.UploadTreeMenu.AddAction(self.Lang.Start, lambda: self.Start())
             self.UploadTreeMenu.AddAction(self.Lang.Stop, lambda: self.Stop())
-            self.UploadTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.Delete())  # 批量删除
+            self.UploadTreeMenu.AddAction(self.Lang.Delete, lambda: self.Delete())  # 批量删除
         else:
-            self.UploadTreeMenu.AddAction(
-                self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理上传完成的数据
+            self.UploadTreeMenu.AddAction(self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理上传完成的数据
 
         self.UploadTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.UploadTreeMenu.show()  # 展示
@@ -188,17 +171,13 @@ class UploadListWindow(BaseInterface, BaseDialog):
         if YesOrNo == QtWidgets.QMessageBox.Yes:
 
             Items = self.UploadTree.selectedItems()
-            self.DoDeleteWorker = DoDeleteWorker(
-                Items, self.UploadDirPath, self.UploadTree)
+            self.DoDeleteWorker = DoDeleteWorker(Items, self.UploadDirPath, self.UploadTree)
 
             self.DoDeleteWorker.BreakSignal.connect(self.ShowError)
-            self.DoDeleteWorker.RemoveItemsSignal.connect(
-                self.UploadTree.RemoveItems)
-            self.DoDeleteWorker.FinishSignal.connect(
-                self.KillThread(self.DeleteUploadThread))
+            self.DoDeleteWorker.RemoveItemsSignal.connect(self.UploadTree.RemoveItems)
+            self.DoDeleteWorker.FinishSignal.connect(self.KillThread(self.DeleteUploadThread))
             self.DoDeleteWorker.moveToThread(self.DeleteUploadThread)
-            self.DeleteUploadThread.started.connect(
-                self.DoDeleteWorker.Run)  # 设置执行方法
+            self.DeleteUploadThread.started.connect(self.DoDeleteWorker.Run)  # 设置执行方法
             self.DeleteUploadThread.start()  # 线程启动
 
     # 移除所有已完成的
@@ -239,10 +218,12 @@ class UploadListWindow(BaseInterface, BaseDialog):
         if ProgressBar != None:
             ProgressBar.setValue(Value)
 
+
 # 连接池线程类
 
 
 class UploadWorker(QRunnable):
+
     def __init__(self, UploadObject):
         super(UploadWorker, self).__init__()
         self.UploadObject = UploadObject
@@ -251,6 +232,7 @@ class UploadWorker(QRunnable):
     @Slot()
     def run(self):
         self.UploadObject.Run()
+
 
 # 上传处理
 
@@ -290,11 +272,9 @@ class UploadHandler(BaseInterface, BaseObject):
         # 解析并修改文件MD5信息
         if FileMD5 == "":
             FileMD5 = self.File.CheckFileMD5(UploadPath)
-            ModifyFileResult = DirFileAction().ModifyFile(
-                ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
+            ModifyFileResult = DirFileAction().ModifyFile(ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
             if ModifyFileResult["State"] != True:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 return
 
         # 设置临时上传文件夹
@@ -314,11 +294,9 @@ class UploadHandler(BaseInterface, BaseObject):
                 return
 
             # 文件切片
-            SliceState, _ = self.File.CutFile(
-                UploadPath, TempUploadDir, FILESLICESIZE)
+            SliceState, _ = self.File.CutFile(UploadPath, TempUploadDir, FILESLICESIZE)
             if SliceState != True:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 return
 
             # 再次获取文件分片数
@@ -329,8 +307,7 @@ class UploadHandler(BaseInterface, BaseObject):
         # 还原进度条显示
         self.SetBarBusySwitchSignal.emit(self.Item, 0, 100)
 
-        self.SetBarValueSignal.emit(
-            self.Item, ceil((UploadBlockSize/BlockSize)*100))
+        self.SetBarValueSignal.emit(self.Item, ceil((UploadBlockSize / BlockSize) * 100))
 
         PerPos = UploadBlockSize  # 上传刻度
         for i in range(len(ReadyToUploadArr)):
@@ -342,17 +319,14 @@ class UploadHandler(BaseInterface, BaseObject):
             PerPos = PerPos + 1
 
             # 上传实体文件
-            Result1 = DirFileAction().UploadFileEntity(
-                ID, ReadyToUploadArr[i], FileSlicePerPath)
+            Result1 = DirFileAction().UploadFileEntity(ID, ReadyToUploadArr[i], FileSlicePerPath)
             if Result1["State"] != True and Result1["Memo"] == "Nnoe":
                 return
             if Result1["State"] != True and Result1["Memo"] != "Nnoe":
-                self.ErrorSignal.emit(
-                    FileInfo["FileName"] + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileInfo["FileName"] + " " + self.Lang.OperationFailed)
                 return
 
-            self.SetBarValueSignal.emit(
-                self.Item, floor((PerPos/BlockSize)*100))
+            self.SetBarValueSignal.emit(self.Item, floor((PerPos / BlockSize) * 100))
 
         ResultForComplete = DirFileAction().CheckFile(ID)
         if ResultForComplete["State"] != True:
@@ -412,22 +386,18 @@ class DoUploadWorker(BaseInterface, BaseObject):
                 return
 
             # 新建文件
-            Result2 = DirFileAction().CreateFile(
-                FileName, FileType, FileSize, self.FileList[i], self.DirID, "")
+            Result2 = DirFileAction().CreateFile(FileName, FileType, FileSize, self.FileList[i], self.DirID, "")
             if Result2["State"] != True:
                 if Result2["Memo"] == "FileType error":
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.WrongFileType)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.WrongFileType)
                 else:
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.OperationFailed)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 return
 
             # 获取文件详情
             Result3 = DirFileAction().CheckFile(Result2["ID"])
             if Result3["State"] != True:
-                self.BreakSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 return
 
             FileID = Result3["Data"]["ID"]
@@ -435,8 +405,8 @@ class DoUploadWorker(BaseInterface, BaseObject):
             TotalSize = Result3["Data"]["BlockSize"]  # 总分片数
 
             # 加入上传列表
-            self.ActionSignal.emit(
-                self.FileList[i], FileID, DestDirName, self.DirID, UploadSize, TotalSize, 2)
+            self.ActionSignal.emit(self.FileList[i], FileID, DestDirName, self.DirID, UploadSize, TotalSize, 2)
+
 
 # 删除任务
 
@@ -477,25 +447,21 @@ class DoDeleteWorker(BaseInterface, BaseObject):
                 # 获取文件详情
                 Result1 = DirFileAction().CheckFile(ID)
                 if Result1["State"] != True:
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.OperationFailed)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     break
                 FileInfo = Result1["Data"]
 
                 try:
                     # 删除临时上传文件夹
-                    self.File.DirRemoveAll(
-                        self.UploadDirPath + FileInfo["FileName"] + "." + str(FileInfo["Createtime"]))
+                    self.File.DirRemoveAll(self.UploadDirPath + FileInfo["FileName"] + "." + str(FileInfo["Createtime"]))
                 except Exception as e:
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.OperationFailed)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     break
 
                 # 删除文件数据
                 Result2 = DirFileAction().DeleteFile(ID)
                 if Result2["State"] != True:
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.OperationFailed)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     break
 
                 self.RemoveItemsSignal.emit(self.Items[i])

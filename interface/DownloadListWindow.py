@@ -27,11 +27,9 @@ class DownloadListWindow(BaseInterface, BaseDialog):
 
         self.DownloadTree = BaseTreeWidget()  # 设置tree控件
         self.DownloadTree.SetSelectionMode(2)  # 设置为多选模式
-        self.DownloadTree.setStyleSheet(
-            self.Style.Object.Download_Tree())  # 设置tree控件样式
+        self.DownloadTree.setStyleSheet(self.Style.Object.Download_Tree())  # 设置tree控件样式
         self.DownloadTree.setColumnCount(4)  # 设置tree控件列数
-        self.DownloadTree.setHeaderLabels(
-            [self.Lang.FileName, "FileID", self.Lang.DownloadProgress, "State"])  # 设置标题栏
+        self.DownloadTree.setHeaderLabels([self.Lang.FileName, "FileID", self.Lang.DownloadProgress, "State"])  # 设置标题栏
 
         # 设置列宽度
         self.DownloadTree.setColumnWidth(0, 150)
@@ -39,8 +37,7 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         # 隐藏列
         self.DownloadTree.hideColumn(1)
         self.DownloadTree.hideColumn(3)
-        self.DownloadTree.Connect(
-            self.DownloadTreeRightContextMenuExec)  # 右键菜单
+        self.DownloadTree.Connect(self.DownloadTreeRightContextMenuExec)  # 右键菜单
         Layout.addWidget(self.DownloadTree)
         self.setLayout(Layout)
 
@@ -77,15 +74,12 @@ class DownloadListWindow(BaseInterface, BaseDialog):
 
     # 新建下载
     def DODownloadInThread(self, FileIDList):
-        self.DoDownloadWorker = DoDownloadWorker(
-            FileIDList, self.DownloadDirPath, self.DCache)
+        self.DoDownloadWorker = DoDownloadWorker(FileIDList, self.DownloadDirPath, self.DCache)
         self.DoDownloadWorker.ActionSignal.connect(self.InsertDownloadItem)
         self.DoDownloadWorker.BreakSignal.connect(self.ShowError)
-        self.DoDownloadWorker.FinishSignal.connect(
-            self.KillThread(self.DownloadThread))
+        self.DoDownloadWorker.FinishSignal.connect(self.KillThread(self.DownloadThread))
         self.DoDownloadWorker.moveToThread(self.DownloadThread)
-        self.DownloadThread.started.connect(
-            self.DoDownloadWorker.Run)  # 设置执行方法
+        self.DownloadThread.started.connect(self.DoDownloadWorker.Run)  # 设置执行方法
         self.DownloadThread.start()  # 线程启动
 
     # 加入下载列表
@@ -98,8 +92,7 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         DownloadBar.setStyleSheet(self.Style.Object.Bar())  # 设置样式
         DownloadBar.setMinimum(0)  # 设置最小值
         DownloadBar.setMaximum(100)  # 设置最大值
-        DownloadBar.setValue(
-            (int(DownloadSize)/int(TotalSize))*100)  # 初始化进度条百分比
+        DownloadBar.setValue((int(DownloadSize) / int(TotalSize)) * 100)  # 初始化进度条百分比
 
         Item = QTreeWidgetItem()  # 实例化item控件
 
@@ -133,8 +126,7 @@ class DownloadListWindow(BaseInterface, BaseDialog):
     # 右键
     def DownloadTreeRightContextMenuExec(self, pos):
         self.DownloadTreeMenu = BaseMenu()  # 实例化基础Menu
-        self.DownloadTreeMenu.setStyleSheet(
-            self.Style.Object.Download_Tree_Menu())  # 设置样式
+        self.DownloadTreeMenu.setStyleSheet(self.Style.Object.Download_Tree_Menu())  # 设置样式
 
         # 获取当前点击的item和坐标
         Item = self.DownloadTree.currentItem()
@@ -142,15 +134,11 @@ class DownloadListWindow(BaseInterface, BaseDialog):
 
         # 焦点判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:
-            self.DownloadTreeMenu.AddAction(
-                self.Lang.Start, lambda: self.Start())
-            self.DownloadTreeMenu.AddAction(
-                self.Lang.Stop, lambda: self.Stop())
-            self.DownloadTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.Delete())  # 批量删除
+            self.DownloadTreeMenu.AddAction(self.Lang.Start, lambda: self.Start())
+            self.DownloadTreeMenu.AddAction(self.Lang.Stop, lambda: self.Stop())
+            self.DownloadTreeMenu.AddAction(self.Lang.Delete, lambda: self.Delete())  # 批量删除
         else:
-            self.DownloadTreeMenu.AddAction(
-                self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理下载完成的数据
+            self.DownloadTreeMenu.AddAction(self.Lang.RemoveAllCompletedTasks, lambda: self.RemoveFinish())  # 清理下载完成的数据
 
         self.DownloadTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.DownloadTreeMenu.show()  # 展示
@@ -172,10 +160,8 @@ class DownloadListWindow(BaseInterface, BaseDialog):
                 FileID = Items[i].text(1)
                 FileCache = self.Common.Explode("_", self.DCache.Get(FileName))
                 FileBlockSize = FileCache[1]
-                POS = len(self.File.SelectDirFiles(
-                    self.DownloadDirPath + FileName))
-                self.DCache.Set(FileName, FileID + "_" +
-                                FileBlockSize + "_" + str(POS + 1))
+                POS = len(self.File.SelectDirFiles(self.DownloadDirPath + FileName))
+                self.DCache.Set(FileName, FileID + "_" + FileBlockSize + "_" + str(POS + 1))
                 Items[i].setText(3, str(1))  # 设置下载状态 0初始 1停止 2开始
 
     # 删除任务
@@ -183,18 +169,13 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         YesOrNo = MSGBOX().ASK(self.Lang.Confirm)
         if YesOrNo == QtWidgets.QMessageBox.Yes:
             Items = self.DownloadTree.selectedItems()
-            self.DoDeleteWorker = DoDeleteWorker(
-                Items, self.DownloadDirPath, self.DownloadTree)
+            self.DoDeleteWorker = DoDeleteWorker(Items, self.DownloadDirPath, self.DownloadTree)
             self.DoDeleteWorker.BreakSignal.connect(self.ShowError)
-            self.DoDeleteWorker.DeleteCacheSignal.connect(
-                self.DCache.Delete)
-            self.DoDeleteWorker.RemoveItemsSignal.connect(
-                self.DownloadTree.RemoveItems)
-            self.DoDeleteWorker.FinishSignal.connect(
-                self.KillThread(self.DeleteDownloadThread))
+            self.DoDeleteWorker.DeleteCacheSignal.connect(self.DCache.Delete)
+            self.DoDeleteWorker.RemoveItemsSignal.connect(self.DownloadTree.RemoveItems)
+            self.DoDeleteWorker.FinishSignal.connect(self.KillThread(self.DeleteDownloadThread))
             self.DoDeleteWorker.moveToThread(self.DeleteDownloadThread)
-            self.DeleteDownloadThread.started.connect(
-                self.DoDeleteWorker.Run)  # 设置执行方法
+            self.DeleteDownloadThread.started.connect(self.DoDeleteWorker.Run)  # 设置执行方法
             self.DeleteDownloadThread.start()  # 线程启动
 
     # 移除所有已完成的
@@ -208,8 +189,7 @@ class DownloadListWindow(BaseInterface, BaseDialog):
 
     # 移动到线程池
     def MoveToThreadPool(self, Item):
-        GoUpload = DownloadHandler(
-            Item, self.DownloadDirPath, self.UserTempDir, self.DCache)  # 实例化下载操作类
+        GoUpload = DownloadHandler(Item, self.DownloadDirPath, self.UserTempDir, self.DCache)  # 实例化下载操作类
         GoUpload.ErrorSignal.connect(self.ShowError)
         GoUpload.SetBarBusySwitchSignal.connect(self.SetBarBusySwitch)
         GoUpload.SetBarValueSignal.connect(self.SetBarValue)
@@ -236,10 +216,12 @@ class DownloadListWindow(BaseInterface, BaseDialog):
         if ProgressBar != None:
             ProgressBar.setValue(Value)
 
+
 # 连接池线程类
 
 
 class DownloadWorker(QRunnable):
+
     def __init__(self, DownloadObject):
         super(DownloadWorker, self).__init__()
         self.DownloadObject = DownloadObject
@@ -248,6 +230,7 @@ class DownloadWorker(QRunnable):
     @Slot()
     def run(self):
         self.DownloadObject.Run()
+
 
 # 下载处理
 
@@ -285,8 +268,7 @@ class DownloadHandler(BaseInterface, BaseObject):
         self.SetBarBusySwitchSignal.emit(self.Item, 0, 100)
 
         # 数值初始化
-        self.SetBarValueSignal.emit(
-            self.Item, ceil((POS/FileBlockSize)*100))
+        self.SetBarValueSignal.emit(self.Item, ceil((POS / FileBlockSize) * 100))
 
         i = 1
         while True:
@@ -305,22 +287,19 @@ class DownloadHandler(BaseInterface, BaseObject):
             # 读取文件分片
             Result = DirFileAction().DownloadFileEntity(FileID, _POS)
             if Result["State"] != True:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
             FileEntityName = Result["Data"]["FileEntityName"]
             Data = Result["Data"]["Data"]
-            Content = self.Common.Base64ToBytes(
-                self.Common.StringToBytes(Data))
+            Content = self.Common.Base64ToBytes(self.Common.StringToBytes(Data))
 
             # 新建实体文件分片
             try:
                 FileEntityPath = self.DownloadDirPath + FileName + "/" + FileEntityName
                 self.File.MkFile(FileEntityPath)
             except Exception as e:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
 
@@ -328,13 +307,11 @@ class DownloadHandler(BaseInterface, BaseObject):
             try:
                 self.File.WFileInByte(FileEntityPath, Content)
             except Exception as e:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
 
-            self.SetBarValueSignal.emit(
-                self.Item, ceil((_POS/FileBlockSize)*100))
+            self.SetBarValueSignal.emit(self.Item, ceil((_POS / FileBlockSize) * 100))
 
             i += 1
 
@@ -354,8 +331,7 @@ class DownloadHandler(BaseInterface, BaseObject):
             try:
                 self.File.DeleteFile(NewFile)
             except Exception as e:
-                self.ErrorSignal.emit(
-                    FileName + " " + self.Lang.TemporaryFileCleanupFailed)
+                self.ErrorSignal.emit(FileName + " " + self.Lang.TemporaryFileCleanupFailed)
                 self.FinishSignal.emit()
                 return
 
@@ -372,8 +348,7 @@ class DownloadHandler(BaseInterface, BaseObject):
         try:
             self.File.DirRemoveAll(self.DownloadDirPath + FileName)
         except Exception as e:
-            self.ErrorSignal.emit(
-                self.DownloadDirPath + FileName + " " + self.Lang.TemporaryFileCleanupFailed)
+            self.ErrorSignal.emit(self.DownloadDirPath + FileName + " " + self.Lang.TemporaryFileCleanupFailed)
             self.FinishSignal.emit()
             return
 
@@ -381,6 +356,7 @@ class DownloadHandler(BaseInterface, BaseObject):
         self.SetBarValueSignal.emit(self.Item, 100)
 
         self.FinishSignal.emit()
+
 
 # 新建下载
 
@@ -407,11 +383,9 @@ class DoDownloadWorker(BaseInterface, BaseObject):
             return
 
         for i in range(len(self.FilesIDList)):
-            Result = DirFileAction().CheckFile(
-                int(self.FilesIDList[i]["ID"]))
+            Result = DirFileAction().CheckFile(int(self.FilesIDList[i]["ID"]))
             if Result["State"] != True:
-                self.BreakSignal.emit(
-                    self.FilesIDList["FileName"] + " " + self.Lang.OperationFailed)
+                self.BreakSignal.emit(self.FilesIDList["FileName"] + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
             FileInfo = Result["Data"]
@@ -423,14 +397,12 @@ class DoDownloadWorker(BaseInterface, BaseObject):
             # Createtime = FileInfo["Createtime"]
 
             if FileInfo["State"] != 2:
-                self.BreakSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
 
             if self.DCache.Get(FileName) is not None:
-                self.BreakSignal.emit(
-                    FileName + " " + self.Lang.AlreadyInTheList)
+                self.BreakSignal.emit(FileName + " " + self.Lang.AlreadyInTheList)
                 self.FinishSignal.emit()
                 return
 
@@ -439,8 +411,7 @@ class DoDownloadWorker(BaseInterface, BaseObject):
                 try:
                     self.File.DirRemoveAll()
                 except Exception as e:
-                    self.BreakSignal.emit(
-                        FileName + " " + self.Lang.OperationFailed)
+                    self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     self.FinishSignal.emit()
                     return
 
@@ -448,19 +419,17 @@ class DoDownloadWorker(BaseInterface, BaseObject):
             try:
                 self.File.MkDir(self.DownloadDirPath + FileName)
             except Exception as e:
-                self.BreakSignal.emit(
-                    FileName + " " + self.Lang.OperationFailed)
+                self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
 
-            self.DCache.Set(
-                FileName, str(ID) + "_" + str(FileBlockSize) + "_" + str(DownloadSize))
+            self.DCache.Set(FileName, str(ID) + "_" + str(FileBlockSize) + "_" + str(DownloadSize))
 
             # 开始下载
-            self.ActionSignal.emit(
-                FileName, ID, DownloadSize, FileBlockSize, 2)
+            self.ActionSignal.emit(FileName, ID, DownloadSize, FileBlockSize, 2)
 
         self.FinishSignal.emit()
+
 
 # 删除任务
 

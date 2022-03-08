@@ -16,13 +16,11 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
 
         self.TaskTree = BaseTreeWidget()  # 设置tree控件
         # self.TaskTree.SetSelectionMode(2)  # 设置为多选模式
-        self.TaskTree.setStyleSheet(
-            self.Style.Object.Download_Tree())  # 设置tree控件样式
+        self.TaskTree.setStyleSheet(self.Style.Object.Download_Tree())  # 设置tree控件样式
         self.TaskTree.setColumnCount(5)  # 设置tree控件列数
         self.TaskTree.hideColumn(3)
         self.TaskTree.hideColumn(4)
-        self.TaskTree.setHeaderLabels(
-            ["URL", self.Lang.TaskStatus, self.Lang.Remark, "ID", "State"])  # 设置标题栏
+        self.TaskTree.setHeaderLabels(["URL", self.Lang.TaskStatus, self.Lang.Remark, "ID", "State"])  # 设置标题栏
         self.TaskTree.setColumnWidth(0, 300)  # 设置列宽度
         self.TaskTree.Connect(self.TaskTreeRightContextMenuExec)  # 右键菜单
 
@@ -31,20 +29,17 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
 
         self.AddTaskBtn = QPushButton(self.Lang.AddTask)
         self.AddTaskBtn.setFixedHeight(30)
-        self.AddTaskBtn.setStyleSheet(
-            self.Style.Object.Offline_Task_Btn())
+        self.AddTaskBtn.setStyleSheet(self.Style.Object.Offline_Task_Btn())
         self.AddTaskBtn.clicked.connect(self.AddTaskWindow)
 
         self.RefreshBtn = QPushButton(self.Lang.Refresh)
         self.RefreshBtn.setFixedSize(150, 30)
-        self.RefreshBtn.setStyleSheet(
-            self.Style.Object.Offline_Task_Btn())
+        self.RefreshBtn.setStyleSheet(self.Style.Object.Offline_Task_Btn())
         self.RefreshBtn.clicked.connect(self.InsertTreeData)
 
         self.ClearBtn = QPushButton(self.Lang.RemoveAllCompletedTasks)
         self.ClearBtn.setFixedSize(300, 30)
-        self.ClearBtn.setStyleSheet(
-            self.Style.Object.Offline_Task_Btn())
+        self.ClearBtn.setStyleSheet(self.Style.Object.Offline_Task_Btn())
         self.ClearBtn.clicked.connect(self.RemoveFinish)
 
         Layout.addWidget(self.TaskTree)
@@ -80,15 +75,9 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
                 item.setText(2, TaskInfo[i]["TaskMemo"])  # 设置内容
                 item.setText(3, str(TaskInfo[i]["ID"]))  # 设置内容
                 item.setText(4, str(TaskInfo[i]["State"]))  # 设置内容
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    2, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 TaskItems.append(item)  # 添加到item list
             self.TaskTree.insertTopLevelItems(0, TaskItems)  # 添加到标签列表
 
@@ -110,17 +99,14 @@ class OfflineTaskListWindow(BaseInterface, BaseDialog):
 
     def TaskTreeRightContextMenuExec(self, pos):
         self.TaskTreeMenu = BaseMenu()  # 实例化基础Menu
-        self.TaskTreeMenu.setStyleSheet(
-            self.Style.Object.Download_Tree_Menu())  # 设置样式
+        self.TaskTreeMenu.setStyleSheet(self.Style.Object.Download_Tree_Menu())  # 设置样式
         # 获取当前点击的item和坐标
         Item = self.TaskTree.currentItem()
         ItemAt = self.TaskTree.itemAt(pos)
         # 焦点判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:
-            self.TaskTreeMenu.AddAction(
-                self.Lang.Retry, lambda: self.Retry())  # 批量删除
-            self.TaskTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.Delete())  # 批量删除
+            self.TaskTreeMenu.AddAction(self.Lang.Retry, lambda: self.Retry())  # 批量删除
+            self.TaskTreeMenu.AddAction(self.Lang.Delete, lambda: self.Delete())  # 批量删除
         else:
             return
         self.TaskTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
@@ -162,13 +148,11 @@ class AddTaskWindow(BaseInterface, BaseDialog):
         self.URLInput.setPlaceholderText("URL")
         self.URLInput.clearFocus()
         self.URLInput.setFixedHeight(30)
-        self.URLInput.setStyleSheet(
-            self.Style.Object.Offline_Task_Line_Input())
+        self.URLInput.setStyleSheet(self.Style.Object.Offline_Task_Line_Input())
 
         self.MemoInput = QTextEdit()
         self.MemoInput.setPlaceholderText(self.Lang.Remark)
-        self.MemoInput.setStyleSheet(
-            self.Style.Object.Offline_Task_Text_Input())
+        self.MemoInput.setStyleSheet(self.Style.Object.Offline_Task_Text_Input())
 
         BtnLayout = QHBoxLayout()
 

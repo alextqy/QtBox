@@ -37,14 +37,12 @@ class DirFileFrame(BaseInterface, BaseFrame):
         self.DirHeader = RootDirectoryLabel(self.Lang.RootDirectory)
         self.DirHeader.setFixedHeight(20)
         self.DirHeader.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.DirHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Header())  # 设置样式
+        self.DirHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Header())  # 设置样式
         self.DirHeader.ActionSignal.connect(self.ShowRootFiles)  # 连接槽函数
 
         # 文件夹列表
         self.DirTree = BaseTreeWidget()  # 实例化树形控件
-        self.DirTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Tree_Widget())  # 设置样式
+        self.DirTree.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Tree_Widget())  # 设置样式
         self.DirTree.HideVScroll()  # 隐藏纵向滚动条
         self.DirTree.setColumnCount(3)  # 设置列数
         self.DirTree.hideColumn(1)  # 隐藏列
@@ -61,12 +59,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 item.setText(0, self.DirData[i]["DirName"])  # 设置内容
                 item.setText(1, str(self.DirData[i]["ID"]))  # 设置内容
                 item.setText(2, str(self.DirData[i]["ParentID"]))  # 文件夹上级目录ID
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                item.setTextAlignment(
-                    2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 DirTreeItems.append(item)  # 添加到item list
             self.DirTree.insertTopLevelItems(0, DirTreeItems)  # 添加到文件夹列表
 
@@ -78,8 +73,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         # 文件夹列表下方按钮
         self.DirListBtnFrame = QFrame()
-        self.DirListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_List_Btn_Frame())
+        self.DirListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn_Frame())
         # self.DirListBtnFrame.setFixedHeight(65)
         self.DirListBtnFrame.setFixedHeight(30)
         self.DirListBtnFrame.setContentsMargins(0, 0, 0, 0)
@@ -90,15 +84,13 @@ class DirFileFrame(BaseInterface, BaseFrame):
         # self.DirListBtnLayout.addStretch()
 
         self.NewDirBtn = QPushButton(self.Lang.NewFolder)
-        self.NewDirBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_List_Btn())
+        self.NewDirBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn())
         self.NewDirBtn.setContentsMargins(1, 1, 1, 1)
         self.NewDirBtn.setFixedHeight(30)
         self.NewDirBtn.clicked.connect(self.CreateTopDirWindow)
 
         self.DownloadDir = QPushButton(self.Lang.DownloadedFiles)
-        self.DownloadDir.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_List_Btn())
+        self.DownloadDir.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn())
         self.DownloadDir.setContentsMargins(1, 1, 1, 1)
         self.DownloadDir.setFixedHeight(30)
         self.DownloadDir.clicked.connect(self.OpenDownloadDirWindow)
@@ -128,37 +120,31 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         # 文件标题栏
         self.FileHeaderFrame = QFrame()
-        self.FileHeaderFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Header_Frame())
+        self.FileHeaderFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Header_Frame())
         self.FileHeaderFrame.setFixedHeight(20)
 
         self.FileHeaderLayout = QHBoxLayout()
         self.FileHeaderLayout.setContentsMargins(0, 0, 0, 0)  # 设置边距
 
         self.FileHeader = QLabel(self.Lang.FileList)
-        self.FileHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
+        self.FileHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
         self.FileHeader.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.FileHeaderList = FileListLabel("List")
         self.FileHeaderList.setScaledContents(True)  # 图片自适应
         self.FileHeaderList.setPixmap(self.SetIMG(FLIST))
-        self.FileHeaderList.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
+        self.FileHeaderList.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
         self.FileHeaderList.setAlignment(Qt.AlignCenter)  # 字体居中
         self.FileHeaderList.setFixedWidth(20)
-        self.FileHeaderList.ActionSignal.connect(
-            self.ShowFileListAction)  # 连接槽函数
+        self.FileHeaderList.ActionSignal.connect(self.ShowFileListAction)  # 连接槽函数
 
         self.FileHeaderGrid = FileGridLabel("Grid")
         self.FileHeaderGrid.setScaledContents(True)  # 图片自适应
         self.FileHeaderGrid.setPixmap(self.SetIMG(FGRID))
-        self.FileHeaderGrid.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
+        self.FileHeaderGrid.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Top_Label())  # 设置样式
         self.FileHeaderGrid.setAlignment(Qt.AlignCenter)  # 字体居中
         self.FileHeaderGrid.setFixedWidth(20)
-        self.FileHeaderGrid.ActionSignal.connect(
-            self.ShowFileGridAction)  # 连接槽函数
+        self.FileHeaderGrid.ActionSignal.connect(self.ShowFileGridAction)  # 连接槽函数
 
         self.FileHeaderLayout.addWidget(self.FileHeader)
         self.FileHeaderLayout.addWidget(self.FileHeaderList)
@@ -168,15 +154,13 @@ class DirFileFrame(BaseInterface, BaseFrame):
         self.FileVS.addWidget(self.FileHeaderFrame)
 
         self.FileFrame = QFrame()
-        self.FileFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Frame())
+        self.FileFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Frame())
         self.FileLayout = QVBoxLayout()
         self.FileLayout.setContentsMargins(0, 0, 0, 0)
 
         self.FileTree = BaseTreeWidget()
         self.FileTree.SetSelectionMode(2)  # 设置多选模式
-        self.FileTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tree_Widget())  # 设置样式
+        self.FileTree.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tree_Widget())  # 设置样式
         self.FileTree.HideVScroll()  # 隐藏纵向滚动条
         self.FileTree.HideHScroll()  # 隐藏横向滚动条
         self.FileTree.setColumnCount(3)  # 设置列数
@@ -201,8 +185,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
         # 文件列表下方按钮
         self.FileListBtnFrame = QFrame()
-        self.FileListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_List_Btn_Frame())
+        self.FileListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_List_Btn_Frame())
         self.FileListBtnFrame.setFixedHeight(30)
         self.FileListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -210,29 +193,25 @@ class DirFileFrame(BaseInterface, BaseFrame):
         self.FileListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         self.UploadFilesBtn = QPushButton(self.Lang.UploadFiles)
-        self.UploadFilesBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_List_Btn())
+        self.UploadFilesBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_List_Btn())
         self.UploadFilesBtn.setContentsMargins(1, 1, 1, 1)
         self.UploadFilesBtn.setFixedHeight(30)
         self.UploadFilesBtn.clicked.connect(self.DoUpload)
 
         self.UploadFolderBtn = QPushButton(self.Lang.UploadFolder)
-        self.UploadFolderBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_List_Btn())
+        self.UploadFolderBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_List_Btn())
         self.UploadFolderBtn.setContentsMargins(1, 1, 1, 1)
         self.UploadFolderBtn.setFixedHeight(30)
         self.UploadFolderBtn.clicked.connect(self.DoUploadDir)
 
         self.DownloadBtn = QPushButton(self.Lang.Download)
-        self.DownloadBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_List_Btn())
+        self.DownloadBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_List_Btn())
         self.DownloadBtn.setContentsMargins(1, 1, 1, 1)
         self.DownloadBtn.setFixedHeight(30)
         self.DownloadBtn.clicked.connect(self.DoDownload)
 
         self.RecycleBtn = QPushButton(self.Lang.RecycleBin)
-        self.RecycleBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_List_Btn())
+        self.RecycleBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_List_Btn())
         self.RecycleBtn.setContentsMargins(1, 1, 1, 1)
         self.RecycleBtn.setFixedHeight(30)
         self.RecycleBtn.clicked.connect(self.RecycleBin)
@@ -305,14 +284,10 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 item = QTreeWidgetItem()  # 设置item控件
                 item.setText(0, Files[i]["FileName"])  # 设置内容
                 item.setText(1, str(Files[i]["ID"]))  # 设置内容
-                item.setText(2, self.Common.TimeToStr(
-                    Files[i]["Createtime"]))  # 设置内容
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                item.setTextAlignment(
-                    2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setText(2, self.Common.TimeToStr(Files[i]["Createtime"]))  # 设置内容
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 FileTreeItems.append(item)  # 添加到item list
             self.FileTree.insertTopLevelItems(0, FileTreeItems)  # 添加到文件夹列表
         # 鼠标右键 链接槽函数
@@ -347,8 +322,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         Files = Result["Data"]
 
         GridFrame = QFrame()
-        GridFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Grid_Frame())
+        GridFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Grid_Frame())
         GridItemLayout = QGridLayout()
         GridItemLayout.setContentsMargins(0, 0, 0, 0)
         # GridItemLayout.setHorizontalSpacing(0)
@@ -360,26 +334,22 @@ class DirFileFrame(BaseInterface, BaseFrame):
         if FileCount > 0:
             for i in range(len(Files)):
                 Col = 8
-                Row = int(FileCount/Col)
+                Row = int(FileCount / Col)
                 Row_ = FileCount % Col
                 if Row_ > 0:
                     Row += Row + 1
                 FileArr = []
                 for i in range(len(Files)):
-                    FileArr.append(
-                        {"Name": Files[i]["FileName"], "ID": Files[i]["ID"]})
-                Positions = [(i, j) for i in range(Row)
-                             for j in range(Col)]  # 创建位置列表 n行5列
+                    FileArr.append({"Name": Files[i]["FileName"], "ID": Files[i]["ID"]})
+                Positions = [(i, j) for i in range(Row) for j in range(Col)]  # 创建位置列表 n行5列
                 for Position, File in zip(Positions, FileArr):
                     FileLabel = FileGridItemLabel()
-                    FileLabel.setText(FileLabel.FM.elidedText(
-                        File["Name"], Qt.ElideRight, 150))  # 省略过长的内容
+                    FileLabel.setText(FileLabel.FM.elidedText(File["Name"], Qt.ElideRight, 150))  # 省略过长的内容
                     FileLabel.setAlignment(Qt.AlignTop)  # 从头显示文本
                     FileLabel.setWordWrap(True)  # 自动换行
                     FileLabel.setToolTip(File["Name"])
                     FileLabel.ActionSignal.connect(self.FOpenAction)
-                    FileLabel.setStyleSheet(
-                        self.Style.Object.MainFrame_Mid_File_Grid_Item())
+                    FileLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Grid_Item())
                     FileLabel.setWhatsThis(str(File["ID"]))
                     FileLabel.setFixedWidth(150)
                     FileLabel.setFixedHeight(60)
@@ -393,8 +363,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
     # 新建顶级文件夹
     def CreateTopDirWindow(self):
         self.CreateTopDirWindowObject = CreateTopDirWindow()
-        self.CreateTopDirWindowObject.ActionSignal.connect(
-            self.CreateTopDirAction)
+        self.CreateTopDirWindowObject.ActionSignal.connect(self.CreateTopDirAction)
         self.CreateTopDirWindowObject.show()
 
     # 新建顶级文件夹方法
@@ -403,12 +372,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
         Item.setText(0, DirName)  # 设置内容
         Item.setText(1, str(DirID))
         Item.setText(2, str(self.CurrentDirID))
-        Item.setTextAlignment(
-            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-        Item.setTextAlignment(
-            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-        Item.setTextAlignment(
-            2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
         self.DirTree.insertTopLevelItem(0, Item)
 
     # 打开下载文件夹
@@ -419,8 +385,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
     def FileTimingSync(self):
         self.FileTimingSyncWorker = FileTimingSyncWorker()
         self.FileTimingSyncWorker.ActionSignal.connect(self.DoFileSync)
-        self.FileTimingSyncWorker.FinishSignal.connect(
-            self.KillThread(self.FileSyncThread))
+        self.FileTimingSyncWorker.FinishSignal.connect(self.KillThread(self.FileSyncThread))
         self.FileTimingSyncWorker.moveToThread(self.FileSyncThread)
         self.FileSyncThread.started.connect(self.FileTimingSyncWorker.Run)
         self.FileSyncThread.start()
@@ -473,8 +438,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                         break
 
                     # 文件切片
-                    SliceState, SliceNum = self.File.CutFile(
-                        FileEntityPath, FileTempDir, FILESLICESIZE)
+                    SliceState, SliceNum = self.File.CutFile(FileEntityPath, FileTempDir, FILESLICESIZE)
                     if SliceState != True:
                         break
 
@@ -483,8 +447,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                         # 获取切片文件
                         _, FileSlice = self.File.SelectDir(FileTempDir)
                         for i in range(len(FileSlice)):
-                            Result2 = DirFileAction().FileEntitySync(
-                                ID, FileSlice[i], FileTempDir + "/" + FileSlice[i])
+                            Result2 = DirFileAction().FileEntitySync(ID, FileSlice[i], FileTempDir + "/" + FileSlice[i])
                             if Result2["State"] != True:
                                 DirFileAction().FileEntitySyncFail(ID)
                                 self.Cache.Set("Sync", False)
@@ -496,8 +459,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                         DirFileAction().FileEntitySyncFail(ID)
                         break
 
-                    Result4 = DirFileAction().ModifyFile(
-                        ID, FileName, State, FileSize, len(FileSlice), UploadBlockSize, DirID, NewMD5)
+                    Result4 = DirFileAction().ModifyFile(ID, FileName, State, FileSize, len(FileSlice), UploadBlockSize, DirID, NewMD5)
                     if Result4["State"] != True:
                         break
 
@@ -533,12 +495,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 Item.setText(0, SubDirList[i]["DirName"])  # 设置内容
                 Item.setText(1, str(SubDirList[i]["ID"]))  # 设置内容
                 Item.setText(2, str(SubDirList[i]["ParentID"]))  # 设置内容
-                Item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                Item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                Item.setTextAlignment(
-                    2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                Item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                Item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                Item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 SubDirItemList.append(Item)  # 添加到item list
                 CurrentDirItem.addChildren(SubDirItemList)  # 添加到文件夹列表
 
@@ -548,22 +507,17 @@ class DirFileFrame(BaseInterface, BaseFrame):
     # 文件夹右键
     def DirRightContextMenuExec(self, pos):
         self.DirTreeMenu = BaseMenu()  # 左侧文件夹列表鼠标右键菜单
-        self.DirTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_File_Tree_Menu())  # 设置样式
+        self.DirTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_File_Tree_Menu())  # 设置样式
         Item = self.DirTree.currentItem()  # 获取被点击行控件
         ItemAt = self.DirTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-            self.DirTreeMenu.AddAction(
-                self.Lang.Rename, lambda: self.DirRenameWindow(Item))  # 重命名
-            self.DirTreeMenu.AddAction(
-                self.Lang.AddSubFolder, lambda: self.CreateSubDirWindow(Item))  # 创建子文件夹
-            self.DirTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.DelDir(self.DirTree, Item))  # 删除文件夹
+            self.DirTreeMenu.AddAction(self.Lang.Rename, lambda: self.DirRenameWindow(Item))  # 重命名
+            self.DirTreeMenu.AddAction(self.Lang.AddSubFolder, lambda: self.CreateSubDirWindow(Item))  # 创建子文件夹
+            self.DirTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelDir(self.DirTree, Item))  # 删除文件夹
             if self.Cache.Get("PasteFilesID") is not None:
-                self.DirTreeMenu.AddAction(
-                    self.Lang.PasteFiles, lambda: self.PasteFiles(Item))  # 粘贴文件
+                self.DirTreeMenu.AddAction(self.Lang.PasteFiles, lambda: self.PasteFiles(Item))  # 粘贴文件
         else:  # 焦点外
             return
 
@@ -600,10 +554,8 @@ class DirFileFrame(BaseInterface, BaseFrame):
         DirID = Item.text(1)
         self.PasteFileWorker = PasteFileWorker(DirID, FilesID)
         self.PasteFileWorker.ErrorSignal.connect(self.ShowError)
-        self.PasteFileWorker.FinishSignal.connect(
-            self.Cache.Delete("PasteFilesID"))
-        self.PasteFileWorker.FinishSignal.connect(
-            self.KillThread(self.PasteFileThread))
+        self.PasteFileWorker.FinishSignal.connect(self.Cache.Delete("PasteFilesID"))
+        self.PasteFileWorker.FinishSignal.connect(self.KillThread(self.PasteFileThread))
         self.PasteFileWorker.moveToThread(self.PasteFileThread)
         self.PasteFileThread.started.connect(self.PasteFileWorker.Run)
         self.PasteFileThread.start()
@@ -611,38 +563,27 @@ class DirFileFrame(BaseInterface, BaseFrame):
     # 文件右键
     def FileRightContextMenuExec(self, pos):
         self.FileTreeMenu = BaseMenu()  # 左侧文件夹列表鼠标右键菜单
-        self.FileTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_File_Tree_Menu())  # 设置样式
+        self.FileTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_File_Tree_Menu())  # 设置样式
         Item = self.FileTree.currentItem()  # 获取被点击行控件
         ItemAt = self.FileTree.itemAt(pos)  # 获取点击焦点
 
         if self.RecycleBinState == True:
             if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-                self.FileTreeMenu.AddAction(
-                    self.Lang.MoveToTheRootFolder, lambda: self.MoveToTheRootFolder())  # 移动到根目录
+                self.FileTreeMenu.AddAction(self.Lang.MoveToTheRootFolder, lambda: self.MoveToTheRootFolder())  # 移动到根目录
             else:
-                self.FileTreeMenu.AddAction(
-                    self.Lang.EmptyTheRecycleBin, lambda: self.EmptyTheRecycleBin())  # 清空
+                self.FileTreeMenu.AddAction(self.Lang.EmptyTheRecycleBin, lambda: self.EmptyTheRecycleBin())  # 清空
         else:
             # 展示判断
             if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-                self.FileTreeMenu.AddAction(
-                    self.Lang.FileDetails, lambda: self.FileInfoWindow(Item))  # 重命名
-                self.FileTreeMenu.AddAction(
-                    self.Lang.CopyFiles, lambda: self.CopyFiles())  # 复制
-                self.FileTreeMenu.AddAction(
-                    self.Lang.MoveToRecycleBin, lambda: self.MoveToRecycleBin())  # 移动到回收站
-                self.FileTreeMenu.AddAction(
-                    self.Lang.Delete, lambda: self.DelFiles())  # 删除文件
-                self.FileTreeMenu.AddAction(
-                    self.Lang.FileSharing, lambda: self.FileSharing())  # 分享给其他用户
-                self.FileTreeMenu.AddAction(
-                    self.Lang.ShareFilesToDepartment, lambda: self.ShareFilesToDepartment())  # 发送到部门
-                self.FileTreeMenu.AddAction(
-                    self.Lang.FavoritesToFilesTag, lambda: self.FavoritesToFilesTag())  # 收藏到文件标签
+                self.FileTreeMenu.AddAction(self.Lang.FileDetails, lambda: self.FileInfoWindow(Item))  # 重命名
+                self.FileTreeMenu.AddAction(self.Lang.CopyFiles, lambda: self.CopyFiles())  # 复制
+                self.FileTreeMenu.AddAction(self.Lang.MoveToRecycleBin, lambda: self.MoveToRecycleBin())  # 移动到回收站
+                self.FileTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelFiles())  # 删除文件
+                self.FileTreeMenu.AddAction(self.Lang.FileSharing, lambda: self.FileSharing())  # 分享给其他用户
+                self.FileTreeMenu.AddAction(self.Lang.ShareFilesToDepartment, lambda: self.ShareFilesToDepartment())  # 发送到部门
+                self.FileTreeMenu.AddAction(self.Lang.FavoritesToFilesTag, lambda: self.FavoritesToFilesTag())  # 收藏到文件标签
             else:  # 焦点外
-                self.FileTreeMenu.AddAction(
-                    self.Lang.Refresh, lambda: self.Refresh())  # 刷新列表
+                self.FileTreeMenu.AddAction(self.Lang.Refresh, lambda: self.Refresh())  # 刷新列表
 
         self.FileTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.FileTreeMenu.show()  # 展示
@@ -673,8 +614,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 UploadBlockSize = FileInfo["UploadBlockSize"]
                 DirID = RootDirID
                 FileMD5 = FileInfo["MD5"]
-                Result2 = DirFileAction().ModifyFile(
-                    ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
+                Result2 = DirFileAction().ModifyFile(ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
                 if Result2["State"] != True:
                     MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                     break
@@ -717,8 +657,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 Result = UserAction().ShareFilesToDepartment(ID)
                 if Result["State"] != True:
                     if Result["Memo"] == "Data is exists":
-                        MSGBOX().WARNING(FileName + " " +
-                                         self.Lang.AlreadyInTheList)
+                        MSGBOX().WARNING(FileName + " " + self.Lang.AlreadyInTheList)
                     else:
                         MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                     return
@@ -761,8 +700,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 UploadBlockSize = FileInfo["UploadBlockSize"]
                 DirID = 0
                 FileMD5 = FileInfo["MD5"]
-                Result = DirFileAction().ModifyFile(ID, FileName, State, FileSize,
-                                                    BlockSize, UploadBlockSize, DirID, FileMD5)
+                Result = DirFileAction().ModifyFile(ID, FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
                 if Result["State"] != True:
                     MSGBOX.ERROR(Name + " " + self.Lang.OperationFailed)
                     return
@@ -821,8 +759,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
     # 选择文件夹上传
     def DoUploadDir(self):
-        FolderPath = QFileDialog.getExistingDirectoryUrl(
-            self).toDisplayString().replace("file:///", "")  # 文件夹选择框
+        FolderPath = QFileDialog.getExistingDirectoryUrl(self).toDisplayString().replace("file:///", "")  # 文件夹选择框
         if FolderPath != "":
             Files = self.File.SelectDirFiles(FolderPath)
             if len(Files) > 0:
@@ -884,8 +821,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         FileMD5 = FileInfo["MD5"]
 
         if self.TCache.Get(FileID + "_" + FileMD5) is not None:
-            self.File.FileNativeCall(
-                self.Cache.Get("TempDir") + FileName + "." + FileInfo["FileType"])  # 打开文件
+            self.File.FileNativeCall(self.Cache.Get("TempDir") + FileName + "." + FileInfo["FileType"])  # 打开文件
             return
 
         # 是否超出预览大小限制
@@ -896,8 +832,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             CheckPreviewSizeLimit = Result2["Data"]["ConfigValue"]
 
         if int(FileInfo["FileSize"]) > int(CheckPreviewSizeLimit):
-            MSGBOX().ERROR(FileName + " " + self.Lang.PreviewSizeLimitExceeded +
-                           "(" + self.File.FileSizeFormat(int(CheckPreviewSizeLimit)) + ")")
+            MSGBOX().ERROR(FileName + " " + self.Lang.PreviewSizeLimitExceeded + "(" + self.File.FileSizeFormat(int(CheckPreviewSizeLimit)) + ")")
             return
 
         # 锁定文件
@@ -937,8 +872,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 return
 
             # 内容转换
-            Content = self.Common.Base64ToBytes(
-                self.Common.StringToBytes(Result["Data"]["Data"]))
+            Content = self.Common.Base64ToBytes(self.Common.StringToBytes(Result["Data"]["Data"]))
 
             # 写入分片数据
             try:
@@ -973,12 +907,10 @@ class DirFileFrame(BaseInterface, BaseFrame):
         self.File.DirRemoveAll(FileTempDirPath)
 
         # 打开文件
-        self.File.FileNativeCall(
-            self.Cache.Get("TempDir") + FileName + "." + FileInfo["FileType"])
+        self.File.FileNativeCall(self.Cache.Get("TempDir") + FileName + "." + FileInfo["FileType"])
 
         # 记录打开的文件并保存MD5
-        self.TCache.Set(
-            FileID + "_" + FileMD5, FileName + "." + FileInfo["FileType"])
+        self.TCache.Set(FileID + "_" + FileMD5, FileName + "." + FileInfo["FileType"])
 
         # 解锁文件
         DirFileAction().FileLockSwitch(FileID)
@@ -989,12 +921,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
             return
         self.PromptPopUpsWorker = PromptPopUpsWorker()
         self.PromptPopUpsWindow.Label.setText(TextParam)
-        self.PromptPopUpsWorker.ActionSignal.connect(
-            self.PromptPopUpsWindow.show)
-        self.PromptPopUpsWorker.HideSignal.connect(
-            self.PromptPopUpsWindow.hide)
-        self.PromptPopUpsWorker.FinishSignal.connect(
-            self.KillThread(self.PromptPopUpsThread))
+        self.PromptPopUpsWorker.ActionSignal.connect(self.PromptPopUpsWindow.show)
+        self.PromptPopUpsWorker.HideSignal.connect(self.PromptPopUpsWindow.hide)
+        self.PromptPopUpsWorker.FinishSignal.connect(self.KillThread(self.PromptPopUpsThread))
         self.PromptPopUpsWorker.moveToThread(self.PromptPopUpsThread)
         self.PromptPopUpsThread.started.connect(self.PromptPopUpsWorker.Run)
         self.PromptPopUpsThread.start()
@@ -1069,16 +998,13 @@ class CreateTopDirWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DirNameInput = QLineEdit()
-        self.DirNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.DirNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DirNameInput.setFixedHeight(30)
-        self.DirNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Input())
+        self.DirNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Input())
 
         self.Btn = QPushButton(self.Lang.Submit)
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
         self.Btn.clicked.connect(self.CreateAction)
 
         self.VLayout.addWidget(self.DirNameInput)
@@ -1100,6 +1026,7 @@ class CreateTopDirWindow(BaseInterface, BaseDialog):
 
 
 class DirRenameWindow(BaseInterface, BaseDialog):
+
     def __init__(self, Item):
         super().__init__()
         self.AppMode()
@@ -1109,17 +1036,14 @@ class DirRenameWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DirNameInput = QLineEdit()
-        self.DirNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.DirNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DirNameInput.setFixedHeight(30)
-        self.DirNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Input())
+        self.DirNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Input())
         self.DirNameInput.setText(self.Item.text(0))
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
         self.Btn.clicked.connect(self.DoRename)
 
         self.VLayout.addWidget(self.DirNameInput)
@@ -1146,6 +1070,7 @@ class DirRenameWindow(BaseInterface, BaseDialog):
 
 
 class CreateSubDirWindow(BaseInterface, BaseDialog):
+
     def __init__(self, Item):
         super().__init__()
         self.AppMode()
@@ -1155,16 +1080,13 @@ class CreateSubDirWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DirNameInput = QLineEdit()
-        self.DirNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.DirNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DirNameInput.setFixedHeight(30)
-        self.DirNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Input())
+        self.DirNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Input())
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_Win_Btn())
         self.Btn.clicked.connect(self.DoCreateSubDirAction)
 
         self.VLayout.addWidget(self.DirNameInput)
@@ -1180,8 +1102,7 @@ class CreateSubDirWindow(BaseInterface, BaseDialog):
             return
         if Result["State"] == True:
             node = QTreeWidgetItem(self.Item)  # 设置Item控件
-            node.setTextAlignment(0, Qt.AlignHCenter |
-                                  Qt.AlignVCenter)  # 设置item字体居中
+            node.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
             node.setText(0, DirName)  # 写入文件名
             node.setText(1, str(Result["ID"]))  # 写入文件ID
             node.setText(2, str(ParentID))  # 写入文件上级ID
@@ -1212,49 +1133,39 @@ class FileInfoWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.FileNameInput = QLineEdit()
-        self.FileNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.FileNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.FileNameInput.setFixedHeight(30)
-        self.FileNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
+        self.FileNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
         self.FileNameInput.setText(self.FileInfo["FileName"])
         self.FileNameInput.setToolTip(self.Lang.FileName)
 
         self.FileSizeInput = QLineEdit()
-        self.FileSizeInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.FileSizeInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.FileSizeInput.setEnabled(False)  # 禁止输入
         self.FileSizeInput.setFixedHeight(30)
-        self.FileSizeInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
-        self.FileSizeInput.setText(
-            self.File.FileSizeFormat(self.FileInfo["FileSize"]))
+        self.FileSizeInput.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
+        self.FileSizeInput.setText(self.File.FileSizeFormat(self.FileInfo["FileSize"]))
         self.FileSizeInput.setToolTip(self.Lang.FileSize)
 
         self.FileTypeInput = QLineEdit()
-        self.FileTypeInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.FileTypeInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.FileTypeInput.setEnabled(False)  # 禁止输入
         self.FileTypeInput.setFixedHeight(30)
-        self.FileTypeInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
+        self.FileTypeInput.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
         self.FileTypeInput.setText(self.FileInfo["FileType"])
         self.FileTypeInput.setToolTip(self.Lang.FileType)
 
         self.FileMD5Input = QLineEdit()
-        self.FileMD5Input.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
+        self.FileMD5Input.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.FileMD5Input.setEnabled(False)  # 禁止输入
         self.FileMD5Input.setFixedHeight(30)
-        self.FileMD5Input.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
+        self.FileMD5Input.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Info_Win_Input())
         self.FileMD5Input.setText(self.FileInfo["MD5"])
         self.FileMD5Input.setToolTip("MD5")
 
         self.Btn = QPushButton(self.Lang.Submit)
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Info_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Info_Win_Btn())
         self.Btn.clicked.connect(self.Rename)
 
         self.VLayout.addWidget(self.FileNameInput)
@@ -1273,8 +1184,7 @@ class FileInfoWindow(BaseInterface, BaseDialog):
         UploadBlockSize = self.FileInfo["UploadBlockSize"]
         DirID = self.FileInfo["DirID"]
         FileMD5 = self.FileInfo["MD5"]
-        Result = DirFileAction().ModifyFile(
-            self.FileInfo["ID"], FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
+        Result = DirFileAction().ModifyFile(self.FileInfo["ID"], FileName, State, FileSize, BlockSize, UploadBlockSize, DirID, FileMD5)
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
         else:
@@ -1284,6 +1194,7 @@ class FileInfoWindow(BaseInterface, BaseDialog):
 
 
 class FileSharingWindow(BaseInterface, BaseDialog):
+
     def __init__(self, FilesItem):
         super().__init__()
         self.AppMode()
@@ -1312,26 +1223,22 @@ class FileSharingWindow(BaseInterface, BaseDialog):
         self.SearchBar.setPlaceholderText(self.Lang.Name)
         # self.SearchBar.setAlignment(
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
-        self.SearchBar.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Sharing_Win_Input())
+        self.SearchBar.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Sharing_Win_Input())
 
         self.Btn1 = QPushButton(self.Lang.SearchName)
         self.Btn1.setFixedWidth(100)
         self.Btn1.setFixedHeight(30)
-        self.Btn1.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Sharing_Win_Btn())
+        self.Btn1.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Sharing_Win_Btn())
         self.Btn1.clicked.connect(self.SearchName)
 
         self.UserTree = QListWidget()
         # self.UserTree.setSelectionMode(QAbstractItemView.ExtendedSelection)  # 设置多选
-        self.UserTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Sharing_Win_List())
+        self.UserTree.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Sharing_Win_List())
         self.UserTree.setFocusPolicy(Qt.NoFocus)
 
         self.Btn2 = QPushButton(self.Lang.Send)
         self.Btn2.setFixedHeight(30)
-        self.Btn2.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Sharing_Win_Btn())
+        self.Btn2.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Sharing_Win_Btn())
         self.Btn2.clicked.connect(self.Send)
 
         self.HLayout.addWidget(self.SearchBar)
@@ -1383,6 +1290,7 @@ class FileSharingWindow(BaseInterface, BaseDialog):
 
 
 class TagListWindow(BaseInterface, BaseDialog):
+
     def __init__(self, Items):
         super().__init__()
         self.AppMode()
@@ -1402,14 +1310,12 @@ class TagListWindow(BaseInterface, BaseDialog):
 
         self.TagListTree = QListWidget()
         # self.UserTree.setSelectionMode(QAbstractItemView.ExtendedSelection)  # 设置多选
-        self.TagListTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tag_Win_List())
+        self.TagListTree.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tag_Win_List())
         self.TagListTree.setFocusPolicy(Qt.NoFocus)
 
         self.Btn = QPushButton(self.Lang.Submit)
         self.Btn.setFixedHeight(30)
-        self.Btn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tag_Win_Btn())
+        self.Btn.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tag_Win_Btn())
         self.Btn.clicked.connect(self.Send)
 
         self.VLayout.addWidget(self.TagListTree)
@@ -1460,8 +1366,7 @@ class PasteFileWorker(BaseInterface, BaseObject):
                 FileInfo = Result1["Data"]
                 Result2 = DirFileAction().CopyFile(self.DirID, self.FilesID[i])
                 if Result2["State"] != True:
-                    self.ErrorSignal.emit(
-                        FileInfo["FileName"] + " " + self.Lang.OperationFailed)
+                    self.ErrorSignal.emit(FileInfo["FileName"] + " " + self.Lang.OperationFailed)
                     break
             self.FinishSignal.emit()
 

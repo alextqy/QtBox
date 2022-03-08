@@ -3,6 +3,7 @@ from interface._base import *
 
 
 class DepartmentFrame(BaseInterface, BaseFrame):
+
     def __init__(self):
         super().__init__()
 
@@ -22,16 +23,12 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         self.DepartmentHeader = DepartmentHeaderLabel(self.Lang.DepartmentList)
         self.DepartmentHeader.setFixedHeight(20)
         self.DepartmentHeader.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.DepartmentHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Header()
-        )  # 设置样式
+        self.DepartmentHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Header())  # 设置样式
         self.DepartmentHeader.ActionSignal.connect(self.DepartmentItemClicked)
 
         # 部门列表
         self.DepartmentTree = BaseTreeWidget()
-        self.DepartmentTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Tree_Widget()
-        )  # 设置样式
+        self.DepartmentTree.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Tree_Widget())  # 设置样式
         self.DepartmentTree.HideVScroll()  # 隐藏纵向滚动条
         self.DepartmentTree.setColumnCount(2)  # 设置列数
         self.DepartmentTree.hideColumn(1)  # 隐藏列
@@ -50,9 +47,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
         # 部门列表下方按钮
         self.DepartmentListBtnFrame = QFrame()
-        self.DepartmentListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_List_Btn_Frame()
-        )
+        self.DepartmentListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_List_Btn_Frame())
         self.DepartmentListBtnFrame.setFixedHeight(30)
         self.DepartmentListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -60,9 +55,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         self.DepartmentListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         self.NewDepartmentBtn = QPushButton(self.Lang.NewDepartment)
-        self.NewDepartmentBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_List_Btn()
-        )
+        self.NewDepartmentBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_List_Btn())
         self.NewDepartmentBtn.setContentsMargins(1, 1, 1, 1)
         self.NewDepartmentBtn.setFixedHeight(30)
         self.NewDepartmentBtn.clicked.connect(self.CreateTopDepartmentWindow)
@@ -80,18 +73,14 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
         # 成员标题栏
         self.StaffHeaderFrame = QFrame()
-        self.StaffHeaderFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Staff_Header_Frame()
-        )
+        self.StaffHeaderFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Staff_Header_Frame())
         self.StaffHeaderFrame.setFixedHeight(20)
 
         self.StaffHeaderLayout = QHBoxLayout()
         self.StaffHeaderLayout.setContentsMargins(0, 0, 0, 0)  # 设置边距
 
         self.StaffHeader = QLabel(self.Lang.StaffList)
-        self.StaffHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Staff_Top_Label()
-        )  # 设置样式
+        self.StaffHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_Staff_Top_Label())  # 设置样式
         self.StaffHeader.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.StaffHeaderLayout.addWidget(self.StaffHeader)
@@ -105,9 +94,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
         self.StaffTree = BaseTreeWidget()  # 员工列表控件
         self.StaffTree.SetSelectionMode(2)  # 设置多选模式
-        self.StaffTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Staff_Tree_Widget()
-        )  # 设置样式
+        self.StaffTree.setStyleSheet(self.Style.Object.MainFrame_Mid_Staff_Tree_Widget())  # 设置样式
         self.StaffTree.HideVScroll()  # 隐藏纵向滚动条
         self.StaffTree.HideHScroll()  # 隐藏横向滚动条
         self.StaffTree.setColumnCount(3)  # 设置列数
@@ -130,9 +117,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
 
         # 成员列表下方按钮
         self.StaffListBtnFrame = QFrame()
-        self.StaffListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Staff_List_Btn_Frame()
-        )
+        self.StaffListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Staff_List_Btn_Frame())
         self.StaffListBtnFrame.setFixedHeight(30)
         self.StaffListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -140,9 +125,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
         self.StaffListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         self.UnassignedBtn = QPushButton(self.Lang.AddEmployeesToTheDepartment)
-        self.UnassignedBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Staff_List_Btn()
-        )
+        self.UnassignedBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Staff_List_Btn())
         self.UnassignedBtn.setContentsMargins(1, 1, 1, 1)
         self.UnassignedBtn.setFixedHeight(30)
         self.UnassignedBtn.clicked.connect(self.UnassignedList)
@@ -204,12 +187,8 @@ class DepartmentFrame(BaseInterface, BaseFrame):
     # 添加顶级部门
     def CreateTopDepartmentWindow(self):
         self.CreateTopDepartmentWindowObject = CreateTopDepartmentWindow()
-        self.CreateTopDepartmentWindowObject.ActionSignal.connect(
-            self.CreateTopDepartmentAction
-        )
-        self.CreateTopDepartmentWindowObject.ActionSignal.connect(
-            self.RefurbishDepartmentList
-        )
+        self.CreateTopDepartmentWindowObject.ActionSignal.connect(self.CreateTopDepartmentAction)
+        self.CreateTopDepartmentWindowObject.ActionSignal.connect(self.RefurbishDepartmentList)
         self.CreateTopDepartmentWindowObject.show()
 
     # 新建顶级部门方法
@@ -251,12 +230,8 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                     Item = QTreeWidgetItem()  # 设置item控件
                     Item.setText(0, SubList[i]["DepartmentName"])  # 设置内容
                     Item.setText(1, str(SubList[i]["ID"]))  # 设置内容
-                    Item.setTextAlignment(
-                        0, Qt.AlignHCenter | Qt.AlignVCenter
-                    )  # 设置item字体居中
-                    Item.setTextAlignment(
-                        1, Qt.AlignHCenter | Qt.AlignVCenter
-                    )  # 设置item字体居中
+                    Item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                    Item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                     SubItemList.append(Item)  # 添加到item list
                     CurrentItem.addChildren(SubItemList)  # 添加到部门列表
 
@@ -277,23 +252,15 @@ class DepartmentFrame(BaseInterface, BaseFrame):
     # 部门右键菜单
     def DepartmentRightContextMenuExec(self, pos):
         self.DepartmentTreeMenu = BaseMenu()  # 左侧部门列表鼠标右键菜单
-        self.DepartmentTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Staff_Tree_Menu()
-        )  # 设置样式
+        self.DepartmentTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Staff_Tree_Menu())  # 设置样式
         Item = self.DepartmentTree.currentItem()  # 获取被点击行控件
         ItemAt = self.DepartmentTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-            self.DepartmentTreeMenu.AddAction(
-                self.Lang.Rename, lambda: self.DepartmentRenameWindow(Item)
-            )  # 重命名
-            self.DepartmentTreeMenu.AddAction(
-                self.Lang.AddSubDepartment, lambda: self.CreateSubDepartmentWindow(Item)
-            )  # 创建子部门
-            self.DepartmentTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.DelDepartment(Item)
-            )  # 删除部门
+            self.DepartmentTreeMenu.AddAction(self.Lang.Rename, lambda: self.DepartmentRenameWindow(Item))  # 重命名
+            self.DepartmentTreeMenu.AddAction(self.Lang.AddSubDepartment, lambda: self.CreateSubDepartmentWindow(Item))  # 创建子部门
+            self.DepartmentTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelDepartment(Item))  # 删除部门
         else:  # 焦点外
             return
 
@@ -308,9 +275,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
     # 添加子部门
     def CreateSubDepartmentWindow(self, Item):
         self.CreateSubDepartmentWindowObject = CreateSubDepartmentWindow(Item)
-        self.CreateSubDepartmentWindowObject.ActionSignal.connect(
-            self.CreateSubDepartmentAction
-        )
+        self.CreateSubDepartmentWindowObject.ActionSignal.connect(self.CreateSubDepartmentAction)
         self.CreateSubDepartmentWindowObject.show()
 
     # 添加子部门方法
@@ -357,12 +322,8 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                 item = QTreeWidgetItem()  # 设置item控件
                 item.setText(0, DepartmentList[i]["DepartmentName"])  # 设置内容
                 item.setText(1, str(DepartmentList[i]["ID"]))  # 设置内容
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 DepartmentTreeItems.append(item)  # 添加到item list
             self.DepartmentTree.insertTopLevelItems(0, DepartmentTreeItems)  # 添加到部门列表
 
@@ -378,18 +339,10 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                 item = QTreeWidgetItem()  # 设置item控件
                 item.setText(0, StaffList[i]["Name"])  # 设置内容
                 item.setText(1, str(StaffList[i]["ID"]))  # 设置内容
-                item.setText(
-                    2, self.Common.TimeToStr(StaffList[i]["Createtime"])
-                )  # 设置内容
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    2, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
+                item.setText(2, self.Common.TimeToStr(StaffList[i]["Createtime"]))  # 设置内容
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 StaffTreeItems.append(item)  # 添加到item list
             self.StaffTree.insertTopLevelItems(0, StaffTreeItems)  # 添加到员工列表
             self.StaffLayout.addWidget(self.StaffTree)
@@ -400,20 +353,14 @@ class DepartmentFrame(BaseInterface, BaseFrame):
             return
 
         self.StaffTreeMenu = BaseMenu()  # 左侧部门列表鼠标右键菜单
-        self.StaffTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Staff_Tree_Menu()
-        )  # 设置样式
+        self.StaffTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Staff_Tree_Menu())  # 设置样式
         Item = self.StaffTree.currentItem()  # 获取被点击行控件
         ItemAt = self.StaffTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-            self.StaffTreeMenu.AddAction(
-                self.Lang.EmployeeInformation, lambda: self.StaffInfoWindow(Item)
-            )  # 重命名
-            self.StaffTreeMenu.AddAction(
-                self.Lang.RemovedFromTheDepartment, self.RemoveStaff
-            )  # 移除员工
+            self.StaffTreeMenu.AddAction(self.Lang.EmployeeInformation, lambda: self.StaffInfoWindow(Item))  # 重命名
+            self.StaffTreeMenu.AddAction(self.Lang.RemovedFromTheDepartment, self.RemoveStaff)  # 移除员工
         else:  # 焦点外
             return
 
@@ -430,9 +377,7 @@ class DepartmentFrame(BaseInterface, BaseFrame):
             MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         UserInfo = Result["Data"]
-        self.StaffInfoWindowObject = StaffInfoWindow(
-            UserInfo["Account"], UserInfo["Name"]
-        )
+        self.StaffInfoWindowObject = StaffInfoWindow(UserInfo["Account"], UserInfo["Name"])
         self.StaffInfoWindowObject.show()
 
     # 移除员工
@@ -494,13 +439,9 @@ class CreateTopDepartmentWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DepartmentNameInput = QLineEdit()
-        self.DepartmentNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        self.DepartmentNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DepartmentNameInput.setFixedHeight(30)
-        self.DepartmentNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Win_Input()
-        )
+        self.DepartmentNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Win_Input())
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
@@ -545,13 +486,9 @@ class DepartmentRenameWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DepartmentNameInput = QLineEdit()
-        self.DepartmentNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        self.DepartmentNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DepartmentNameInput.setFixedHeight(30)
-        self.DepartmentNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Win_Input()
-        )
+        self.DepartmentNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Win_Input())
         self.DepartmentNameInput.setText(self.Item.text(0))
 
         self.Btn = QPushButton("OK")
@@ -602,13 +539,9 @@ class CreateSubDepartmentWindow(BaseInterface, BaseDialog):
         self.VLayout.setContentsMargins(5, 5, 5, 5)
 
         self.DepartmentNameInput = QLineEdit()
-        self.DepartmentNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        self.DepartmentNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.DepartmentNameInput.setFixedHeight(30)
-        self.DepartmentNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Win_Input()
-        )
+        self.DepartmentNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Win_Input())
 
         self.Btn = QPushButton("OK")
         self.Btn.setFixedHeight(30)
@@ -624,9 +557,7 @@ class CreateSubDepartmentWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.WrongDepartmentName)
             return
 
-        Result = DepartmentAction().CreateDepartment(
-            self.DepartmentNameInput.text(), self.Item.text(1)
-        )
+        Result = DepartmentAction().CreateDepartment(self.DepartmentNameInput.text(), self.Item.text(1))
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
@@ -641,6 +572,7 @@ class CreateSubDepartmentWindow(BaseInterface, BaseDialog):
 
 # 员工详情
 class StaffInfoWindow(BaseInterface, BaseDialog):
+
     def __init__(self, Account, Name):
         super().__init__()
         self.AppMode()
@@ -650,25 +582,17 @@ class StaffInfoWindow(BaseInterface, BaseDialog):
 
         self.StaffAccountInput = QLineEdit()
         self.StaffAccountInput.setEnabled(False)
-        self.StaffAccountInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        self.StaffAccountInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.StaffAccountInput.setFixedHeight(30)
-        self.StaffAccountInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Win_Input()
-        )
+        self.StaffAccountInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Win_Input())
         self.StaffAccountInput.setToolTip(self.Lang.Account)
         self.StaffAccountInput.setText(Account)
 
         self.StaffNameInput = QLineEdit()
         self.StaffNameInput.setEnabled(False)
-        self.StaffNameInput.setAlignment(
-            Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
-        )  # 内容居中
+        self.StaffNameInput.setAlignment(Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)  # 内容居中
         self.StaffNameInput.setFixedHeight(30)
-        self.StaffNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Department_Win_Input()
-        )
+        self.StaffNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Department_Win_Input())
         self.StaffNameInput.setToolTip(self.Lang.Name)
         self.StaffNameInput.setText(Name)
 

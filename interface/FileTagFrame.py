@@ -26,16 +26,12 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.TagHeader = TagHeaderLabel(self.Lang.TagList)
         self.TagHeader.setFixedHeight(20)
         self.TagHeader.setAlignment(Qt.AlignCenter)  # 字体居中
-        self.TagHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Header()
-        )  # 设置样式
+        self.TagHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Header())  # 设置样式
 
         # 标签列表
         self.TagTree = BaseTreeWidget()
         self.TagTree.setMaximumWidth(300)
-        self.TagTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Tree_Widget()
-        )  # 设置样式
+        self.TagTree.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Tree_Widget())  # 设置样式
         self.TagTree.HideVScroll()  # 隐藏纵向滚动条
         self.TagTree.setColumnCount(3)  # 设置列数
         self.TagTree.hideColumn(1)  # 隐藏列
@@ -54,9 +50,7 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.TagTree.Connect(self.TagRightContextMenuExec)
 
         self.TagListBtnFrame = QFrame()
-        self.TagListBtnFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_List_Btn_Frame()
-        )
+        self.TagListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_List_Btn_Frame())
         self.TagListBtnFrame.setFixedHeight(30)
         self.TagListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
@@ -64,8 +58,7 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.TagListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         self.NewTagBtn = QPushButton(self.Lang.NewTag)
-        self.NewTagBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_List_Btn())
+        self.NewTagBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_List_Btn())
         self.NewTagBtn.setContentsMargins(1, 1, 1, 1)
         self.NewTagBtn.setFixedHeight(30)
         self.NewTagBtn.clicked.connect(self.CreateTagWindow)
@@ -82,17 +75,14 @@ class FileTagFrame(BaseInterface, BaseFrame):
 
         # 文件标题栏
         self.FileHeaderFrame = QFrame()
-        self.FileHeaderFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Header_Frame())
+        self.FileHeaderFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Header_Frame())
         self.FileHeaderFrame.setFixedHeight(20)
 
         self.FileHeaderLayout = QHBoxLayout()
         self.FileHeaderLayout.setContentsMargins(0, 0, 0, 0)  # 设置边距
 
         self.FileHeader = QLabel(self.Lang.FileList)
-        self.FileHeader.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tag_Top_Label()
-        )  # 设置样式
+        self.FileHeader.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tag_Top_Label())  # 设置样式
         self.FileHeader.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.FileHeaderLayout.addWidget(self.FileHeader)
@@ -100,23 +90,19 @@ class FileTagFrame(BaseInterface, BaseFrame):
         self.FileVS.addWidget(self.FileHeaderFrame)
 
         self.FileFrame = QFrame()
-        self.FileFrame.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tag_Frame())
+        self.FileFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tag_Frame())
         self.FileLayout = QVBoxLayout()
         self.FileLayout.setContentsMargins(0, 0, 0, 0)
 
         self.FileTree = BaseTreeWidget()  # 员工列表控件
         self.FileTree.SetSelectionMode(2)  # 设置多选模式
-        self.FileTree.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_File_Tag_Tree_Widget()
-        )  # 设置样式
+        self.FileTree.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Tag_Tree_Widget())  # 设置样式
         self.FileTree.HideVScroll()  # 隐藏纵向滚动条
         self.FileTree.HideHScroll()  # 隐藏横向滚动条
         self.FileTree.setColumnCount(4)  # 设置列数
         self.FileTree.hideColumn(1)  # 隐藏列
         self.FileTree.hideColumn(3)  # 隐藏列
-        self.FileTree.setHeaderLabels(
-            ["FILE", "ID", "Createtime", "DataID"])  # 设置标题栏
+        self.FileTree.setHeaderLabels(["FILE", "ID", "Createtime", "DataID"])  # 设置标题栏
         self.FileTree.setHeaderHidden(True)  # 隐藏标题栏
         self.FileTree.setColumnWidth(0, 200)  # 设置列宽
         # self.FileTree.setDragEnabled(True)  # 设置item可拖动
@@ -148,15 +134,10 @@ class FileTagFrame(BaseInterface, BaseFrame):
                 item.setText(1, str(TagList[i]["ID"]))  # 设置内容
                 item.setText(2, TagList[i]["TagMemo"])  # 设置内容
                 item.setToolTip(0, TagList[i]["TagMemo"])
-                item.setTextAlignment(
-                    0, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
-                item.setTextAlignment(
-                    1, Qt.AlignHCenter | Qt.AlignVCenter
-                )  # 设置item字体居中
+                item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                 TagTreeItems.append(item)  # 添加到item list
-            self.TagTree.insertTopLevelItems(
-                0, TagTreeItems)  # 添加到标签列表
+            self.TagTree.insertTopLevelItems(0, TagTreeItems)  # 添加到标签列表
 
     # 单击标签
     def TagItemClicked(self):
@@ -181,38 +162,26 @@ class FileTagFrame(BaseInterface, BaseFrame):
                         item = QTreeWidgetItem()  # 设置item控件
                         item.setText(0, Files["FileName"])  # 设置内容
                         item.setText(1, str(Files["ID"]))  # 设置内容
-                        item.setText(2, self.Common.TimeToStr(
-                            Files["Createtime"]))  # 设置内容
+                        item.setText(2, self.Common.TimeToStr(Files["Createtime"]))  # 设置内容
                         item.setText(3, str(DataID))
-                        item.setTextAlignment(
-                            0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                        item.setTextAlignment(
-                            1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                        item.setTextAlignment(
-                            2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
-                        item.setTextAlignment(
-                            4, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(2, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+                        item.setTextAlignment(4, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
                         FileTreeItems.append(item)  # 添加到item list
-                    self.FileTree.insertTopLevelItems(
-                        0, FileTreeItems)  # 添加到文件夹列表
+                    self.FileTree.insertTopLevelItems(0, FileTreeItems)  # 添加到文件夹列表
 
     # 标签右键菜单
     def TagRightContextMenuExec(self, pos):
         self.TagTreeMenu = BaseMenu()  # 左侧标签列表鼠标右键菜单
-        self.TagTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Tree_Menu()
-        )  # 设置样式
+        self.TagTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Tree_Menu())  # 设置样式
         Item = self.TagTree.currentItem()  # 获取被点击行控件
         ItemAt = self.TagTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == QTreeWidgetItem:  # 焦点内
-            self.TagTreeMenu.AddAction(
-                self.Lang.Rename, lambda: self.TagRenameWindow(Item)
-            )  # 重命名
-            self.TagTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.DelTag(Item)
-            )  # 删除标签
+            self.TagTreeMenu.AddAction(self.Lang.Rename, lambda: self.TagRenameWindow(Item))  # 重命名
+            self.TagTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelTag(Item))  # 删除标签
         else:  # 焦点外
             return
 
@@ -224,10 +193,8 @@ class FileTagFrame(BaseInterface, BaseFrame):
         Item = QTreeWidgetItem()  # 设置item控件
         Item.setText(0, Name)  # 设置内容
         Item.setText(1, str(ID))
-        Item.setTextAlignment(0, Qt.AlignHCenter |
-                              Qt.AlignVCenter)  # 设置item字体居中
-        Item.setTextAlignment(1, Qt.AlignHCenter |
-                              Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(0, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
+        Item.setTextAlignment(1, Qt.AlignHCenter | Qt.AlignVCenter)  # 设置item字体居中
         self.TagTree.insertTopLevelItem(0, Item)
 
     # 刷新标签列表
@@ -265,23 +232,16 @@ class FileTagFrame(BaseInterface, BaseFrame):
     # 文件右键菜单
     def FileRightContextMenuExec(self, pos):
         self.FileTreeMenu = BaseMenu()  # 左侧标签列表鼠标右键菜单
-        self.FileTreeMenu.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Tree_Menu()
-        )  # 设置样式
+        self.FileTreeMenu.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Tree_Menu())  # 设置样式
         Item = self.FileTree.currentItem()  # 获取被点击行控件
         ItemAt = self.FileTree.itemAt(pos)  # 获取点击焦点
 
         # 展示判断
         if type(Item) == QTreeWidgetItem and type(ItemAt) == type(Item):  # 焦点内
-            self.FileTreeMenu.AddAction(
-                self.Lang.Download, lambda: self.DoDownload()
-            )  # 重命名
-            self.FileTreeMenu.AddAction(
-                self.Lang.Delete, lambda: self.DelData()
-            )  # 删除标签
+            self.FileTreeMenu.AddAction(self.Lang.Download, lambda: self.DoDownload())  # 重命名
+            self.FileTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelData())  # 删除标签
         else:  # 焦点外
-            self.FileTreeMenu.AddAction(
-                self.Lang.Refresh, lambda: self.InsertFileListData())  # 刷新列表
+            self.FileTreeMenu.AddAction(self.Lang.Refresh, lambda: self.InsertFileListData())  # 刷新列表
 
         self.FileTreeMenu.move(QtGui.QCursor().pos())  # 移动到焦点
         self.FileTreeMenu.show()  # 展示
@@ -322,12 +282,9 @@ class FileTagFrame(BaseInterface, BaseFrame):
             return
         self.PromptPopUpsWorker = PromptPopUpsWorker()
         self.PromptPopUpsWindow.Label.setText(TextParam)
-        self.PromptPopUpsWorker.ActionSignal.connect(
-            self.PromptPopUpsWindow.show)
-        self.PromptPopUpsWorker.HideSignal.connect(
-            self.PromptPopUpsWindow.hide)
-        self.PromptPopUpsWorker.FinishSignal.connect(
-            self.KillThread(self.PromptPopUpsThread))
+        self.PromptPopUpsWorker.ActionSignal.connect(self.PromptPopUpsWindow.show)
+        self.PromptPopUpsWorker.HideSignal.connect(self.PromptPopUpsWindow.hide)
+        self.PromptPopUpsWorker.FinishSignal.connect(self.KillThread(self.PromptPopUpsThread))
         self.PromptPopUpsWorker.moveToThread(self.PromptPopUpsThread)
         self.PromptPopUpsThread.started.connect(self.PromptPopUpsWorker.Run)
         self.PromptPopUpsThread.start()
@@ -361,18 +318,14 @@ class CreateTagWindow(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.TagNameInput.setFixedHeight(30)
-        self.TagNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Win_Input()
-        )
+        self.TagNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Win_Input())
         self.TagNameInput.setPlaceholderText(self.Lang.TagName)
 
         self.TagMemoInput = QTextEdit()
         # self.TagMemoInput.setAlignment(
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
         self.TagMemoInput.setFixedHeight(100)
-        self.TagMemoInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()
-        )
+        self.TagMemoInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input())
         self.TagMemoInput.setPlaceholderText(self.Lang.Remark)
 
         self.Btn = QPushButton("OK")
@@ -393,8 +346,7 @@ class CreateTagWindow(BaseInterface, BaseDialog):
             MSGBOX().ERROR(self.Lang.WrongLengthOfTagName)
             return
 
-        Result = DirFileAction().CreateTag(
-            self.TagNameInput.text(), self.TagMemoInput.toPlainText())
+        Result = DirFileAction().CreateTag(self.TagNameInput.text(), self.TagMemoInput.toPlainText())
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
@@ -423,9 +375,7 @@ class TagRenameWindow(BaseInterface, BaseDialog):
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter
         # )  # 内容居中
         self.TagNameInput.setFixedHeight(30)
-        self.TagNameInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Win_Input()
-        )
+        self.TagNameInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Win_Input())
         self.TagNameInput.setPlaceholderText(self.Lang.TagName)
         self.TagNameInput.setText(self.Item.text(0))
 
@@ -433,9 +383,7 @@ class TagRenameWindow(BaseInterface, BaseDialog):
         # self.TagMemoInput.setAlignment(
         #     Qt.AlignCenter | Qt.AlignBottom | Qt.AlignHCenter)
         self.TagMemoInput.setFixedHeight(100)
-        self.TagMemoInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input()
-        )
+        self.TagMemoInput.setStyleSheet(self.Style.Object.MainFrame_Mid_Tag_Memo_Win_Input())
         self.TagMemoInput.setPlaceholderText(self.Lang.Remark)
         self.TagMemoInput.setText(self.Item.text(2))
 
@@ -461,11 +409,7 @@ class TagRenameWindow(BaseInterface, BaseDialog):
                 MSGBOX().ERROR(self.Lang.OperationFailed)
                 return
             else:
-                Result = DirFileAction().ModifyTag(
-                    self.Item.text(1),
-                    self.TagNameInput.text(),
-                    self.TagMemoInput.toPlainText()
-                )
+                Result = DirFileAction().ModifyTag(self.Item.text(1), self.TagNameInput.text(), self.TagMemoInput.toPlainText())
                 if Result["State"] == True:
                     self.ActionSignal.emit()
                     self.close()

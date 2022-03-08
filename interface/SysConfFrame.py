@@ -3,6 +3,7 @@ from interface._base import *
 
 
 class SysConfFrame(BaseInterface, BaseFrame):
+
     def __init__(self):
         super().__init__()
 
@@ -14,8 +15,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
 
         self.FileType = Result["Data"]
 
-        self.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Frame())
+        self.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Frame())
         self.SysConfLayout = QVBoxLayout()
         self.SysConfLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -24,20 +24,17 @@ class SysConfFrame(BaseInterface, BaseFrame):
         self.SysConfPart1 = QHBoxLayout()
 
         self.FileTypeLabel = QLabel(self.Lang.UploadTypesSupported + " :")
-        self.FileTypeLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.FileTypeLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
         self.FileTypeLabel.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.FileTypeInput = QLineEdit()
         # self.FileTypeInput.setInputMask("<")
-        self.FileTypeInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Input())
+        self.FileTypeInput.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Input())
         self.FileTypeInput.setPlaceholderText(self.Lang.FileType)
         self.FileTypeInput.setText(self.FileType["ConfigValue"])
 
         self.FileTypeBtn = QPushButton(self.Lang.Submit)
-        self.FileTypeBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Btn())
+        self.FileTypeBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Btn())
         self.FileTypeBtn.setFixedHeight(30)
         self.FileTypeBtn.setFixedWidth(80)
         self.FileTypeBtn.clicked.connect(self.FileTypeModifyAction)
@@ -46,10 +43,8 @@ class SysConfFrame(BaseInterface, BaseFrame):
         self.SysConfPart1.addWidget(self.FileTypeInput)
         self.SysConfPart1.addWidget(self.FileTypeBtn)
 
-        self.FileTypeCueLabel = QLabel(
-            self.Lang.Tips + " : " + self.Lang.DifferentFileTypesSeparatedByCommas)
-        self.FileTypeCueLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.FileTypeCueLabel = QLabel(self.Lang.Tips + " : " + self.Lang.DifferentFileTypesSeparatedByCommas)
+        self.FileTypeCueLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
         self.FileTypeCueLabel.setAlignment(Qt.AlignRight)  # 字体居中
 
         self.SysConfLayout.addLayout(self.SysConfPart1)
@@ -60,29 +55,23 @@ class SysConfFrame(BaseInterface, BaseFrame):
         self.SysConfPart2 = QHBoxLayout()
 
         self.FileSyncCycleLabel = QLabel(self.Lang.FileSyncFrequency + " :")
-        self.FileSyncCycleLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.FileSyncCycleLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
         self.FileSyncCycleLabel.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.FileSyncCycleInput = QLineEdit()
         self.FileSyncCycleInput.setFixedWidth(80)
-        self.FileSyncCycleInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Input())
+        self.FileSyncCycleInput.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Input())
         self.FileSyncCycleInput.setPlaceholderText(self.Lang.FileSyncFrequency)
-        self.FileSyncCycleInput.setText(
-            str(self.Cache.Get("SynchronizationCycle")))
+        self.FileSyncCycleInput.setText(str(self.Cache.Get("SynchronizationCycle")))
 
         self.FileSyncCycleBtn = QPushButton(self.Lang.Submit)
-        self.FileSyncCycleBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Btn())
+        self.FileSyncCycleBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Btn())
         self.FileSyncCycleBtn.setFixedHeight(30)
         self.FileSyncCycleBtn.setFixedWidth(80)
         self.FileSyncCycleBtn.clicked.connect(self.SetSynchronizationCycle)
 
-        self.FileSyncCycleCueLabel = QLabel(
-            self.Lang.Tips + " : " + self.Lang.FileSyncCycleCue)
-        self.FileSyncCycleCueLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.FileSyncCycleCueLabel = QLabel(self.Lang.Tips + " : " + self.Lang.FileSyncCycleCue)
+        self.FileSyncCycleCueLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
         self.FileSyncCycleCueLabel.setAlignment(Qt.AlignRight)  # 字体居中
 
         self.SysConfPart2.addWidget(self.FileSyncCycleLabel)
@@ -97,44 +86,33 @@ class SysConfFrame(BaseInterface, BaseFrame):
 
         self.SysConfPart3 = QHBoxLayout()
 
-        self.ServerDiskSpaceInformationLabel = QLabel(
-            self.Lang.ServerDiskSpaceInformation + " :")
-        self.ServerDiskSpaceInformationLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
-        self.ServerDiskSpaceInformationLabel.setAlignment(
-            Qt.AlignCenter)  # 字体居中
+        self.ServerDiskSpaceInformationLabel = QLabel(self.Lang.ServerDiskSpaceInformation + " :")
+        self.ServerDiskSpaceInformationLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.ServerDiskSpaceInformationLabel.setAlignment(Qt.AlignCenter)  # 字体居中
 
         # 总空间
         self.DiskSpaceLabel = QLabel("Disk space")
-        self.DiskSpaceLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
-        self.DiskSpaceLabel.setAlignment(
-            Qt.AlignCenter)  # 字体居中
+        self.DiskSpaceLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.DiskSpaceLabel.setAlignment(Qt.AlignCenter)  # 字体居中
         self.ServerDiskSpaceInformationInput1 = QLineEdit()
         self.ServerDiskSpaceInformationInput1.setFixedWidth(150)
-        self.ServerDiskSpaceInformationInput1.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Input())
+        self.ServerDiskSpaceInformationInput1.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Input())
         self.ServerDiskSpaceInformationInput1.setEnabled(False)
 
         # 剩余空间
         self.FreeDiskSpaceLabel = QLabel("Free disk space")
-        self.FreeDiskSpaceLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
-        self.FreeDiskSpaceLabel.setAlignment(
-            Qt.AlignCenter)  # 字体居中
+        self.FreeDiskSpaceLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.FreeDiskSpaceLabel.setAlignment(Qt.AlignCenter)  # 字体居中
         self.ServerDiskSpaceInformationInput2 = QLineEdit()
         self.ServerDiskSpaceInformationInput2.setFixedWidth(150)
-        self.ServerDiskSpaceInformationInput2.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Input())
+        self.ServerDiskSpaceInformationInput2.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Input())
         self.ServerDiskSpaceInformationInput2.setEnabled(False)
 
         self.ServerDiskSpaceInformationBtn = QPushButton(self.Lang.Submit)
-        self.ServerDiskSpaceInformationBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Btn())
+        self.ServerDiskSpaceInformationBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Btn())
         self.ServerDiskSpaceInformationBtn.setFixedHeight(30)
         self.ServerDiskSpaceInformationBtn.setFixedWidth(80)
-        self.ServerDiskSpaceInformationBtn.clicked.connect(
-            self.GetHardDiskSpaceInfo)
+        self.ServerDiskSpaceInformationBtn.clicked.connect(self.GetHardDiskSpaceInfo)
 
         self.SysConfPart3.addWidget(self.ServerDiskSpaceInformationLabel)
         self.SysConfPart3.addWidget(self.DiskSpaceLabel)
@@ -151,13 +129,11 @@ class SysConfFrame(BaseInterface, BaseFrame):
         self.SysConfPart4 = QHBoxLayout()
 
         self.SysLogLabel = QLabel(self.Lang.SystemLog + " :")
-        self.SysLogLabel.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Label())
+        self.SysLogLabel.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Label())
         self.SysLogLabel.setAlignment(Qt.AlignCenter)  # 字体居中
 
         self.SysLogCheckBtn = QPushButton(self.Lang.Check)
-        self.SysLogCheckBtn.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Btn())
+        self.SysLogCheckBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Btn())
         self.SysLogCheckBtn.setFixedHeight(30)
         self.SysLogCheckBtn.setFixedWidth(80)
         self.SysLogCheckBtn.clicked.connect(self.SysLogWindow)
@@ -181,8 +157,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
             MSGBOX().ERROR(self.Lang.WrongInput)
             return
         ConfigValue = ConfigValue.lower()
-        Result = ConfigAction().ModifyConfig(
-            1, ConfigKey, ConfigDesc, ConfigType, ConfigValue)
+        Result = ConfigAction().ModifyConfig(1, ConfigKey, ConfigDesc, ConfigType, ConfigValue)
         if Result["State"] != True:
             MSGBOX().ERROR(self.Lang.OperationFailed)
             return
@@ -197,8 +172,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
         if Data >= 10:
             Data = 10
         self.Cache.Set("SynchronizationCycle", Data)
-        self.FileSyncCycleInput.setText(
-            str(self.Cache.Get("SynchronizationCycle")))
+        self.FileSyncCycleInput.setText(str(self.Cache.Get("SynchronizationCycle")))
 
     def GetHardDiskSpaceInfo(self):
         Result = ConfigAction().GetHardDiskSpaceInfo()
@@ -214,6 +188,7 @@ class SysConfFrame(BaseInterface, BaseFrame):
 
 
 class SetCalendarWindow(CalendarWindow):  # 系统日志
+
     def __init__(self):
         super().__init__()
 
@@ -236,6 +211,7 @@ class SetCalendarWindow(CalendarWindow):  # 系统日志
 
 
 class SysLogWindow(BaseInterface, BaseDialog):
+
     def __init__(self, LogData=""):
         super().__init__()
         self.AppMode()
@@ -245,8 +221,7 @@ class SysLogWindow(BaseInterface, BaseDialog):
 
         self.SysLogInput = QTextEdit()
         self.SysLogInput.setReadOnly(True)
-        self.SysLogInput.setStyleSheet(
-            self.Style.Object.MainFrame_Mid_SysConf_Log_Input())
+        self.SysLogInput.setStyleSheet(self.Style.Object.MainFrame_Mid_SysConf_Log_Input())
         self.SysLogInput.setText(LogData)
 
         self.SysLogLayout.addWidget(self.SysLogInput)

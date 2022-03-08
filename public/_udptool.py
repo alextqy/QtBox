@@ -6,6 +6,7 @@ from public._common import *
 
 
 class UDPTool(BasePublic):
+
     def __init__(self, PORT=5002, BUFSIZE=64, SendInfoStr="bitbox", TimeoutSet=15):
         super().__init__()
         HOST = "192.168." + \
@@ -31,8 +32,7 @@ class UDPTool(BasePublic):
         while True:  # 发送广播
             sleep(1)
             try:
-                self.UDPClient.sendto(
-                    self.SendInfoStr.encode("utf8"), self.ADDR)
+                self.UDPClient.sendto(self.SendInfoStr.encode("utf8"), self.ADDR)
             except Exception as e:
                 print(e)
 

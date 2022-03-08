@@ -3,6 +3,7 @@ from style._base import *
 
 
 class DefaultQSS(BaseStyle):
+
     def __init__(self):
         super().__init__()
 

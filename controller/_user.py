@@ -3,6 +3,7 @@ from controller._base import *
 
 
 class UserAction(BaseController):
+
     def __init__(self):
         super().__init__()
 
@@ -217,7 +218,8 @@ class UserAction(BaseController):
     # 查看信息
     def CheckMessage(self, ID):
         Param = {
-            "ID", ID,
+            "ID",
+            ID,
         }
         Result = self.Post(Param, "/Check/Message")
         if self.Debug == True:
@@ -303,8 +305,7 @@ class UserAction(BaseController):
     # 导入用户
     def ImportUser(self, FileEntityPath):
         FileEntityByte = {"FileEntity": open(FileEntityPath, "rb").read()}
-        Result = self.Post({}, "/Import/User",
-                           "", "", "", FileEntityByte)
+        Result = self.Post({}, "/Import/User", "", "", "", FileEntityByte)
         if self.Debug == True:
             print(Result)
         return Result
