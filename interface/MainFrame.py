@@ -773,7 +773,7 @@ class AboutUSWindow(BaseInterface, BaseDialog):
         VLayout = QVBoxLayout()
         VLayout.setContentsMargins(5, 5, 5, 5)
         self.AboutUSLabel = QLabel("""
-            Ver 0.0.1 alpha<br/><br/>
+            Ver 1.0.0 beta<br/><br/>
             Contact Us:<br/>
             alextqy@gmail.com<br/>
             285150667@qq.com<br/>
