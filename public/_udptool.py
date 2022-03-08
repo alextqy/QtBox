@@ -57,6 +57,8 @@ class UDPTool(BasePublic):
     def UDPReceive(self, UDPPort):
         # 1. 创建套接字
         udp_socket = socket(AF_INET, SOCK_DGRAM)
+        # 设置请求超时
+        udp_socket.settimeout(5)
 
         # 2. 绑定本机ip和端口
         udp_socket.bind(("", UDPPort))  # 绑定本机的ip和端口(元组类型)  ""表示本机ip
