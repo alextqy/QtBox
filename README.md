@@ -37,7 +37,7 @@ trusted-host = mirrors.aliyun.com
 #### 打包
 
 1调试打包 cxfreeze -c main.py --target-dir dist
-2发布打包 cxfreeze -c ./qtbox/bitbox.py --target-dir ./BitBox --base-name=win32gui --include-files="./qtbox/source"
+2发布打包 cxfreeze -c ./qtbox/bitbox.py --target-dir ./BitBox --base-name=win32gui --include-files="./qtbox/source" --icon="./qtbox/exeicon.ico"
 
 #### 使用说明
 
