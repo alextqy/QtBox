@@ -454,7 +454,7 @@ class DoDeleteWorker(BaseInterface, BaseObject):
                 try:
                     # 删除临时上传文件夹
                     self.File.DirRemoveAll(self.UploadDirPath + FileInfo["FileName"] + "." + str(FileInfo["Createtime"]))
-                except Exception as e:
+                except OSError as e:
                     self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     break
 

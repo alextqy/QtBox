@@ -238,7 +238,7 @@ class LoginFrame(BaseInterface, BaseFrame):
             UDPPort = self.Cache.Get("UDPPort")
             try:
                 UDPReceived = self.UDPTool.UDPReceive(UDPPort)  # 获取UDP信息
-            except Exception as e:
+            except OSError as e:
                 MSGBOX().ERROR(self.Lang.RequestTimeout)
                 return
 

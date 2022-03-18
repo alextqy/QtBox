@@ -434,7 +434,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                     FileTempDir = TempDir + FileName + "." + str(Createtime)
                     try:
                         self.File.MkDir(FileTempDir)
-                    except Exception as e:
+                    except OSError as e:
                         break
 
                     # 文件切片
@@ -849,7 +849,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         # 建立文件缓存目录
         try:
             self.File.MkDir(FileTempDirPath)
-        except Exception as e:
+        except OSError as e:
             DirFileAction().FileLockSwitch(FileID)
             MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
             return
@@ -866,7 +866,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             FilePart = FileTempDirPath + "/" + FileEntityName
             try:
                 self.File.MkFile(FilePart)
-            except Exception as e:
+            except OSError as e:
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                 return
@@ -877,7 +877,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             # 写入分片数据
             try:
                 self.File.WFileInByte(FilePart, Content)
-            except Exception as e:
+            except OSError as e:
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                 return
@@ -888,7 +888,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
         if self.File.FileIsExist(NewFile) == True:
             try:
                 self.File.DeleteFile(NewFile)
-            except Exception as e:
+            except OSError as e:
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
 
@@ -898,7 +898,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 DirFileAction().FileLockSwitch(FileID)
                 MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
                 return
-        except Exception as e:
+        except OSError as e:
             DirFileAction().FileLockSwitch(FileID)
             MSGBOX().ERROR(FileName + " " + self.Lang.OperationFailed)
             return

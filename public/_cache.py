@@ -23,7 +23,7 @@ class Cache(BasePublic):
             with open(self.jsonFile, encoding="utf-8") as f:
                 data = load(f)
             return data
-        except Exception as e:
+        except OSError as e:
             return
 
     def Get(self, k):
@@ -44,7 +44,7 @@ class Cache(BasePublic):
         try:
             with open(self.jsonFile, "w", encoding="utf-8") as f:
                 dump(self.configData, f, indent=2, sort_keys=True, ensure_ascii=False)  # 写入多行
-        except Exception as e:
+        except OSError as e:
             return
 
     def Delete(self, k):
@@ -56,7 +56,7 @@ class Cache(BasePublic):
         try:
             with open(self.jsonFile, "w", encoding="utf-8") as f:
                 dump(self.configData, f, indent=2, sort_keys=True, ensure_ascii=False)  # 写入多行
-        except Exception as e:
+        except OSError as e:
             return
 
     def Append(self, k, v):

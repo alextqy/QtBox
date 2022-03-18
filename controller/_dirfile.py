@@ -137,7 +137,7 @@ class DirFileAction(BaseController):
             if self.Debug == True:
                 print(Result)
             return Result
-        except Exception as e:
+        except OSError as e:
             return {"State": False, "Memo": "Nnoe"}
 
     # 下载文件分片实体

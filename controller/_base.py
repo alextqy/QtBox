@@ -43,7 +43,7 @@ class BaseController():
         try:
             JsonResult = post(URL + Func, PostData, files=Files, headers=Headers, verify=self.SwitchHttps)  # 返回json数据
             return loads(JsonResult.text)
-        except Exception as e:
+        except OSError as e:
             return {"State": False, "Memo": "error"}
 
     def Get(self, URL="", **args):

@@ -136,7 +136,7 @@ class File(BasePublic):
             File = open(Path, "wb")
             File.write(Content)
             File.close()
-        except Exception as e:
+        except OSError as e:
             return False
         return True
 
@@ -180,7 +180,7 @@ class File(BasePublic):
         Partnum = 0
         try:
             Inputfile = open(FilePath, "rb")
-        except Exception as e:
+        except OSError as e:
             return False, 0
         while True:
             Chunk = Inputfile.read(ChunkSize)
@@ -356,6 +356,6 @@ class File(BasePublic):
         try:
             file = zipfile.ZipFile(SourceFile, "r")
             file.extractall(TargetPath)
-        except Exception as e:
+        except OSError as e:
             return False
         return True

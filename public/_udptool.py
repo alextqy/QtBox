@@ -33,7 +33,7 @@ class UDPTool(BasePublic):
             sleep(1)
             try:
                 self.UDPClient.sendto(self.SendInfoStr.encode("utf8"), self.ADDR)
-            except Exception as e:
+            except OSError as e:
                 print(e)
 
     # 接收广播
@@ -51,7 +51,7 @@ class UDPTool(BasePublic):
             except (KeyboardInterrupt, SyntaxError):
                 print(KeyboardInterrupt, SyntaxError)
                 raise
-            except Exception as e:
+            except OSError as e:
                 print(e)
 
     def UDPReceive(self, UDPPort):

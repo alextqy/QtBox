@@ -298,7 +298,7 @@ class DownloadHandler(BaseInterface, BaseObject):
             try:
                 FileEntityPath = self.DownloadDirPath + FileName + "/" + FileEntityName
                 self.File.MkFile(FileEntityPath)
-            except Exception as e:
+            except OSError as e:
                 self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
@@ -306,7 +306,7 @@ class DownloadHandler(BaseInterface, BaseObject):
             # 写入数据
             try:
                 self.File.WFileInByte(FileEntityPath, Content)
-            except Exception as e:
+            except OSError as e:
                 self.ErrorSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
@@ -330,7 +330,7 @@ class DownloadHandler(BaseInterface, BaseObject):
         if self.File.FileIsExist(NewFile) == True:
             try:
                 self.File.DeleteFile(NewFile)
-            except Exception as e:
+            except OSError as e:
                 self.ErrorSignal.emit(FileName + " " + self.Lang.TemporaryFileCleanupFailed)
                 self.FinishSignal.emit()
                 return
@@ -347,7 +347,7 @@ class DownloadHandler(BaseInterface, BaseObject):
         # 删除临时文件分片文件夹
         try:
             self.File.DirRemoveAll(self.DownloadDirPath + FileName)
-        except Exception as e:
+        except OSError as e:
             self.ErrorSignal.emit(self.DownloadDirPath + FileName + " " + self.Lang.TemporaryFileCleanupFailed)
             self.FinishSignal.emit()
             return
@@ -410,7 +410,7 @@ class DoDownloadWorker(BaseInterface, BaseObject):
             if self.File.DirIsExist(self.DownloadDirPath + FileName) == True:
                 try:
                     self.File.DirRemoveAll()
-                except Exception as e:
+                except OSError as e:
                     self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                     self.FinishSignal.emit()
                     return
@@ -418,7 +418,7 @@ class DoDownloadWorker(BaseInterface, BaseObject):
             # 建立临时下载目录
             try:
                 self.File.MkDir(self.DownloadDirPath + FileName)
-            except Exception as e:
+            except OSError as e:
                 self.BreakSignal.emit(FileName + " " + self.Lang.OperationFailed)
                 self.FinishSignal.emit()
                 return
