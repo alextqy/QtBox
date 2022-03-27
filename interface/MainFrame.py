@@ -768,7 +768,7 @@ class AboutUSWindow(BaseInterface, BaseDialog):
         super().__init__()
         self.AppMode()
         self.setFixedSize(220, 170)
-        TheURL = "www.bitfty.cc"
+        TheURL = "www.bitf.tech"
 
         VLayout = QVBoxLayout()
         VLayout.setContentsMargins(5, 5, 5, 5)
