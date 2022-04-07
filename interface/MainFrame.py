@@ -207,7 +207,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.FeedbackWindowObject = FeedbackWindow()
         self.AboutUSWindowObject = AboutUSWindow()
 
-        self.InitLeftModule()
+        self.InitLeftModule(self.SelfData["Account"])
         self.TokenRunningStateAction()
 
     # 顶部动效
@@ -221,7 +221,7 @@ class MainFrame(BaseInterface, BaseFrame):
         AnimationGroup.start()
 
     # 实例化常驻非窗体控件
-    def InitLeftModule(self):
+    def InitLeftModule(self, MasterName):
         self.LeftFrameLayout = QVBoxLayout()
 
         self.UserFrameObject = UserFrame()
@@ -246,7 +246,7 @@ class MainFrame(BaseInterface, BaseFrame):
         self.FileTagFrameObject.hide()
         self.LeftFrameLayout.addWidget(self.FileTagFrameObject)
 
-        self.DirFileFrameObject = DirFileFrame()
+        self.DirFileFrameObject = DirFileFrame(MasterName)
         self.DirFileFrameObject.UploadSignal.connect(self.DoUpload)
         self.DirFileFrameObject.DownloadSignal.connect(self.DoDownload)
         self.DirFileFrameObject.RefreshFileTagListSignal.connect(self.FileTagFrameObject.InsertFileListData)
@@ -769,11 +769,12 @@ class AboutUSWindow(BaseInterface, BaseDialog):
         self.AppMode()
         self.setFixedSize(220, 170)
         TheURL = "www.bitf.tech"
+        CurrentVersion = "1.0.1"
 
         VLayout = QVBoxLayout()
         VLayout.setContentsMargins(5, 5, 5, 5)
         self.AboutUSLabel = QLabel("""
-            Ver 1.0.0 beta<br/><br/>
+            Ver """ + CurrentVersion + """ beta<br/><br/>
             Contact Us:<br/>
             alextqy@gmail.com<br/>
             285150667@qq.com<br/>
@@ -783,14 +784,23 @@ class AboutUSWindow(BaseInterface, BaseDialog):
 
         self.Btn = QPushButton(self.Lang.CheckForUpdates)
         self.Btn.setFixedHeight(30)
-        self.Btn.clicked.connect(lambda: self.OpenURL(TheURL))
+        self.Btn.clicked.connect(lambda: self.OpenURL(TheURL, CurrentVersion))
 
         VLayout.addWidget(self.AboutUSLabel)
         VLayout.addWidget(self.Btn)
         self.setLayout(VLayout)
 
-    def OpenURL(self, TheUrl):
-        QDesktopServices.openUrl(QUrl(TheUrl))
+    def OpenURL(self, TheUrl, CurrentVersion):
+        CheckVersionApi = "http://" + TheUrl + "/new-version"
+        NewVersion = urllib.request.urlopen(CheckVersionApi).read().decode('utf-8')
+        if NewVersion != CurrentVersion:
+            YesOrNo = MSGBOX().ASK(self.Lang.WhetherToUpdate + "?")
+            if YesOrNo == QtWidgets.QMessageBox.Yes:
+                QDesktopServices.openUrl(QUrl(TheUrl + "/bitbox-download"))
+            else:
+                return
+        else:
+            MSGBOX.CUE(self.Lang.CurrentlyTheLatestVersion)
 
 
 # 登录状态监控

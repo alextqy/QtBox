@@ -4,6 +4,8 @@ from public.zead import *
 from style.zead import *
 from controller.zead import *
 from abc import ABCMeta, abstractmethod
+import urllib.request
+import urllib.parse
 
 
 class BaseInterface():  # 基础操作类

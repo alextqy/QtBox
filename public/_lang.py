@@ -64,6 +64,7 @@ class Lang(BasePublic):
             self.FileList = "File list"
             self.FileGrid = "File grid"
             self.RequestWasAborted = "Request was aborted"
+            self.BackToTop = "Back to top"
             self.NewFolder = "New folder"
             self.DownloadedFiles = "Downloaded files"
             self.SynchronizeModifiedFiles = "Synchronize modified files"
@@ -177,6 +178,9 @@ class Lang(BasePublic):
             self.InTheLine = "In the line"
             self.Processing = "Processing"
 
+            self.WhetherToUpdate = "whether to update"
+            self.CurrentlyTheLatestVersion = "Currently the latest version"
+
         # 西班牙语
         elif self.Type == "es":
             self.Avatar = "Avatar"
@@ -227,6 +231,7 @@ class Lang(BasePublic):
             self.FileList = "lista de documentos"
             self.FileGrid = "Matriz de archivos"
             self.RequestWasAborted = "Solicitud fallida"
+            self.BackToTop = "volver arriba"
             self.NewFolder = "nueva carpeta"
             self.DownloadedFiles = "Archivo descargado"
             self.SynchronizeModifiedFiles = "Sincronizar archivos modificados"
@@ -340,6 +345,9 @@ class Lang(BasePublic):
             self.InTheLine = "En la linea"
             self.Processing = "Procesando"
 
+            self.WhetherToUpdate = "si actualizar"
+            self.CurrentlyTheLatestVersion = "Actualmente la última versión"
+
         # 法语
         elif self.Type == "fr":
             self.Avatar = "Avatar"
@@ -390,6 +398,7 @@ class Lang(BasePublic):
             self.FileList = "liste de documents"
             self.FileGrid = "Tableau de fichiers"
             self.RequestWasAborted = "Demande échoué"
+            self.BackToTop = "retour au sommet"
             self.NewFolder = "nouveau dossier"
             self.DownloadedFiles = "Fichier téléchargé"
             self.SynchronizeModifiedFiles = "Synchroniser les fichiers modifiés"
@@ -503,6 +512,9 @@ class Lang(BasePublic):
             self.InTheLine = "dans la ligne"
             self.Processing = "Traitement"
 
+            self.WhetherToUpdate = "s'il faut mettre à jour"
+            self.CurrentlyTheLatestVersion = "Actuellement la dernière version"
+
         # 中文简体
         elif self.Type == "zh-cn":
             self.Avatar = "头像"
@@ -553,6 +565,7 @@ class Lang(BasePublic):
             self.FileList = "文件列表"
             self.FileGrid = "文件阵列"
             self.RequestWasAborted = "请求失败"
+            self.BackToTop = "返回根目录"
             self.NewFolder = "新建文件夹"
             self.DownloadedFiles = "已下载的文件"
             self.SynchronizeModifiedFiles = "同步修改过的文件"
@@ -666,6 +679,9 @@ class Lang(BasePublic):
             self.InTheLine = "排队中"
             self.Processing = "处理中"
 
+            self.WhetherToUpdate = "有新版本 是否更新"
+            self.CurrentlyTheLatestVersion = "当前为最新版本"
+
         # 中文繁体
         elif self.Type == "zh-tw":
             self.Avatar = "頭像"
@@ -716,6 +732,7 @@ class Lang(BasePublic):
             self.FileList = "文件列表"
             self.FileGrid = "文件陣列"
             self.RequestWasAborted = "請求失敗"
+            self.BackToTop = "返回根目錄"
             self.NewFolder = "新建文件夾"
             self.DownloadedFiles = "已下載的文件"
             self.SynchronizeModifiedFiles = "同步修改過的文件"
@@ -829,6 +846,9 @@ class Lang(BasePublic):
             self.InTheLine = "排隊中"
             self.Processing = "處理中"
 
+            self.WhetherToUpdate = "有新版本 是否更新"
+            self.CurrentlyTheLatestVersion = "當前為最新版本"
+
         # 默认
         else:
             self.Avatar = ""
@@ -879,6 +899,7 @@ class Lang(BasePublic):
             self.FileList = ""
             self.FileGrid = ""
             self.RequestWasAborted = ""
+            self.BackToTop = ""
             self.NewFolder = ""
             self.DownloadedFiles = ""
             self.SynchronizeModifiedFiles = ""
@@ -991,3 +1012,6 @@ class Lang(BasePublic):
             self.AddTask = ""
             self.InTheLine = ""
             self.Processing = ""
+
+            self.WhetherToUpdate = ""
+            self.CurrentlyTheLatestVersion = ""

@@ -7,8 +7,9 @@ class DirFileFrame(BaseInterface, BaseFrame):
     DownloadSignal = Signal(list)
     RefreshFileTagListSignal = Signal()
 
-    def __init__(self):
+    def __init__(self, MasterName):
         super().__init__()
+        self.MasterName = MasterName
 
         # =========================================== Ready ===========================================
         self.RecycleBinState = False  # 回收站状态
@@ -74,14 +75,20 @@ class DirFileFrame(BaseInterface, BaseFrame):
         # 文件夹列表下方按钮
         self.DirListBtnFrame = QFrame()
         self.DirListBtnFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn_Frame())
-        # self.DirListBtnFrame.setFixedHeight(65)
-        self.DirListBtnFrame.setFixedHeight(30)
+        self.DirListBtnFrame.setFixedHeight(65)
         self.DirListBtnFrame.setContentsMargins(0, 0, 0, 0)
 
         self.DirListBtnLayout = QVBoxLayout()
         self.DirListBtnLayout.setContentsMargins(0, 0, 0, 0)
 
         # self.DirListBtnLayout.addStretch()
+
+        self.TopDirBtn = QPushButton(self.Lang.BackToTop)
+        self.TopDirBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn())
+        self.TopDirBtn.setContentsMargins(1, 1, 1, 1)
+        self.TopDirBtn.setFixedHeight(30)
+        self.TopDirBtn.clicked.connect(self.ShowRootFiles)
+        self.DirListBtnLayout.addWidget(self.TopDirBtn)
 
         self.NewDirBtn = QPushButton(self.Lang.NewFolder)
         self.NewDirBtn.setStyleSheet(self.Style.Object.MainFrame_Mid_Dir_List_Btn())
@@ -274,7 +281,8 @@ class DirFileFrame(BaseInterface, BaseFrame):
     def InsertFileTree(self, DirID, State=2):
         Result = DirFileAction().FileList(DirID, State)
         if Result["State"] != True:
-            MSGBOX().ERROR(self.Lang.RequestWasAborted)
+            self.FileTree.clear()
+            # MSGBOX().ERROR(self.Lang.RequestWasAborted)
             return
         Files = Result["Data"]
         self.FileTree.clear()
@@ -316,13 +324,14 @@ class DirFileFrame(BaseInterface, BaseFrame):
 
     # 写入文件阵列
     def InsertFileGrid(self, DirID, State=2):
+        GridFrame = QFrame()
+        GridFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Grid_Frame())
         Result = DirFileAction().FileList(DirID, State)
         if Result["State"] != True:
+            self.GridSA.setWidget(GridFrame)
             return
         Files = Result["Data"]
 
-        GridFrame = QFrame()
-        GridFrame.setStyleSheet(self.Style.Object.MainFrame_Mid_File_Grid_Frame())
         GridItemLayout = QGridLayout()
         GridItemLayout.setContentsMargins(0, 0, 0, 0)
         # GridItemLayout.setHorizontalSpacing(0)
@@ -542,6 +551,7 @@ class DirFileFrame(BaseInterface, BaseFrame):
             Result = DirFileAction().DeleteDir(ID)
             if Result["State"] == True:
                 DirTree.RemoveItems(Item)
+                self.Refresh()
                 MSGBOX().COMPLETE(self.Lang.Complete)
             else:
                 MSGBOX().ERROR(self.Lang.OperationFailed)
@@ -580,7 +590,8 @@ class DirFileFrame(BaseInterface, BaseFrame):
                 self.FileTreeMenu.AddAction(self.Lang.MoveToRecycleBin, lambda: self.MoveToRecycleBin())  # 移动到回收站
                 self.FileTreeMenu.AddAction(self.Lang.Delete, lambda: self.DelFiles())  # 删除文件
                 self.FileTreeMenu.AddAction(self.Lang.FileSharing, lambda: self.FileSharing())  # 分享给其他用户
-                self.FileTreeMenu.AddAction(self.Lang.ShareFilesToDepartment, lambda: self.ShareFilesToDepartment())  # 发送到部门
+                if self.MasterName != "root":
+                    self.FileTreeMenu.AddAction(self.Lang.ShareFilesToDepartment, lambda: self.ShareFilesToDepartment())  # 发送到部门
                 self.FileTreeMenu.AddAction(self.Lang.FavoritesToFilesTag, lambda: self.FavoritesToFilesTag())  # 收藏到文件标签
             else:  # 焦点外
                 self.FileTreeMenu.AddAction(self.Lang.Refresh, lambda: self.Refresh())  # 刷新列表
