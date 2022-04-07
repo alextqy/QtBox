@@ -243,7 +243,12 @@ class DepartmentFrame(BaseInterface, BaseFrame):
                 MSGBOX().ERROR(self.Lang.RequestWasAborted)
                 return
 
-            StaffList = Result["Data"]
+            _StaffList = Result["Data"]
+            StaffList = []
+            for item in _StaffList:
+                if item["Account"] != self.Cache.Get("Account"):
+                    StaffList.append(item)
+
             self.InsertStaffListData(StaffList)
 
         self.StaffRightMouseButton = True  # 是否允许鼠标右键
